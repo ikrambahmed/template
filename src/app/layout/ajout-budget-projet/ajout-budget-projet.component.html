@@ -1,0 +1,40 @@
+<div class="card" >
+  <div class="card-header">
+ادخال
+</div>
+                <div class="card-body ">
+                    <h2 class="mb-0 text-center"> <span class="badge badge-secondary">{{y}}</span>
+                    </h2>
+                  <form [formGroup]="BudgetProjForm" >
+                    <div class="row" dir="rtl" lang="ar">
+                        <div class="form-group col-md-6 text-right" >
+                            <label >المشروع </label>
+                            <select class="form-control" formControlName="codPrj" [(ngModel)]="selectedBudgetProj.codPrj">
+                                <option *ngFor="let projet of projets" [ngValue]="projet.codPrj">{{projet.libprjA}}</option>
+                              </select>    
+                            </div>
+                            <input type="text" formControlName="code" [(ngModel)]="codeDept" hidden>
+                            <input type="date" formControlName="dateBproj" [(ngModel)]="dateSys" hidden>
+                        </div>
+        <div class="row">
+            <div class="form-group col-md-6 text-right">
+                <label >المرجع</label>
+                <input type="text" class="form-control" formControlName="reference" [(ngModel)]="selectedBudgetProj.reference"> 
+            </div>
+            <div class="form-group col-md-6 text-right">
+                <label >الاعتمادات</label>
+                <input type="text" class="form-control" formControlName="valeur" [(ngModel)]="selectedBudgetProj.valeur">
+            </div>
+        </div>
+        </form>
+      
+      
+        <div>
+            <button class="btn btn-success" (click)="add()">
+              إدخال  
+            </button>
+        
+        </div>
+ 
+        </div>
+    </div>

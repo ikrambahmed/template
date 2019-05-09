@@ -1,0 +1,122 @@
+
+<div *ngIf="operation=='ADD'|| operation=='EDIT'">
+    <div class="card">
+      <div class="card-header">{{ operation == 'ADD' ? 'ادخال' :
+          operation == 'EDIT' ? 'تغيير' : ''}}</div>
+    <div *ngIf="show==true">
+        <div class="container" >
+              <div class="card-body">
+                <div *ngIf="Avoirbudg==true|| Avoirbudgproj==true">
+                <form [formGroup]="missionForm" #f="ngForm">
+                   <div class="row" dir="rtl">
+                      <div class="form-group col-md-12 text-center">
+                         <div *ngIf="operation=='ADD'"><h4>رقم المأمورية<span class = "label label-default">{{cod}}/{{codeMission}}</span></h4>
+                          <input type="text" class="form-control" formControlName="numMission" [(ngModel)]="codeMission" hidden>
+                        </div> 
+                         <div *ngIf="operation=='EDIT'"><h4>رقم المأمورية<span class = "label label-default">{{cod}}/{{selectedMission.numMission}}</span></h4></div> 
+                         <input type="text" class="form-control" formControlName="numMission" [(ngModel)]="selectedMission.numMission" hidden>
+    
+                        </div>  
+                   </div>
+    
+                  <div class="row" dir="rtl">
+                    <div class="form-group col-md-6 text-right">
+                      <label> الكلمة المفتاح </label>
+                      <select class="form-control form-control-lg" id="select" formControlName="motcle" >
+                        <option *ngFor="let motcle of motcles" [ngValue]="motcle"  >{{motcle.amotcle}}</option>
+                      </select>
+                    </div>
+    
+                    <div>
+                      <input type="textbox" id="champ12" class="class-form" formControlName="code" [(ngModel)]="cod" hidden />
+                    </div>
+    
+                  </div>
+    
+                  <div class="row">
+                    <div class="form-group col-md-6 text-left">
+                      <label> Objet de la mission</label>
+                      <textarea class="form-control rounded-0" formControlName="objetl" id="exampleFormControlTextarea1" rows="10" [(ngModel)]="selectedMission.objetl"></textarea>
+                    </div>
+                    <div class="form-group col-md-6 text-right">
+                      <label for="exampleFormControlTextarea1">موضوع المأمورية </label>
+                      <textarea class="form-control rounded-0" formControlName="objeta" id="exampleFormControlTextarea1"  rows="10" [(ngModel)]="selectedMission.objeta"></textarea>
+                    </div>
+    
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-4 text-right">
+                      <label>المدة </label>
+                      <input type="text" class="form-control" formControlName="duree" [(ngModel)]="nb" readonly/>
+                    </div>
+                    <div class="form-group col-md-4 text-right">
+                      <label>تاريخ الاياب </label>
+    
+                      <input type="date" id="date1" class="form-control" formControlName="datarrP"
+                       [(ngModel)]="selectedMission.datarrP" (change)="toggle()"/>
+    
+                    </div>
+                    <div class="form-group col-md-4 text-right">
+                      <label>تاريخ الذهاب </label>
+    
+                      <input type="date" id="date2" class="form-control" formControlName="datdepP" [(ngModel)]="selectedMission.datdepP" />
+    
+                    </div>
+    
+                  </div>
+                  <div>
+                  
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >
+  {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'تغيير': ''}}
+</button>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-right">
+          هل انت متاكد؟</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">لا</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="operation == 'ADD' ? add() : operation=='EDIT'? update() : '' " >نعم</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+                
+    
+                </form>
+              </div>
+                <div *ngIf="Avoirbudg==false && Avoirbudgproj==false">
+                    <div class="form-group col-md-12 text-right">
+            
+                      <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">ميزانية غير موجودة</h4>
+                        <p> ميزانية غير موجودة , الرجاء التثبت من الميزانية </p>
+                        <hr>
+                        <p class="mb-0">هل تريد إضافة ميزانية؟
+                          </p>
+                          <ul dir="rtl">
+                              <li> <a [routerLink]="['/budgetDept']">الى المؤسسة</a>
+                              </li>
+                              <li> <a [routerLink]="['/budgetProj']">الى مشروع</a></li>
+                          </ul>
+                       
+                      </div>
+                    </div>
+            
+                  </div>
+              </div>
+            </div>
+    </div>
+  </div>
+    
+    </div>

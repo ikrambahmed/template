@@ -1,0 +1,113 @@
+<div class="button-page">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="row " dir="rtl" lang="ar">
+                    <div class="col-md-12  text-right">
+                      <table class="table table-hover table-bordered">
+                          <thead>
+                            <tr>
+                              <th>اعتمادات المامورية </th>
+                              <th>المرجع</th>
+                              <th>اعتمادات النقل</th>
+                              <th>المرجع</th>
+                              <th>تاريخ الادخال </th>
+                              <th>تاريخ المصادقة</th>
+  
+                              <th>
+                              <button class="btn btn-outline-primary" (click)="operation ='ADD' ;" *ngIf="val ==false">اظافة</button>
+                               </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let budget of budgets">
+                              <td> {{budget.valeur_miss}}</td>
+                              <td>{{budget.reference_mis}}</td>
+                              <td> {{budget.valeur_tr}}</td>
+                              <td>{{budget.reference_tr}}</td>
+                              <td>{{budget.date_budg | date:'yyyy-MM-dd'}}</td>
+                              <td>{{budget.date_val | date:'yyyy-MM-dd'}}</td>
+  
+                              <td>
+                                <button class="btn btn-outline-primary" *ngIf="budget.date_val=== null || budget.date_val===undefined"
+                                  (click)="editOp() ;  selectedBudget = budget">تغيير</button>
+                             
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6  text-right">
+                      <label> مجموع </label>
+                      
+                      <label>  مجموع اعتمادات المامورية </label>
+                      
+                      
+                      </div>
+                      <div class="col-md-6  text-right">
+                          <label> مجموع </label>
+                      
+                      <label>  مجموع اعتمادات  النقل </label>
+                      
+                      </div>
+                      </div>
+                    </div>
+            
+  
+  
+          <div class="card"  *ngIf="operation == 'EDIT' || operation=='ADD'"> 
+            <div class="card-header">
+            {{operation == 'ADD' ? 'ادخال' :
+          operation == 'EDIT' ? 'تغيير': ''  }}
+        </div>
+  <div class="container"  >
+  
+      <div class="card">
+      
+          <div class="card-body">
+              <h2 class="mb-0 text-center"> <span class="badge badge-secondary">{{y}}</span>
+              </h2>
+              <form [formGroup]="BudgetDeptForm" #f="ngForm">
+                  <div class="row">
+                  <div class="form-group col-md-6 text-right">
+                      <label >المرجع </label>
+                      <input type="text" class="form-control" formControlName="reference_mis" [(ngModel)]="selectedBudget.reference_mis"   
+                     > 
+                  </div>
+                <div class="form-group col-md-6 text-right">
+                    <label > اعتمادات المامورية </label>
+                    <input type="text" class="form-control" formControlName="valeur_miss"  [(ngModel)]="selectedBudget.valeur_miss"    >
+                    <input type="date" class="form-control" formControlName="date_budg" [(ngModel)]="dataSys" hidden >
+                    <input type="text" class="form-control" formControlName="code" [(ngModel)]="cod" hidden >
+                </div>
+             
+  </div>
+  <div class="row">
+      <div class="form-group col-md-6 text-right">
+          <label >المرجع </label>
+          <input type="text" class="form-control" formControlName="reference_tr" [(ngModel)]="selectedBudget.reference_tr"> 
+      </div>
+      <div class="form-group col-md-6 text-right">
+          <label > اعتمادات النقل </label>
+          <input type="text" class="form-control" formControlName="valeur_tr" [(ngModel)]="selectedBudget.valeur_tr">
+      </div>
+    
+  </div>
+  
+  
+  <div>
+      <button class="btn btn-success" (click)="operation == 'ADD' ? add() : operation=='EDIT'? update(): ''">
+        إدخال  
+      </button>
+    </div>
+  </form>
+  </div>
+  </div>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+    

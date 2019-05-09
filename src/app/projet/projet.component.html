@@ -1,0 +1,95 @@
+<div class="card" >
+  <div class="card-header">
+    <div class="search-projets">
+      <input class="form-control text-right" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+        placeholder="&#61442; ابحث هنا">
+    </div>
+  </div>
+  <div class="card-body" >
+      <button class="btn btn-outline-primary" (click)="operation='ADD'" dir="ltr">اظافة</button>
+  
+      <table class="table table-hover table-bordered text-right" >
+  
+        <thead>
+          <tr div class="text-right">
+            <th >رقم المشروع</th>
+            <th>المشروع </th> 
+          
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let projet of projets | filter:searchText | paginate: { id: 'listing_pagination',
+          itemsPerPage: 10,
+          currentPage: page,
+          totalItems: totalRec} ">
+              <td>{{projet.codPrj}}</td>
+            <td>{{projet.libPrjL}} </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <pagination-controls id="listing_pagination" maxSize="5" directionLinks="true"
+          (pageChange)="page = $event" previousLabel="السابقة" nextLabel="الاخرى"></pagination-controls>
+      </div>    
+    </div>
+    </div>
+  <div class="card"  *ngIf="operation=='ADD'" >
+    <div class="card-header text-right">
+        اضافة مشروع
+    </div>
+  <div class="container" >  
+          <div class="card-body ">
+            <form [formGroup]="PojetForm" (ngSubmit)="PojetForm.valid">
+              <div class="row" dir="rtl">
+                <div class="form-group col-md-6 text-right">
+                  <label>السنة</label>
+                  <h4><span class="label label-default">{{year}}</span></h4>
+                </div>
+              </div>
+         
+
+                <div class="row">
+                <div class="form-group col-md-6 text-right">
+                  <label>المشروع</label>
+                  <input type="textbox" class="form-control" formControlName="libprjA"  required
+                  [ngClass]="{'is-invalid':PojetForm.get('libprjA').touched && PojetForm.get('libprjA').invalid}" 
+                  >
+                </div>
+
+                
+                <div class="form-group col-md-6 text-right">
+                  <label>Projet</label>
+                  <input type="textbox" class="form-control" formControlName="libPrjL" required 
+                  [ngClass]="{'is-invalid':PojetForm.get('libPrjL').touched && PojetForm.get('libPrjL').invalid}" 
+
+                  >
+                </div>
+              </div>
+           
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" [disabled]="!PojetForm.valid">
+             اظافة</button>
+              
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel"></h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body text-right">
+              هل انت متاكد؟      </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal"  >لا</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="operation == 'ADD' ? add() : operation=='EDIT'? update() : operation=='REMOVE'? remove() : '' " >نعم</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+    
+  </div>

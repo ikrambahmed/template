@@ -1,0 +1,68 @@
+<div class="login-page" [@routerTransition] style="background-image: url('https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/EPzzjHhuxijr01n5f/4k-traveling-by-airplane-at-sunset-view-from-airplane-window_4dovfi6dl__F0000.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;" >
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img src="assets/images/logo.png" width="150px" class="user-avatar" />
+            <h1>منظومة الماموريات  بالخارج</h1>
+            <div class="auth-box"  style=" background-color: rgba(126,123,215,0.2) " >
+                    <div class="row m-b-20">
+                      <div class="col-md-12">
+                        <h3 class="text-center txt-primary">تسجيل الدخول</h3>
+                      </div>
+                    </div>
+                    <hr/>
+                    <form class="md-float-material" [formGroup]="loginForm" (submit)="login()" #f="ngForm">
+
+                    <div class="input-group">
+                      <input type="text" class="form-control text-right" placeholder="بطاقة التعريف الوطنية" formControlName="username"
+                      [(ngModel)]="credentials.username"
+                      pattern="[0-9]{8}"  required maxlength="8"> 
+                      <span class="md-line"></span>
+                    </div>
+                    <div class="input-group">
+                      <input type="password" class="form-control text-right" placeholder="كلمة العبور" formControlName="password"
+                      [(ngModel)]="credentials.password">
+                      <span class="md-line"></span>
+                    </div>
+                    </form>
+                    <div class="row m-t-25 text-left">
+                      <div class="col-sm-7 col-xs-12">
+                        <div class="checkbox-fade fade-in-primary">       
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-xs-12 forgot-phone text-center">
+                        <a [routerLink]="['/authentication/forgot']" class="text-center f-w-600 text-inverse"> تغيير كلمة العبور</a>
+                      </div>
+                    </div>
+                    <div class="row m-t-30">
+                      <div class="col-md-12">
+                        <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" type="submit"  [disabled]="f.invalid" (click)="login() ; onLoggedin()" >الدخول</button>
+                     
+                    </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                      <div class="col-md-12 text-center">
+                        <p class="text-inverse  m-b-0">منظومة الماموريات  بالخارج</p>
+                        <p class="text-inverse "><b>المركز الوطني للاعلامية  </b></p>
+                      </div> 
+                    </div>
+                  </div>
+            <!--<form role="form">
+                <div class="form-content">
+                    <div class="form-group text-right">
+                        <input type="text" ng-model="name" class="form-control input-underline input-lg text-right" id="" placeholder="{{ 'بطاقة التعريف الوطنية' | translate }}">
+                    </div>
+
+                    <div class="form-group text-right">
+                        <input type="password" class="form-control input-underline input-lg text-right" id="" placeholder="{{ 'كلمة العبور' | translate }}">
+                    </div>
+                </div>
+                <a class="btn rounded-btn" [routerLink]="['/dashboard']" (click)="onLoggedin()">{{ 'الدخول' | translate }}</a>
+                &nbsp;
+                <a class="btn rounded-btn" [routerLink]="['/signup']">{{ 'Register' | translate }}</a>
+            </form>-->
+
+
+        </div>
+    </div>
+</div>

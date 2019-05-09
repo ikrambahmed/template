@@ -1,0 +1,61 @@
+<div class="card">
+  <div class="card-header">
+      <div class="search-missionnaire">
+          <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+            placeholder="&#61442; ابحث هنا ">
+        </div>
+  </div>
+  <div class="card-body">
+   <div dir="rtl">
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>رقم الامر بالمامورية </th>
+            <th>رقم المامورية </th>
+            <th>تاريخ الذهاب</th>
+            <th>تاريخ الاياب</th>
+            <th>الحالة</th>
+            <th>
+              <button class="btn btn-outline-primary" (click)="operation ='ADD' ;initMiss() ;">اظافة</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ord of ords | filter:searchText | paginate: { id: 'listing_pagination',
+          itemsPerPage: 10,
+          currentPage: page,
+          totalItems: totalRec}">
+            <td>{{ord.numord}} </td>
+            <td>{{ord.numMission}}</td>
+            <td>{{ord.datarrP}}</td>
+            <td>{{ord.datdepP}} </td>
+            <td>{{ord.etat}} </td>
+            <td>
+              <button class="btn btn-outline-primary"
+                (click)="operation='EDIT' ;  selectedOrdre = ord">تغيير</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+          <pagination-controls id="listing_pagination" maxSize="10" directionLinks="true"
+            (pageChange)="page = $event" previousLabel="السابقة" nextLabel="الاخرى"></pagination-controls>
+        </div>  
+    </div>
+  </div>
+  
+  <!--</div>
+
+<div>
+  <app-missionaire [operation]="operation" [selectedMissionnaire]="selectedMissionnaire"></app-missionaire>
+
+    <app-missionnaire ></app-missionnaire>
+  </div>
+    </div>-->
+    <div *ngIf="operation=='ADD' || operation=='EDIT'">
+    <app-ord-missionnaire [operation]="operation" [selectedOrdre]="selectedMissionnaire"></app-ord-missionnaire>
+    </div>
+   
+</div>
+

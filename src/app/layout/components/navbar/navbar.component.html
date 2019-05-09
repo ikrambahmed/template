@@ -1,0 +1,223 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div id="menu_area" class="menu-area">
+    <div class="container">
+        <div class="row">
+                <div class="topnav">
+
+            <nav class="navbar navbar-expand-lg fixed-top mainmenu">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav mr-auto">
+                            <li><a href="#">
+                                    <img src="https://d7ieeqxtzpkza.cloudfront.net/wp-content/uploads/2019/02/logo-tranparent-cni1.png" witdth="30" height="25" >
+                                  </a>    </li>
+        
+                        <li class="active"><a href="#">الصفحة الرئيسية <span class="sr-only">(current)</span></a></li>
+                      <!--  <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown2</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown3</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>-->
+
+                        <li class="dropdown">
+                                <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">الاعتمادات</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">إدخال الاعتمادات السنوية
+                                        </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a href="ajoutBudgetDept"  >المؤسسة</a></li>
+                                    <li><a href="ajoutBudgetProjet" >المشاريع</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">تحيين الأعتمادات  </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a href="budgetDept">المؤسسة</a></li>
+                                        <li><a href="budgetProj">المشاريع</a></li>
+                                        </ul>
+                                    </li>
+
+
+
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+
+                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">المآموريات
+                                        </a>
+                                        
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a href="listeMissionnaire">إدخال المنتفعين
+                                                </a></li>
+
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">إدخال المأموريات                  </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="mission" >قائمة المامورية</a></li>
+
+                                            <li><a href="stepper">إدخال مأمورية جديدة
+                                            </a></li>
+                                            <li><a href="validation"> مصادقة الآمر بالصرف
+
+                                                </a></li>
+
+                                        </ul>
+                                    </li>
+                                   
+    
+    
+    
+                                    </ul>
+                                </li>
+
+                                <li class="dropdown">
+                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> الثوابت
+                                            </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a href="projet">المشاريع</a></li>
+                                        </ul>
+                                    </li>
+                                 
+
+                                </ul>
+                                <div class="topnav-right">
+                                        <ul class="navbar-nav mr-auto">
+                                            <li><a href=""> المؤسسة  {{depart}} <i class="fa fa-building"></i> </a></li>
+                                        <li class="dropdown" >
+                                     <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{NameString}}  مرحبا <i class="fa fa-user"></i> </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a href="" [routerLink]="['/login']" (click)="onLoggedout()">  <i class="fa fa-fw fa-power-off"></i>الخروج</a></li>
+                                    </ul>
+                                    </li> 
+
+                                    </ul> 
+                                </div>
+                              
+
+
+                </div>
+                
+            </nav>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<br>
+   <script>
+   (function($){
+	$('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+	  if (!$(this).next().hasClass('show')) {
+		$(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+	  }
+	  var $subMenu = $(this).next(".dropdown-menu");
+	  $subMenu.toggleClass('show');
+
+	  $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+		$('.dropdown-submenu .show').removeClass("show");
+	  });
+
+	  return false;
+	});
+})(jQuery)</script>
+<!-- example 1 - using absolute position for center 
+
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+        <a class="navbar-brand abs" href="#">Navbar 1</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="collapsingNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="//codeply.com">Codeply</a>
+                </li>
+                <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown2</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown3</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                        </ul>
+                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#myAlert" data-toggle="collapse">Link</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">user</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">dept</a>
+                    </li>
+    
+            </ul>
+        </div>
+    </nav>
+    
+    <br>
+   <script>
+   (function($){
+	$('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+	  if (!$(this).next().hasClass('show')) {
+		$(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+	  }
+	  var $subMenu = $(this).next(".dropdown-menu");
+	  $subMenu.toggleClass('show');
+
+	  $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+		$('.dropdown-submenu .show').removeClass("show");
+	  });
+
+	  return false;
+	});
+})(jQuery)</script>-->

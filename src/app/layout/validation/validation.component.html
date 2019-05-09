@@ -1,0 +1,186 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<div class="card" >
+  <div class="card-header">مصادقة الامر بالصرف</div>
+                <div class="container" >
+                      <div class="card-body"dir="rtl">
+
+                            <div class="row" >
+                                    <div class="form-group col-md-12 text-center">
+
+                             <h4> الاذن بمامورية عدد </h4>
+                                <select  class="form-control"  id="select" [(ngModel)]="selectedOrd" (change)="loadMission();loadMissionnaire();">
+                              <option *ngFor="let ord of ords"  [ngValue]="ord"  >{{ord.code}}/{{ord.numMission}}/{{ord.numord}}</option>
+                             </select>
+
+                           
+                            </div> 
+                           </div>
+<div class="row">
+        <div class="form-group col-md-12 text-center">
+         <label>موضوع المامورية </label>
+        <input type="text" [(ngModel)]="objet"  class="form-control"  >
+</div>
+</div>
+<div class="row">
+  <h4> <label>المعني بالامر</label></h4> 
+</div>
+<div class="row">
+        <div class="form-group col-md-3 text-right">
+
+    <label>رقم الهوية</label>
+    <input type="text" [(ngModel)]="cin"  class="form-control" >
+  </div>
+<div class="form-group col-md-3 text-right">
+        <label>الاسم و اللقب</label>
+        <input type="text" [(ngModel)]="name"  class="form-control" >
+</div>
+<div class="form-group col-md-3 text-right">
+        <label>تاريخ الذهاب</label>
+        <input type="date" [ngModel] ="dateAller|date:'yyyy-MM-dd'"  class="form-control" >
+</div>
+<div class="form-group col-md-3 text-right">
+        <label>تاريخ الاياب</label>
+        <input type="date"  [ngModel] ="dateRetour|date:'yyyy-MM-dd'"  class="form-control" > 
+
+
+</div>
+
+</div>
+<div class="row">
+        <h4> <label>الوجهة المقصودة</label></h4>
+
+</div>
+<div class="row" dir="rtl">
+        <div class="form-group col-md-12 text-center">
+         
+                <table class="table table-striped table-bordered text-right" >
+                        <thead>
+                          <tr>
+                            <th>البلد </th>
+                            <th>المدينة</th>
+                            <th>وسيلة النقل</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                      
+                          <tr *ngFor="let i of fraisMiss">
+                            <td>
+                              <div class="form-group">
+                                   {{i.pays.libPaysa}}
+                                </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                             {{i.NVille}}                            
+                              </div>
+                            </td>
+                            <td>
+                              <div class="form-group">
+                             {{i.typetransport}}
+                              </div>
+                            </td>
+                        
+                          </tr>
+                        </tbody>
+                      </table>
+    
+
+
+</div>
+
+
+</div>
+
+<div class="row">
+        <table class="table table-striped table-bordered text-right" >
+                <thead>
+                 <tr>
+                    <th>نوعية المصايف</th>
+                    <th>المبلغ</th>
+                  
+                  </tr>
+                </thead>
+                <tbody>
+              
+                  <tr  *ngFor="let i of fraisMiss">
+                    <td>
+                      <div class="form-group">
+                           {{i.typFrais1.libFrais}}
+
+                        </div>
+                    </td>
+                   
+                    <td>
+                      <div class="form-group">
+                          {{i.valeurR}}
+
+                      </div>
+                    </td>
+                
+                  </tr>
+                </tbody>
+              </table>
+
+</div>
+<div class="row" dir="ltr" >
+      <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" *ngIf="hasRoleUser()==true" >
+    المصادقة
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="annulerMission()">الغاء المامورية</button>
+          <button type="button" class="btn btn-primary" (click)="validation()">مصادقة</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="validation()" data-toggle="modal" data-target="#exampleModal1" *ngIf="hasRoleController()==true" >
+      المصادقة
+  </button>
+  <div class="modal" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="AttendreMission()">الانتضار</button>
+          <button type="button" class="btn btn-primary" (click)="validationController()">مصادقة</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+</div>
+  </div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"> </script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

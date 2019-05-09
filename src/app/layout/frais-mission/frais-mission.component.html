@@ -1,0 +1,385 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<div class="card">
+<div class="stepwizard">
+    <div class="stepwizard-row">
+        <div class="stepwizard-step">
+            <button type="button" class="btn btn-info btn-circle" (click)="affich=true;affich2=false;affich3=false;">1</button>
+            <p>ادخال مامورية</p>
+
+        </div>
+        <div class="stepwizard-step">
+            <button type="button" class="btn btn-info btn-circle" (click)="affich=false;affich3=false;affich2=true">2</button>
+            <p>اضافة منتفع بالمامورية</p>
+        </div>
+        <div class="stepwizard-step">
+            <button type="button" class="btn btn-secondary btn-circle" (click)="affich2=false;affich3=true;affich=false;" >3</button>
+            <p>اضافة المصاريف</p>
+        </div> 
+    </div>
+</div>
+
+<div class=card >
+  <div class="card-header">
+    إضافة الاعتمادات للمأمورية
+  </div>
+    <div class="container">
+  
+      <div class="card-body ">
+        <form [formGroup]="OrdMissForm" #f="ngForm">
+          <div class="row " dir="rtl">
+            <div class="form-group col-md-12 text-center">
+              <h4> المامورية رقم <span class="label label-default">{{cod}}/{{numMission}}/{{num_ord}} </span></h4>
+            </div>
+            <input type="text" formControlName="numMission" hidden [(ngModel)]="codeMission">
+            <input type="text" formControlName="numord" hidden [(ngModel)]="num_ord">
+            <input type="text" formControlName="cin" hidden [(ngModel)]="username">
+            <input type="text" formControlName="code" hidden [(ngModel)]="cod">
+            <input type="text" formControlName="typFrais" [(ngModel)]="typFrais" hidden>
+  
+          </div>
+          <div class="row">
+            <div class="col-lg-12" dir="rtl">
+              <table class="table table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>رقم بطاقة التعريف</th>
+                    <th>الاسم</th>
+                    <th>اللقب</th>
+                    <th> المدة</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{username}} </td>
+                    <td>{{prenom}}</td>
+                    <td>{{nom}} </td>
+                   
+                    <td>{{duree}}</td>
+  
+                  </tr>
+                </tbody>
+              </table>
+  
+  
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="form-group col-md-3 text-right">
+              <label>المدة
+              </label>
+              <input type="textbox" class="form-control" formControlName="duree" [(ngModel)]="d" >
+            </div>
+            <div class="form-group col-md-3 text-right">
+              <label>وسيلة النقل
+              </label>
+              <select class="form-control form-control-lg" formControlName="typetransport">
+                <option selected>اختار وسيلة نقل</option>
+                <option value="1" [ngValue]="'الحافلة'">الحافلة</option>
+                <option value="2" [ngValue]="'القطار'">القطار</option>
+                <option value="3" [ngValue]="'الباخرة'">الباخرة</option>
+                <option value="3" [ngValue]="'الطائرة'">الطائرة</option>
+              </select>
+            </div>
+  
+            <div class="form-group col-md-3 text-right">
+              <label>المدينة
+              </label>
+              <input type="textbox" class="form-control" formControlName="NVille" required [(ngModel)]="ville">
+            </div>
+            <div class="form-group col-md-3 text-right">
+              <label>البلد
+              </label>
+  
+              <select class="form-control form-control-lg" id="select" formControlName="codPays">
+                <option>ادخال بلد</option>
+                <option *ngFor="let pays of payss" [ngValue]="pays.codPays">{{pays.libPaysa}}</option>
+              </select>
+            </div>
+          </div>
+  
+          <div class="card" dir="rtl">
+            <div class="card-header">
+              <div class="row" dir="rtl">
+                <div class="form-group col-md-4 text-right">
+              <h4 (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                    aria-controls="collapseExample">    <label><u>مصاريف المامورية</u></label></h4>
+                </div>
+              </div>
+            </div>
+              <div class="card-body">
+                <div id="collapseExample" [ngbCollapse]="isCollapsed">
+                  <div class="row" dir="rtl">
+                    <div class="form-group col-md-4 text-right">
+                      <input type="text" formControlName="valeurP">
+                    </div>
+                  </div>
+                  <div class="row" dir="rtl">
+                    <div class="form-group col-md-4 text-right">
+                      <h5><label> التحمل على</label></h5>
+                    </div>
+                  </div>
+                  <div class="row" dir="rtl">
+                    <div class="form-group col-md-3 text-right">
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <label  for="defaultInline1">الهيكل المعني</label>
+                        <input type="radio" id="defaultInline1" dir="ltr" value="الهيكل المعني"
+                          formControlName="supporte">
+                      </div>
+                    </div>
+                    <div class="form-group col-md-3 text-right">
+  
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <label  for="defaultInline2">الهيكل المضبف</label>
+  
+                        <input type="radio" id="defaultInline2" value="الهيكل المضبف" formControlName="supporte">
+                      </div>
+                    </div>
+                    <!-- Default inline 3-->
+                    <div class="form-group col-md-3 text-right">
+  
+                      <div class="custom-control custom-radio custom-control-inline">
+                        <label  for="defaultInline3">مشروع</label>
+                        <input type="radio" id="defaultInline3" (change)="toggleRadio($event)" value="مشروع"
+                          formControlName="supporte">
+                      </div>
+  
+                    </div>
+  
+                    <div class="form-group col-md-3 text-right">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" id="defaultChecked2" (change)="toggleEditable($event)">
+                        <label  for="defaultChecked2">استثناء</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="radioProjet==true">
+                    <div class="row" dir="rtl">
+                      <div class="form-group col-md-4 text-right">
+                        <select class="form-control" formControlName="codPrj">
+                          <option *ngFor="let projet of projets" [ngValue]="projet.codPrj">{{projet.libprjA}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+  
+  
+                  <div *ngIf="op==true">
+                    <div class="row" dir='rtl'>
+                      <div class="form-group col-md-4 text-right">
+                        <div class="list-group radio-list-group">
+  
+                          <div class="list-group-item list-group-item-info">&nbsp;<label><input type="radio"
+                                value="على الحساب الخاص" formControlName="supCode"><span class="list-group-item-text">على
+                                الحساب الخاص</span></label></div>
+  
+                          <div class="list-group-item list-group-item-info"><label>&nbsp;<input type="radio"
+                                value="تحمل مشترك بين الهيكل المعني و الاجنبي" formControlName="supCode"><span
+                                class="list-group-item-text">تحمل مشترك بين الهيكل المعني و الاجنبي</span></label></div>
+  
+                          <div class="list-group-item list-group-item-info"><label>&nbsp;<input type="radio"
+                                value="عدم الحط من المنحة بداية من 21 يوم" formControlName="supCode"><span
+                                class="list-group-item-text"> عدم الحط من المنحة بداية من 21 يوم</span></label></div>
+  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                      <!--  <button class="btn btn-success" (click)="add()"> ادخال الوجهة و المصاريف</button>--> 
+                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >
+                           ادخال الوجهة و المصاريف</button>
+                         <!-- Modal -->
+                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                           <div class="modal-dialog" role="document">
+                             <div class="modal-content">
+                               <div class="modal-header">
+                                 <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                   <span aria-hidden="true">&times;</span>
+                                 </button>
+                               </div>
+                               <div class="modal-body text-right">
+                                  هل انت متاكد؟      </div>
+                               <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"  >لا</button>
+                                 <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="add1();affich=false;">نعم</button>
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+     
+     
+     
+     
+                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+              </div>
+            </div>
+  
+            <!-- <div class="row" dir='rtl'>
+         <h4> <label> بقية المصاريف</label></h4> 
+                  <div class="form-group col-md-12 text-right">
+                      <div id="table" class="table-editable">
+                          <table class="table table-bordered table-responsive-md table-striped text-center">
+                            <tr>             
+                                <th class="text-center">نوعية المصاريف </th>
+                              <th class="text-center"> المبلغ</th>
+                              <th class="text-center">التحمل</th>
+                            </tr>
+                            <tr *ngFor="let type of typeFrais">
+                              <td class="pt-3-half" contenteditable="false" >{{type.libFrais}}</td>
+                              <td class="pt-3-half" contenteditable="true"></td>
+                              <td class="pt-3-half" contenteditable="true">
+                                  <select class="form-control" >
+                                      <option  *ngFor="let s of supportes">{{s}}</option>
+                                    </select>
+                              </td>
+                            </tr>
+                           
+                           
+                          </table>
+                        </div>
+  </div>
+              </div>-->
+  
+            <div class="card" dir="rtl">
+              <div class="card-header">
+                <div class="row">
+                  <!--*ngIf="affich===false"-->
+                  <h4><label (click)="isCollapsed1 = !isCollapsed1" [attr.aria-expanded]="!isCollapsed1"
+                      aria-controls="collapseExample1"><ins>بقية المصاريف</ins></label></h4>
+                </div>
+                <div class="card-body">
+  
+                  <div id="collapseExample1" [ngbCollapse]="isCollapsed1">
+                    <table class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>نوعية المصاريف </th>
+                          <th>المبلغ</th>
+                          <th>التحمل</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let field of fieldArray; let i = index">
+                          <td>
+                            <div class="form-group">
+                              <select class="form-control" formControlName="typFrais">
+                                <option *ngFor="let type of typeFrais" [ngValue]="type.typFrais">{{type.libFrais}}
+                                </option>
+                              </select></div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <input class="form-control" type="text" name="{{field.name}}" formControlName="valeurR" />
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <select class="form-control" formControlName="supporte">
+                                <option *ngFor="let s of supportes" [ngValue]="s">{{s}}</option>
+                              </select>
+                            </div>
+                          </td>
+                          <!--   <td>
+                                
+                            <button class="btn btn-default"  type="button" (click)="deleteFieldValue(i)">Delete</button>
+                          <button class="btn btn-default" type="button" (click)="addFieldValue()">ادخال بقية
+                              المصاريف</button>    
+                          </td>-->
+                          <td>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >
+                                        ادخال بقية المصاريف</button>
+                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                       <div class="modal-dialog" role="document">
+                                         <div class="modal-content">
+                                           <div class="modal-header">
+                                             <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                               <span aria-hidden="true">&times;</span>
+                                             </button>
+                                           </div>
+                                           <div class="modal-body text-right">
+                                              هل انت متاكد؟      </div>
+                                           <div class="modal-footer">
+                                             <button type="button" class="btn btn-secondary" data-dismiss="modal"  >لا</button>
+                                             <button type="button" class="btn btn-primary" data-dismiss="modal"(click)=" add();">نعم</button>
+                                           </div>
+                                         </div>
+                                       </div>
+                                     </div>
+                 
+                              
+
+
+
+
+
+
+
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="form-group">
+                              <select class="form-control" formControlName="typFrais">
+                                <option *ngFor="let type of typeFrais" [ngValue]="type.typFrais">{{type.libFrais}}
+                                </option>
+                              </select></div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <input class="form-control" type="text" formControlName="valeurR" />
+                            </div>
+                          </td>
+                          <td>
+                            <div class="form-group">
+                              <select class="form-control" formControlName="supporte">
+                                <option *ngFor="let s of supportes" [ngValue]="s">{{s}}</option>
+                              </select>
+                            </div>
+                          </td>
+                          <td>
+                            <button class="btn btn-default" type="button" (click)="add();addFieldValue();">ادخال بقية
+                              المصاريف</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <button class="btn btn-success" style="position : absolute ; right :75% "(click)="initialiser()">ادخال بلد جديد</button>
+              <a routerLink="/ord"><button class="btn btn-success">ادخال منتفع جديد</button></a>
+  
+            </div>
+        </form>
+  
+      </div>
+  
+  
+    </div>
+  
+  
+  </div>

@@ -1,0 +1,51 @@
+
+          <div class="card" > 
+              <div class="card-header">
+             ادخال    
+          </div>
+    <div class="container"  >
+    
+        <div class="card">
+        
+            <div class="card-body">
+                <h2 class="mb-0 text-center"> <span class="badge badge-secondary">{{y}}</span>
+                </h2>
+                <form [formGroup]="BudgetDeptForm" #f="ngForm">
+                    <div class="row">
+                    <div class="form-group col-md-6 text-right">
+                        <label >المرجع </label>
+                        <input type="text" class="form-control" formControlName="reference_mis" [(ngModel)]="selectedBudget.reference_mis"   
+                       > 
+                    </div>
+                  <div class="form-group col-md-6 text-right">
+                      <label > اعتمادات المامورية </label>
+                      <input type="text" class="form-control" formControlName="valeur_miss"  [(ngModel)]="selectedBudget.valeur_miss"    >
+                      <input type="date" class="form-control" formControlName="date_budg" [(ngModel)]="dataSys" hidden >
+                      <input type="text" class="form-control" formControlName="code" [(ngModel)]="cod" hidden >
+                  </div>
+               
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6 text-right">
+            <label >المرجع </label>
+            <input type="text" class="form-control" formControlName="reference_tr" [(ngModel)]="selectedBudget.reference_tr"> 
+        </div>
+        <div class="form-group col-md-6 text-right">
+            <label > اعتمادات النقل </label>
+            <input type="text" class="form-control" formControlName="valeur_tr" [(ngModel)]="selectedBudget.valeur_tr">
+        </div>
+      
+    </div>
+    
+    
+    <div>
+        <button class="btn btn-success" (click)="add()">
+          إدخال  
+        </button>
+      </div>
+    </form>
+    </div>
+    </div>
+    </div>
+  </div>

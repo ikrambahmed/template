@@ -1,0 +1,83 @@
+
+      <div class="card">
+        <div class="card-header">
+          <div class="search-missionnaire" dir="rtl">
+              <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+                placeholder="&#61442; ابحث هنا ">
+          </div>
+      </div>
+          <!-- <div class="row">
+              <div class="col-lg-12">
+                <nav class=" navbar navbar-light " style="background-color: #33b5e5;">-->
+            <div class="card-body">
+            <div  dir="rtl">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>ب.ت </th>
+                    <th>المعرف الوحيد </th>
+                    <th>الاسم</th>
+                    <th>اللقب</th>
+                    <th>الجنسية</th>
+                    <th>
+                      <button class="btn btn-outline-primary" (click)="operation ='ADD' ;initMiss() ;">اظافة</button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let missionnaire of missionnaires | filter:searchText | paginate: { id: 'listing_pagination',
+                  itemsPerPage: 10,
+                  currentPage: page,
+                  totalItems: totalRec} ">
+                    <td>{{missionnaire.cin}} </td>
+                    <td>{{missionnaire.matricule}}</td>
+                    <td>{{missionnaire.prenom}}</td>
+                    <td>{{missionnaire.nom}} </td>
+                    <td>{{missionnaire.nationalite}} </td>
+                    <td>
+                      <button class="btn btn-outline-primary"
+                        (click)="editOp() ;  selectedMissionnaire = missionnaire">تغيير</button>
+                      <button class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" (click)=" selectedMissionnaire = missionnaire"
+                        >حذف</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div>
+                <pagination-controls id="listing_pagination" maxSize="10" directionLinks="true"
+                  (pageChange)="page = $event" previousLabel="السابقة" nextLabel="الاخرى"></pagination-controls>
+              </div>  
+            </div>
+          
+          <!--</div>
+     
+       <div>
+            <app-missionnaire ></app-missionnaire>
+          </div>
+            </div>-->
+            </div>
+          
+      </div>
+
+      <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-right">
+  هل انت متاكد؟      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"  >لا</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="remove()" >نعم</button>
+        </div>
+      </div>
+    </div>
+  </div>
+      <app-missionaire [operation]="operation" [selectedMissionnaire]="selectedMissionnaire"></app-missionaire>
+      
+      
