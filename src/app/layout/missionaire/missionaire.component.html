@@ -11,116 +11,159 @@
   <body> 
       <div class="card">
 
-<div *ngIf="operation == 'ADD' || operation =='EDIT' || operation =='REMOVE'">
+<div *ngIf="operation == 'ADD' || operation =='EDIT'">
 <div class="card-header text-right" >
     {{operation == 'ADD' ? 'ادخال' :
-      operation == 'EDIT' ? 'تغيير' :
-      operation == 'REMOVE' ? 'جذف' : ''}}
+      operation == 'EDIT' ? 'تغيير' :''}}
 منتفع
 
 </div>
 
 
 <div class="card-body">
-    <form [formGroup]="missionnaireForm">
+    <form [formGroup]="missionnaireForm" (ngSubmit)="missionnaireForm.valid" >
       <div class="row">
       <div class="form-group col-md-4  text-right" >
         <label> مكانها </label>
         <input type="text" class="form-control" formControlName="place_cin" 
-        [(ngModel)]="selectedMissionnaire.place_cin" >
+        [(ngModel)]="selectedMissionnaire.place_cin"  required
+        [ngClass]="{'is-invalid':missionnaireForm.get('place_cin').touched && missionnaireForm.get('place_cin').invalid}"
+        >
       </div>
       <div class="form-group col-md-4 text-right" >
         <label for="delivre"> المسلمة يوم </label>
         <input type="date" class="form-control" formControlName="date_cin"      
-        [(ngModel)]="selectedMissionnaire.date_cin" >
+        [(ngModel)]="selectedMissionnaire.date_cin" required
+        [ngModel] ="selectedMissionnaire.date_cin|date:'yyyy-MM-dd'"
+        [ngClass]="{'is-invalid':missionnaireForm.get('date_cin').touched && missionnaireForm.get('date_cin').invalid}"
+
+        >
       </div>
      
       <div class="form-group col-md-4 text-right">
         <label for="cin"> الهوية الوطنية </label>
-        <input type="text" class="form-control" formControlName="cin" 
+        <input type="text" class="form-control" formControlName="cin"  required
         placeholder="Tapez dans ce champ 8 chiffres" autofocus pattern="[0-9]{8}" 
-        name="cin" [(ngModel)]="selectedMissionnaire.cin" maxlength="8" >
+        name="cin" [(ngModel)]="selectedMissionnaire.cin" maxlength="8" 
+        [ngClass]="{'is-invalid':missionnaireForm.get('cin').touched && missionnaireForm.get('cin').invalid}"
+
+        >
       </div>
     </div>
     <div class="row">
 
       <div class="form-group col-md-6 text-right">
         <label>مكانها</label>
-        <input type="text" class="form-control" formControlName="place_naissance" 
-        [(ngModel)]="selectedMissionnaire.place_naissance" >
+        <input type="text" class="form-control" formControlName="place_naissance" required
+        [(ngModel)]="selectedMissionnaire.place_naissance" 
+        [ngClass]="{'is-invalid':missionnaireForm.get('place_naissance').touched && missionnaireForm.get('place_naissance').invalid}"
+
+        >
       </div>
         <div class="form-group col-md-6 text-right">
           <label> تاريخ الولادة </label>
-          <input type="date" class="form-control" formControlName="datenaissance" 
-          [(ngModel)]="selectedMissionnaire.datenaissance" >
+          <input type="date" class="form-control" formControlName="datenaissance" required
+          [(ngModel)]="selectedMissionnaire.datenaissance"
+          [ngClass]="{'is-invalid':missionnaireForm.get('datenaissance').touched && missionnaireForm.get('datenaissance').invalid}"
+
+          >
         </div>
     </div>
     <div class="row">
 
         <div class="form-group col-md-6">
           <label> RIB </label>
-          <input type="text" class="form-control" formControlName="rib" 
-          [(ngModel)]="selectedMissionnaire.rib" >
+          <input type="text" class="form-control" formControlName="rib" required
+          [(ngModel)]="selectedMissionnaire.rib" 
+          [ngClass]="{'is-invalid':missionnaireForm.get('rib').touched && missionnaireForm.get('rib').invalid}"
+
+          >
         </div>
 
         <div class="form-group col-md-6 text-right">
           <label> المعرف الوحيد </label>
-          <input type="text" class="form-control" formControlName="matricule" 
-          [(ngModel)]="selectedMissionnaire.matricule" >
+          <input type="text" class="form-control" formControlName="matricule" required
+          [(ngModel)]="selectedMissionnaire.matricule" 
+          [ngClass]="{'is-invalid':missionnaireForm.get('matricule').touched && missionnaireForm.get('matricule').invalid}"
+
+          >
         </div>
     </div>
     <div class="row">
 
         <div class="form-group col-md-6">
           <label> Prenom </label>
-          <input type="text" class="form-control" formControlName="prenomL"
-          [(ngModel)]="selectedMissionnaire.prenomL" >
+          <input type="text" class="form-control" formControlName="prenomL" required
+          [(ngModel)]="selectedMissionnaire.prenomL" 
+          [ngClass]="{'is-invalid':missionnaireForm.get('prenomL').touched && missionnaireForm.get('prenomL').invalid}"
+
+          >
         </div>
 
         <div class="form-group col-md-6 text-right">
             <label>الاسم</label>
-            <input type="text" class="form-control" formControlName="prenom" 
-            [(ngModel)]="selectedMissionnaire.prenom" >
+            <input type="text" class="form-control" formControlName="prenom" required
+            [(ngModel)]="selectedMissionnaire.prenom" 
+            [ngClass]="{'is-invalid':missionnaireForm.get('prenom').touched && missionnaireForm.get('prenom').invalid}"
+
+            >
           </div>
     </div>
     <div class="row">
 
         <div class="form-group col-md-6 ">
           <label> Nom </label>
-          <input type="text" class="form-control" formControlName="nomL" 
-          [(ngModel)]="selectedMissionnaire.nomL" >
+          <input type="text" class="form-control" formControlName="nomL" required
+          [(ngModel)]="selectedMissionnaire.nomL" 
+          [ngClass]="{'is-invalid':missionnaireForm.get('nomL').touched && missionnaireForm.get('nomL').invalid}"
+
+          >
         </div>
 
         <div class="form-group col-md-6 text-right">
           <label>اللقب  </label>
-          <input type="text" class="form-control" formControlName="nom" 
-          [(ngModel)]="selectedMissionnaire.nom" >
+          <input type="text" class="form-control" formControlName="nom" required
+          [(ngModel)]="selectedMissionnaire.nom"
+          [ngClass]="{'is-invalid':missionnaireForm.get('nom').touched && missionnaireForm.get('nom').invalid}"
+
+          >
         </div>
     </div>
     <div class="row">
             <div class="form-group col-md-6">
               <label>Nationalite </label>
-              <input type="text" class="form-control" formControlName="nationaliteL"  
-              [(ngModel)]="selectedMissionnaire.nationaliteL" > 
+              <input type="text" class="form-control" formControlName="nationaliteL"  required
+              [(ngModel)]="selectedMissionnaire.nationaliteL" 
+              [ngClass]="{'is-invalid':missionnaireForm.get('nationaliteL').touched && missionnaireForm.get('nationaliteL').invalid}"
+
+              > 
             </div>
             <div class="form-group col-md-6 text-right">
                 <label>الجنسية</label>
-                <input type="text" class="form-control" formControlName="nationalite" [(ngModel)]="selectedMissionnaire.nationalite" >
+                <input type="text" class="form-control" formControlName="nationalite" required
+                [(ngModel)]="selectedMissionnaire.nationalite" 
+                [ngClass]="{'is-invalid':missionnaireForm.get('nationalite').touched && missionnaireForm.get('nationalite').invalid}"
+
+                >
               </div>
     </div>
     <div class="row">
 
               <div class="form-group col-md-6 text-right">
-                <label> الرتبة </label>
-                <select class="form-control" formControlName="graade" [(ngModel)]="selectedMissionnaire.graade">
-                  <option *ngFor="let grade of grades" [ngValue]="grade">{{grade.libGrda}}</option>
+               <label> الرتبة </label>
+             <select class="form-control" id="search" formControlName="graade" [(ngModel)]="selectedMissionnaire.graade" required
+>
+                  <option *ngFor="let grade of grades" [ngValue]="grade" [selected]="selectedMissionnaire.graade">{{grade.libGrda}}</option>
                 </select>
               </div>
 
               <div class="form-group col-md-6 text-right">
                 <label>الوظيفة</label>
-                <select class="form-control" formControlName="fonnction" [(ngModel)]="selectedMissionnaire.fonnction">
-                  <option *ngFor="let fonction of fonctions" [ngValue]="fonction">{{fonction.libFonca}}</option>
+                <select class="form-control" formControlName="fonnction" [(ngModel)]="selectedMissionnaire.fonnction" required
+      >
+
+                
+                  <option *ngFor="let fonction of fonctions" [ngValue]="fonction"  [selected]="selectedMissionnaire.fonnction">{{fonction.libFonca}}</option>
                 </select>
               </div>
     </div>
@@ -128,15 +171,20 @@
 
               <div class="form-group col-md-6 text-right">
                   <label>صنف</label>
-                  <select class="form-control" formControlName="codCat" [(ngModel)]="selectedMissionnaire.codCat">
-                    <option *ngFor="let categorie of categories" [ngValue]="categorie">{{categorie.libCatAr}}</option>
+                  <select class="form-control" formControlName="codCat" [(ngModel)]="selectedMissionnaire.codCat" required
+                 >
+
+                  
+                    <option *ngFor="let categorie of categories" [ngValue]="categorie" [selected]="selectedMissionnaire.codCat">{{categorie.libCatAr}}</option>
                   </select>
                 </div>
                 
                 <div class="form-group col-md-6 text-right">
                   <label>سلك</label>
-                  <select class="form-control" formControlName="classgrd" [(ngModel)]="selectedMissionnaire.classgrd">
-                    <option *ngFor="let classe of classes" [ngValue]="classe">{{classe.libclassgrda}}</option>
+                  <select class="form-control" formControlName="classgrd" [(ngModel)]="selectedMissionnaire.classgrd" required
+
+                  >
+                    <option *ngFor="let classe of classes" [ngValue]="classe" [selected]="selectedMissionnaire.classgrd">{{classe.libclassgrda}}</option>
                   </select>
               </div>
     </div>
@@ -145,14 +193,18 @@
                <div class="form-group col-md-6 text-right">
                   <label>المجموع</label>
                   <input type="text" class="form-control" formControlName="groupe"  
-                  [(ngModel)]="selectedMissionnaire.groupe">
+                  [(ngModel)]="selectedMissionnaire.groupe" required
+                  [ngClass]="{'is-invalid':missionnaireForm.get('groupe').touched && missionnaireForm.get('groupe').invalid}"
+
+                  
+                  >
                 </div>
                 <div class="form-group col-md-6 text-right">
                   <label>مستوى التاجير</label>
                   <input type="text" class="form-control" formControlName="niveau" 
-                  [(ngModel)]="selectedMissionnaire.niveau">
-                  <input type="text" class="form-control" formControlName="code" 
-                  [(ngModel)]="cod" hidden>
+                  [(ngModel)]="selectedMissionnaire.niveau"  required
+                  [ngClass]="{'is-invalid':missionnaireForm.get('niveau').touched && missionnaireForm.get('niveau').invalid}" >
+               
 
                 </div>
     </div>
@@ -168,7 +220,7 @@
 </button> -->
 
    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" [disabled]="!missionnaireForm.valid" >
   {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'تغيير':operation == 'REMOVE' ? 'حذف' : ''}}</button>
 
 <!-- Modal -->
@@ -185,7 +237,7 @@
 هل انت متاكد؟      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal"  >لا</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="operation == 'ADD' ? add() : operation=='EDIT'? update() : operation=='REMOVE'? remove() : '' " >نعم</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="operation == 'ADD' ? add() : operation=='EDIT'? update() : '' " >نعم</button>
       </div>
     </div>
   </div>

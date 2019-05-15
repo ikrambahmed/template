@@ -14,4 +14,7 @@ export class HomeService {
     return this.http.get('http://localhost:8080/miss_cni-0.0.1-SNAPSHOT/api/getNomPrenom?cin='+cin) ; 
 
   }
+  getDepartments():Observable<any>{
+    return this.http.get('http://localhost:8080/miss_cni-0.0.1-SNAPSHOT/api/alldept') ; 
+  }
 }

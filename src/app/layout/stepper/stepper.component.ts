@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stepper',
@@ -12,16 +13,23 @@ affich:boolean ;
 affich2:boolean ;
 affich3:boolean;
 
-
-  constructor() {
+validOrd:boolean ; 
+validFrais : boolean ; 
+  constructor(private router : Router) {
   }
 
   ngOnInit() {
+  this.validOrd=false ; 
+  this.validFrais=false ; 
   this.affich=true ; 
    
-   
-
     
+  }
+  goToOrdMiss(){
+    this.router.navigateByUrl('/ord') ; 
+  }
+  goToFrais(){
+    this.router.navigateByUrl('/frais') ; 
   }
 
  

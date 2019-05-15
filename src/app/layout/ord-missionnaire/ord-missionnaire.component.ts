@@ -94,10 +94,10 @@ toggle(){
      let dur =JSON.parse(localStorage.getItem('duree') ); 
      if(this.dateDiff(this.date_dep,this.date_ret)>dur)
      {
-       window.alert('duree lezem akther') ; 
+       window.alert('الرجاء التثبت من المدة') ; 
      }
      if(this.dateDiff(this.date_dep,this.date_ret)<0)
-     {window.alert('erreur duree');
+     {window.alert('الرجاء التثبت من المدة');
      console.log('duree',this.duree_miss);}
      else if (this.dateDiff(this.date_dep,this.date_ret)>=0)
      {let key3='duree_missionnaire' ; 
@@ -114,11 +114,13 @@ x:Number ;
    const m = this.OrdMissForm.value ;
    //alert(JSON.stringify(m));
   if(this.duree_miss <0 || this.duree_miss ==undefined){
-    window.alert('erreur de duree') ; 
+    window.alert('الرجاء التثبت من المدة') ; 
   }
   if(this.duree_miss>=0){
     this.missionService.addOrdMiss(m).subscribe(
       res => {
+        window.alert('لقد تمت الاضافة بنجاح') ; 
+
          this.ordmiss=res;
          },
          error=>{console.log(error);}    
@@ -171,12 +173,11 @@ x:Number ;
     name1: string = '';
     _timeout: any = null;
 
-    displayName() {
+    displayName(){
       this._timeout  = null;
       if(this._timeout){ 
         window.clearTimeout(this._timeout);
       }
-
       this._timeout = window.setTimeout(() => {
          this._timeout = null;
         // this.lc.run(() => this.name1 = this.name);
@@ -190,15 +191,21 @@ x:Number ;
    
 }
 
-
+goToMission(){
+  this.router.navigateByUrl('/stepper');
+}
+goToFrais(){
+  this.router.navigateByUrl('/frais') ; 
+}
  doStuff() {
     alert('do stuff');
 }
 affich2 : boolean ; 
   ngOnInit() {
 
+
   this.num_miss = JSON.parse(localStorage.getItem('num_mission')) ;
-  console.log('noumrou',this.num_miss); 
+ // console.log('noumrou',this.num_miss); 
   var DeptGenVal = localStorage.getItem('deptGen') ; 
   var data = JSON.parse(DeptGenVal) ; 
   console.log('retrievedObject:',data.departement.code) ;

@@ -26,31 +26,37 @@ export class BudgetDeptComponent implements OnInit {
   createForm()
   {
     this.BudgetDeptForm = this.fb.group({
-      date_budg: ['',Validators.required],
       valeur_miss: ['',Validators.required],
       reference_mis :['',Validators.required],
       valeur_tr: ['',Validators.required],
       reference_tr: ['',Validators.required] , 
-      code : ['',Validators.required] 
     })}
- 
+    entry:number=0 ; 
+    somme : number =0 ;    
+    sommeTr : number=0 ; 
     loadBudgets()
-    {this.missionService.getBudgets(this.cod).subscribe(
+    {     this.val=false ; 
+      
+      this.missionService.getBudgets(this.cod).subscribe(
       data => {
+        console.log('data',data) ; 
         if((data===null)||(data===undefined)|| (data.length==0))
         this.val=false ;
       else
       {
-        this.budgets=data;
+       this.budgets=data;
       console.log(data) ; 
-      for (let entry of data) {
-        console.log(entry.date_val)
-       if(entry.date_val==null)
+      while((this.entry<=data.length) && (this.val!=true))
+{      console.log(data[this.entry].date_val)
+       if(data[this.entry].date_val==null)
        {console.log('date fergha')
        this.val=true ; 
       }
       else this.val=false  ; 
-}}},
+      this.sommeTr=this.sommeTr+data[this.entry].valeur_tr ; 
+      this.somme=this.somme+data[this.entry].valeur_miss ; 
+      this.entry=this.entry+1 ; 
+      }}},
       error => {console.log(error); } , 
       () => {console.log('loading budgets was done ')}
     )}
@@ -71,11 +77,14 @@ export class BudgetDeptComponent implements OnInit {
     )} 
   
   add(){
+    this.BudgetDeptForm.value.date_budg=this.dataSys ; 
+    this.BudgetDeptForm.value.code=this.cod ; 
         console.log(this.BudgetDeptForm.value) ; 
         const m = this.BudgetDeptForm.value ;
-        alert(JSON.stringify(m));
+       // alert(JSON.stringify(m));
         this.missionService.addBudgetDept(m).subscribe(
           res => {
+            alert('لقد تمت الاضافة بنجاح')
             this.loadBudgets() ; 
             this.initialiser() ;
           //  alert(JSON.stringify(res));   

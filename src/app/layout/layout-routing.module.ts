@@ -17,6 +17,11 @@ import { AjoutBudgetProjetComponent } from './ajout-budget-projet/ajout-budget-p
 import { OneMissionComponent } from './one-mission/one-mission.component';
 import { AjoutMissionComponent } from './ajout-mission/ajout-mission.component';
 import { StepperComponent } from './stepper/stepper.component';
+import { ValidationBudgetComponent } from './validation-budget/validation-budget.component';
+import { ValidationBudProjComponent } from './validation-bud-proj/validation-bud-proj.component';
+import { ValidationCTRLMissionComponent } from './validation-ctrlmission/validation-ctrlmission.component';
+import { ChangePassComponent } from './change-pass/change-pass.component';
+import { RecapComponent } from './recap/recap.component';
 
 const routes: Routes = [
     {
@@ -46,7 +51,16 @@ const routes: Routes = [
             {path:'ajoutBudgetDept',component:AjoutBudgetDeptComponent},
             {path:'ajoutBudgetProjet',component:AjoutBudgetProjetComponent},
             {path:'oneMission',component:OneMissionComponent},
-            {path:'ajoutMission',component:AjoutMissionComponent}
+            {path:'ajoutMission',component:AjoutMissionComponent},
+            {path:'validationDept',component:ValidationBudgetComponent},
+            {path:'validationProj',component:ValidationBudProjComponent},
+            {path:'validMissCtrl',component:ValidationCTRLMissionComponent},
+            {path:'changePassword',component:ChangePassComponent},
+            {path:'recap',component:RecapComponent}
+
+
+
+
         ]
     }
 ];

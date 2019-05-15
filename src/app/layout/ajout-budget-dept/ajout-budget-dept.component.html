@@ -10,18 +10,18 @@
             <div class="card-body">
                 <h2 class="mb-0 text-center"> <span class="badge badge-secondary">{{y}}</span>
                 </h2>
-                <form [formGroup]="BudgetDeptForm" #f="ngForm">
+                <form [formGroup]="BudgetDeptForm" (ngSubmit)="BudgetDeptForm.valid">
                     <div class="row">
                     <div class="form-group col-md-6 text-right">
                         <label >المرجع </label>
-                        <input type="text" class="form-control" formControlName="reference_mis" [(ngModel)]="selectedBudget.reference_mis"   
+                        <input type="text" class="form-control" formControlName="reference_mis" [(ngModel)]="selectedBudget.reference_mis" 
+                        [ngClass]="{'is-invalid':BudgetDeptForm.get('reference_mis').touched && BudgetDeptForm.get('reference_mis').invalid}" 
+  
                        > 
                     </div>
                   <div class="form-group col-md-6 text-right">
                       <label > اعتمادات المامورية </label>
-                      <input type="text" class="form-control" formControlName="valeur_miss"  [(ngModel)]="selectedBudget.valeur_miss"    >
-                      <input type="date" class="form-control" formControlName="date_budg" [(ngModel)]="dataSys" hidden >
-                      <input type="text" class="form-control" formControlName="code" [(ngModel)]="cod" hidden >
+                      <input type="number" class="form-control" formControlName="valeur_miss"  [(ngModel)]="selectedBudget.valeur_miss"    >
                   </div>
                
     </div>
@@ -29,18 +29,24 @@
     <div class="row">
         <div class="form-group col-md-6 text-right">
             <label >المرجع </label>
-            <input type="text" class="form-control" formControlName="reference_tr" [(ngModel)]="selectedBudget.reference_tr"> 
+            <input type="text" class="form-control" formControlName="reference_tr" [(ngModel)]="selectedBudget.reference_tr"
+            [ngClass]="{'is-invalid':BudgetDeptForm.get('reference_tr').touched && BudgetDeptForm.get('reference_tr').invalid}" 
+
+            > 
         </div>
         <div class="form-group col-md-6 text-right">
             <label > اعتمادات النقل </label>
-            <input type="text" class="form-control" formControlName="valeur_tr" [(ngModel)]="selectedBudget.valeur_tr">
+            <input type="number" class="form-control" formControlName="valeur_tr" [(ngModel)]="selectedBudget.valeur_tr"
+            [ngClass]="{'is-invalid':BudgetDeptForm.get('valeur_tr').touched && BudgetDeptForm.get('valeur_tr').invalid}" 
+
+            >
         </div>
       
     </div>
     
     
     <div>
-        <button class="btn btn-success" (click)="add()">
+        <button class="btn btn-success" (click)="add()" [disabled]="!BudgetDeptForm.valid">
           إدخال  
         </button>
       </div>

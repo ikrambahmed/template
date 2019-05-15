@@ -1,0 +1,84 @@
+<div class="card">
+  <div class="row" dir="rtl" *ngIf="show==false">
+      <div class="col-md-12">
+        <div class="alert alert-danger text-right" role="alert">
+            <h4 class="alert-heading">لا توجد ماموريات في انتضار المصادقة حاليا </h4>
+            <hr>
+            <p> الرجاء التثبت </p>
+          
+          </div>
+        </div>
+    </div>
+</div>
+<div class="card" *ngIf="show==true">
+    <div class="card-header">
+        <div class="search-missionnaire" dir="rtl">
+            <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+              placeholder="&#61442; ابحث هنا ">
+        </div>
+    </div>
+    <div class="card-body" dir="rtl">
+        <div class="col-md-12  text-right">
+    <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>المشروع  </th>
+            <th>اعتمادات المشروع</th>
+            <th>المرجع</th>
+            <th>المؤسسة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let budget of budgets | filter:searchText | paginate: { id: 'listing_pagination',
+          itemsPerPage: 10,
+          currentPage: page,
+          totalItems: totalRec}" (click)="selected() ; selectedBudget=budget">
+            <td> {{budget.projet.libprjA}}</td>
+            <td>{{budget.valeur}}</td>
+            <td> {{budget.reference}}</td>
+            <td>{{budget.projet.dept.libA}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+          <pagination-controls id="listing_pagination" maxSize="10" directionLinks="true"
+            (pageChange)="page = $event" previousLabel="السابقة" nextLabel="الاخرى"></pagination-controls>
+        </div>  
+    </div>
+</div>
+</div>
+<div class="card" *ngIf="select==true">
+    <div class="card-body">
+          <div class="row" dir="rtl">
+          <div class="form-group col-md-6  text-right" >
+          <label> <h5>المؤسسة</h5> {{selectedBudget.projet.dept.libA}} </label>
+          </div>
+        </div>
+        <div class="row" dir="rtl">
+            <div class="form-group col-md-6  text-right" >
+             <h4><label> اعتمادات المؤسسة</label></h4> 
+            </div>
+          </div>
+          <div class="row" dir="rtl">
+              <div class="form-group col-md-6  text-right" >
+              <label>المشروع </label>
+              <label class="form-control">{{selectedBudget.projet.libprjA}}</label>
+              </div>
+              </div>
+              <div class="row" dir="rtl">
+                  <div class="form-group col-md-6  text-right" >
+                <label>المبلغ  </label>
+                <label class="form-control" >{{selectedBudget.valeur}}</label>
+                  </div>
+                    <div class="form-group col-md-6  text-right" >
+                 <label> المرجع </label>
+                 <label class="form-control" >{{selectedBudget.reference}}</label>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-danger">الغاء
+                    </button>
+                    <button type="button" class="btn btn-primary" (click)="ValiderMission()">مصادقة
+                      </button>             
+</div>
+
+</div>

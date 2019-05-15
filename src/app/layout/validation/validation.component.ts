@@ -10,6 +10,9 @@ import { frais } from '../../models/frais';
 import { Principal } from 'src/app/shared/principal.model';
 import { Store } from '@ngrx/store';
 import { PrincipalState } from 'src/app/shared/principal.state';
+import { DeptGen } from 'src/app/models/DeptGen';
+import { HomeService } from 'src/app/services/home.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-validation',
@@ -17,12 +20,12 @@ import { PrincipalState } from 'src/app/shared/principal.state';
   styleUrls: ['./validation.component.scss']
 })
 export class ValidationComponent implements OnInit {
-
+  showIt:Boolean;
+  depts:DeptGen[] ; 
   private principal : Principal ; 
   cod:String ; 
   fraisMiss: frais[] ; 
   ordMiss:ordMiss ; 
-  ords:ordMiss[] ; 
   miss : Mission = new Mission(); 
   objet : String ; 
   ord:ordMiss ; 
@@ -37,8 +40,13 @@ export class ValidationComponent implements OnInit {
   numOrd : Number; 
  hasRole :Boolean=false ; 
  validationForm:FormGroup ; 
+ depart:DeptGen ; 
+ listMission: Array<Mission> = [];
+ ords:Array<ordMiss>=[];
+ clicked:Boolean ; 
 
-  constructor(private store : Store<PrincipalState> , private missionnaireService :MissionnaireService ,private fb : FormBuilder,private ordMisService : OrdMissService, private missionService : MissionService) {
+
+  constructor(private router : Router,private homeService :HomeService  ,private store : Store<PrincipalState> , private missionnaireService :MissionnaireService ,private fb : FormBuilder,private ordMisService : OrdMissService, private missionService : MissionService) {
     this.createForm() ; 
    }
 
@@ -52,19 +60,41 @@ export class ValidationComponent implements OnInit {
     this.loadOrdreMission() ;
     console.log('localStorage' , JSON.parse(localStorage.getItem('principal'))) ; 
     this.principal=JSON.parse(localStorage.getItem('principal')) 
-    console.log(this.principal);
     console.log(this.hasRoleUser()) ; 
-  }
+    this.loadDepartments() ;   }
+  
+
+    loadDepartments()  {this.homeService.getDepartments()
+      .subscribe(
+      data => { this.depts=data ; 
+  },
+      error => {console.log(error) } , 
+      () => {console.log('loading depts was done ')}
+    )
+  
+    }
+
  loadOrdreMission()
-  {this.ordMisService.getOrdsMiss(this.cod)
+  {this.showIt=false;
+    this.ordMisService.getOrdsMiss(this.cod)
     .subscribe(
-    data => { this.ords=data ; 
+    data => { 
+      console.log(data ,'data') ; 
+      for (let o of data) {
+        if ((o.etat ===null) || (o.etat===undefined))
+        {this.ords.push(o) ;
+          console.log(this.ords,'ords',o,'o');
+        }
+      }
+      if(this.ords.length>0){this.showIt=true ; }
+      console.log('listM',this.listMission)
+     // this.ords=data ; 
 
     console.log('ord',this.ords) ; 
   console.log('data ord',data);
 
 
-},
+}, 
     error => {console.log(error) } , 
     () => {console.log('loading ordres was done ')}
   )
@@ -181,25 +211,37 @@ this.loadFraisMission(this.cod,this.numMissF,this.cinF,this.numF ) ;
   this.selectedOrd.etat='A';
   this.missionService.validerMission(this.selectedOrd).subscribe(data=>{
     console.log(data); 
+    alert('لقد تم الغاء المامورية') ;
+    window.location.reload() ; 
+ /*   this.initialiser(); 
+    this.ngOnInit(); */
   },
   error => {console.log(error) ; } , 
   () => {console.log('done');}
-  )
-
+  );
  }
-
+ initialiser(){
+  this.objet="";
+this.cin="" ; 
+this.name="" ; 
+this.dateAller=new Date() ; 
+this.dateRetour= new Date() ; 
+this.fraisMiss.length=0 ; 
+}
  validation(){
    console.log('valider') ;
    console.log(this.selectedOrd) ;
 this.selectedOrd.etat='V';
 this.missionService.validerMission(this.selectedOrd).subscribe(data=>{
-  console.log(data) ; 
+  console.log(data); 
+  alert(' لقد تمت المصادقة بنجاح') ; 
+  window.location.reload() ; 
+ // this.initialiser(); 
+
 } , 
 error => {console.log(error) ; } , 
 () => {console.log('done');}
-)
-
-
+);
  }
  hasRoleCTRL:boolean ; 
  AttendreMission(){
@@ -207,6 +249,11 @@ error => {console.log(error) ; } ,
   this.selectedOrd.etat='I';
   this.missionService.validerMission(this.selectedOrd).subscribe(data=>{
     console.log(data) ; 
+    alert('لقد تم وضع المامورية في الانتظار')
+    window.location.reload() ; 
+
+    //this.initialiser(); 
+
   } , 
   error => {console.log(error) ; } , 
   () => {console.log('done');}
@@ -244,12 +291,12 @@ error => {console.log(error) ; } ,
   console.log(this.selectedOrd) ;
 this.selectedOrd.etat='S';
 this.missionService.validerMission(this.selectedOrd).subscribe(data=>{
- console.log(data) ; 
+ console.log(data) ;
+ alert(' لقد تمت المصادقة بنجاح')
+ this.initialiser(); 
+
 } , 
 error => {console.log(error) ; } , 
 () => {console.log('done');}
-)
-
- }
-
+)}
 }

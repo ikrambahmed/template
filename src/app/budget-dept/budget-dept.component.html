@@ -15,7 +15,7 @@
                               <th>تاريخ المصادقة</th>
   
                               <th>
-                              <button class="btn btn-outline-primary" (click)="operation ='ADD' ;" *ngIf="val ==false">اظافة</button>
+                                <a href="budgetDept#OneBudget"> <button class="btn btn-outline-primary" (click)="operation ='ADD' ;" *ngIf="val ==false">اظافة</button></a>
                                </th>
                             </tr>
                           </thead>
@@ -40,15 +40,15 @@
                   </div>
                   <div class="row">
                       <div class="col-md-6  text-right">
-                      <label> مجموع </label>
+                    <label> {{somme!='null' ? somme  : ''}}  </label>
                       
                       <label>  مجموع اعتمادات المامورية </label>
                       
                       
                       </div>
                       <div class="col-md-6  text-right">
-                          <label> مجموع </label>
-                      
+                         <label> {{sommeTr!='null' ? sommeTr  : ''}} </label>
+                          
                       <label>  مجموع اعتمادات  النقل </label>
                       
                       </div>
@@ -57,7 +57,7 @@
             
   
   
-          <div class="card"  *ngIf="operation == 'EDIT' || operation=='ADD'"> 
+          <div class="card"  *ngIf="operation == 'EDIT' || operation=='ADD'" id="OneBudget"> 
             <div class="card-header">
             {{operation == 'ADD' ? 'ادخال' :
           operation == 'EDIT' ? 'تغيير': ''  }}
@@ -69,36 +69,43 @@
           <div class="card-body">
               <h2 class="mb-0 text-center"> <span class="badge badge-secondary">{{y}}</span>
               </h2>
-              <form [formGroup]="BudgetDeptForm" #f="ngForm">
+              <form [formGroup]="BudgetDeptForm" (ngSubmit)="BudgetDeptForm.valid">
                   <div class="row">
                   <div class="form-group col-md-6 text-right">
                       <label >المرجع </label>
-                      <input type="text" class="form-control" formControlName="reference_mis" [(ngModel)]="selectedBudget.reference_mis"   
+                      <input type="text" class="form-control" formControlName="reference_mis" [(ngModel)]="selectedBudget.reference_mis"  
+                      [ngClass]="{'is-invalid':BudgetDeptForm.get('reference_mis').touched && BudgetDeptForm.get('reference_mis').invalid}" 
+ 
                      > 
                   </div>
                 <div class="form-group col-md-6 text-right">
                     <label > اعتمادات المامورية </label>
-                    <input type="text" class="form-control" formControlName="valeur_miss"  [(ngModel)]="selectedBudget.valeur_miss"    >
-                    <input type="date" class="form-control" formControlName="date_budg" [(ngModel)]="dataSys" hidden >
-                    <input type="text" class="form-control" formControlName="code" [(ngModel)]="cod" hidden >
-                </div>
+                    <input type="number" class="form-control" formControlName="valeur_miss"  [(ngModel)]="selectedBudget.valeur_miss"    
+                    [ngClass]="{'is-invalid':BudgetDeptForm.get('valeur_miss').touched && BudgetDeptForm.get('valeur_miss').invalid}" >
+
+                  </div>
              
   </div>
   <div class="row">
       <div class="form-group col-md-6 text-right">
           <label >المرجع </label>
-          <input type="text" class="form-control" formControlName="reference_tr" [(ngModel)]="selectedBudget.reference_tr"> 
+          <input type="text" class="form-control" formControlName="reference_tr" [(ngModel)]="selectedBudget.reference_tr"
+          [ngClass]="{'is-invalid':BudgetDeptForm.get('reference_tr').touched && BudgetDeptForm.get('reference_tr').invalid}" 
+          > 
       </div>
       <div class="form-group col-md-6 text-right">
           <label > اعتمادات النقل </label>
-          <input type="text" class="form-control" formControlName="valeur_tr" [(ngModel)]="selectedBudget.valeur_tr">
+          <input type="number" class="form-control" formControlName="valeur_tr" [(ngModel)]="selectedBudget.valeur_tr"
+          [ngClass]="{'is-invalid':BudgetDeptForm.get('valeur_tr').touched && BudgetDeptForm.get('valeur_tr').invalid}" 
+          >
       </div>
     
   </div>
   
   
   <div>
-      <button class="btn btn-success" (click)="operation == 'ADD' ? add() : operation=='EDIT'? update(): ''">
+      <button class="btn btn-success" (click)="operation == 'ADD' ? add() : operation=='EDIT'? update(): ''" 
+      [disabled]="!BudgetDeptForm.valid" >
         إدخال  
       </button>
     </div>

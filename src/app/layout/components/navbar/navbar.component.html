@@ -18,7 +18,7 @@
                                     <img src="https://d7ieeqxtzpkza.cloudfront.net/wp-content/uploads/2019/02/logo-tranparent-cni1.png" witdth="30" height="25" >
                                   </a>    </li>
         
-                        <li class="active"><a href="#">الصفحة الرئيسية <span class="sr-only">(current)</span></a></li>
+                        <li class="active"><a href="dashboard">الصفحة الرئيسية <span class="sr-only">(current)</span></a></li>
                       <!--  <li class="dropdown">
                             <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -80,20 +80,15 @@
                                     <li class="dropdown">
                                         <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">إدخال المأموريات                  </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <li><a href="mission" >قائمة المامورية</a></li>
+                                            <li><a href="mission" >قائمة المامورية</a></li>
+                                            <li><a href="stepper">إدخال مأمورية جديدة</a></li>
+                                            <li *ngIf="hasRole==true"><a href="validation"> مصادقة الآمر بالصرف</a></li>
+                                            <li *ngIf="hasRoleCTRL==true"><a href="validMissCtrl"> مصادقة  على الماموريات</a></li>
 
-                                            <li><a href="stepper">إدخال مأمورية جديدة
-                                            </a></li>
-                                            <li><a href="validation"> مصادقة الآمر بالصرف
-
-                                                </a></li>
-
+                                            <li *ngIf="hasRoleCTRL==true"><a href="validationDept">المصادقة على اعتمادات المؤسسة</a></li>
+                                            <li *ngIf="hasRoleCTRL==true"><a href="validationProj"> المصادقة على اعتمادات المشروع</a></li>
                                         </ul>
                                     </li>
-                                   
-    
-    
-    
                                     </ul>
                                 </li>
 

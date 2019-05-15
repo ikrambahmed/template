@@ -6,9 +6,7 @@
                 placeholder="&#61442; ابحث هنا ">
           </div>
       </div>
-          <!-- <div class="row">
-              <div class="col-lg-12">
-                <nav class=" navbar navbar-light " style="background-color: #33b5e5;">-->
+          
             <div class="card-body">
             <div  dir="rtl">
               <table class="table table-hover">
@@ -20,7 +18,7 @@
                     <th>اللقب</th>
                     <th>الجنسية</th>
                     <th>
-                      <button class="btn btn-outline-primary" (click)="operation ='ADD' ;initMiss() ;">اظافة</button>
+                      <a href="listeMissionnaire#missionnaire">   <button class="btn btn-outline-primary" (click)="operation ='ADD' ;initMiss() ;">اظافة</button></a>
                     </th>
                   </tr>
                 </thead>
@@ -35,10 +33,10 @@
                     <td>{{missionnaire.nom}} </td>
                     <td>{{missionnaire.nationalite}} </td>
                     <td>
-                      <button class="btn btn-outline-primary"
-                        (click)="editOp() ;  selectedMissionnaire = missionnaire">تغيير</button>
-                      <button class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" (click)=" selectedMissionnaire = missionnaire"
-                        >حذف</button>
+                      <a href="listeMissionnaire#missionnaire"> <button class="btn btn-outline-primary"
+                        (click)="editOp() ;  selectedMissionnaire = missionnaire">تغيير</button></a>
+                      <button class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" (click)=" selectedMissionnaire = missionnaire ;removeOp()"
+                      >حذف</button>
                     </td>
                   </tr>
                 </tbody>
@@ -49,18 +47,13 @@
               </div>  
             </div>
           
-          <!--</div>
-     
-       <div>
-            <app-missionnaire ></app-missionnaire>
-          </div>
-            </div>-->
+      
             </div>
           
       </div>
 
       <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="operation=='REMOVE'">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -70,7 +63,7 @@
           </button>
         </div>
         <div class="modal-body text-right">
-  هل انت متاكد؟      </div>
+          هل انت متاكد؟      </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal"  >لا</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="remove()" >نعم</button>
@@ -78,6 +71,7 @@
       </div>
     </div>
   </div>
-      <app-missionaire [operation]="operation" [selectedMissionnaire]="selectedMissionnaire"></app-missionaire>
-      
+  <div id="missionnaire">
+      <app-missionaire [operation]="operation" [selectedMissionnaire]="selectedMissionnaire" autofocus></app-missionaire>
+  </div>
       

@@ -1,10 +1,10 @@
-<div dir="rtl">
+<div >
     <div class="card">
       <div class="card-header">ادخال مامورية جديدة</div>
     <div *ngIf="show==true">
         <div class="container" >
               <div class="card-body">
-                <div *ngIf="Avoirbudg==true|| Avoirbudgproj==true">
+                <div *ngIf="Avoirbudg==true || Avoirbudgproj==true">
                 <form [formGroup]="missionForm" #f="ngForm">
                    <div class="row" dir="rtl">
                       <div class="form-group col-md-12 text-center">
@@ -13,13 +13,13 @@
                         </div> 
     
                         </div>  
-                   </div>
+                      </div>
     
                   <div class="row" dir="rtl">
                     <div class="form-group col-md-6 text-right">
                       <label> الكلمة المفتاح </label>
                       <select class="form-control form-control-lg" id="select" formControlName="motcle" >
-                        <option *ngFor="let motcle of motcles" [ngValue]="motcle"  >{{motcle.amotcle}}</option>
+                        <option *ngFor="let motcle of motcles" [ngValue]="motcle">{{motcle.amotcle}}</option>
                       </select>
                     </div>
     
@@ -30,15 +30,14 @@
                   </div>
     
                   <div class="row">
-
-                    <div class="form-group col-md-6 text-right">
-                      <label for="exampleFormControlTextarea1">موضوع المأمورية </label>
-                      <textarea class="form-control rounded-0" formControlName="objeta" id="exampleFormControlTextarea1"  rows="10" ></textarea>
-                    </div>
                         <div class="form-group col-md-6 text-left">
                           <label> Objet de la mission</label>
                           <textarea class="form-control rounded-0" formControlName="objetl" id="exampleFormControlTextarea1" rows="10" ></textarea>
                         </div>
+                        <div class="form-group col-md-6 text-right">
+                            <label for="exampleFormControlTextarea1">موضوع المأمورية </label>
+                            <textarea class="form-control rounded-0" formControlName="objeta" id="exampleFormControlTextarea1"  rows="10" ></textarea>
+                          </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-md-4 text-right">
@@ -49,21 +48,18 @@
                       <label>تاريخ الاياب </label>
     
                       <input type="date" id="date1" class="form-control" formControlName="datarrP"
-                     (change)="toggle()"/>
+                     (change)="toggle()"   [(ngModel)]="selectedMission.datarrP"/>
     
-                    </div>
+                   </div>
                     <div class="form-group col-md-4 text-right">
                       <label>تاريخ الذهاب </label>
-    
-                      <input type="date" id="date2" class="form-control" formControlName="datdepP" />
+                      <input type="date" id="date2" class="form-control" formControlName="datdepP" [(ngModel)]="selectedMission.datdepP" />
     
                     </div>
     
                   </div>
+             
                   <div>
-                  
-
-
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >
                      اظافة
                     </button>

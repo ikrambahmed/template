@@ -27,12 +27,10 @@ export class AjoutBudgetDeptComponent implements OnInit {
   createForm()
   {
     this.BudgetDeptForm = this.fb.group({
-      date_budg: ['',Validators.required],
       valeur_miss: ['',Validators.required],
       reference_mis :['',Validators.required],
       valeur_tr: ['',Validators.required],
       reference_tr: ['',Validators.required] , 
-      code : ['',Validators.required] 
     })}
  
     loadBudgets()
@@ -72,15 +70,20 @@ export class AjoutBudgetDeptComponent implements OnInit {
     )} 
   
   add(){
-        console.log(this.BudgetDeptForm.value) ; 
+ 
+ this.BudgetDeptForm.value.date_budg=this.dataSys ; 
+    this.BudgetDeptForm.value.code=this.cod ; 
         const m = this.BudgetDeptForm.value ;
-        alert(JSON.stringify(m));
+        console.log(this.BudgetDeptForm.value) ; 
+
+     alert(JSON.stringify(m));
         this.missionService.addBudgetDept(m).subscribe(
           res => {
             this.loadBudgets() ; 
             this.initialiser() ;
           //  alert(JSON.stringify(res));   
             this.operation='' ;  
+            alert('لقد تمت الاضافة بنجاح')
           }    
         )
       }   

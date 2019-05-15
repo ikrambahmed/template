@@ -11,6 +11,7 @@ export class Mission {
 	public datdepP: Date;
 	public datarrP: Date;
 	public motcle: Motcle;
+	public duree : String ; 
 	
 	constructor(
 		numMission?:String , 

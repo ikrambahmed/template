@@ -15,12 +15,13 @@
                     <div class="input-group">
                       <input type="text" class="form-control text-right" placeholder="بطاقة التعريف الوطنية" formControlName="username"
                       [(ngModel)]="credentials.username"
-                      pattern="[0-9]{8}"  required maxlength="8"> 
+                      pattern="[0-9]{8}"  required maxlength="8"  
+                      > 
                       <span class="md-line"></span>
                     </div>
                     <div class="input-group">
                       <input type="password" class="form-control text-right" placeholder="كلمة العبور" formControlName="password"
-                      [(ngModel)]="credentials.password">
+                      [(ngModel)]="credentials.password" [ngClass]="{'is-invalid':loginForm.get('password').touched && loginForm.get('password').invalid}" >
                       <span class="md-line"></span>
                     </div>
                     </form>

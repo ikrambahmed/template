@@ -9,8 +9,9 @@ export class budget {
 	public  date_val:Date ; 
 	public  cod_util:String ; 
 	public  type_budget :String;
-	public  code :DeptGen; 
-	public  date_budg:Date ;
+	public  code :String; 
+    public  date_budg:Date ;
+    public depart: DeptGen ; 
     constructor(   annee ?: Date ,	
           valeur_miss?: Number , 
           reference_miss?:String ,
@@ -19,8 +20,9 @@ export class budget {
           date_val?:Date ,
           cod_util?:String , 
           type_budget ?:String,
-          code ?:DeptGen, 
+          code ?:String, 
+          depart?:DeptGen, 
           date_budg?:Date  ) {
-          this.code=new DeptGen() ; 
+          this.depart=new DeptGen() ; 
           } 
 }

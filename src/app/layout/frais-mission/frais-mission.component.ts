@@ -8,6 +8,10 @@ import { Projet } from 'src/app/models/Projet';
 import { budget } from 'src/app/models/budget';
 import { Pays } from 'src/app/models/pays';
 import { ordMiss } from 'src/app/models/Ord_Miss';
+import { MissionnaireService } from 'src/app/services/missionnaire.service';
+import { Missionnaire } from 'src/app/models/missionnaire';
+import { frais } from 'src/app/models/frais';
+import { budgetProjet } from 'src/app/models/budgetProjet';
 
 @Component({
   selector: 'app-frais-mission',
@@ -35,13 +39,20 @@ projets: Projet[] ;
 radioProjet:Boolean ; 
 typeFrais : TypeFrais [] ; 
 FraisForm:FormGroup ; 
+Somme : Number ;
+fraisMiss : frais ; 
+budgetProjet:budgetProjet ; 
+diffProjet:Number ; 
+val : Number ;
+budgetDept : budget ; 
+diff : Number ; 
 public supportes:Array<string> = [
  'التحمل على الحساب الخاص' ,
  'التحمل على الهيكل المعني'
 ];
 d:number ; 
 typFrais :String;
-  constructor(private ordMissService : OrdMissService,private router : Router, private fb : FormBuilder ,private  missionService : MissionService) { 
+  constructor(private missionnaireService :MissionnaireService  ,private ordMissService : OrdMissService,private router : Router, private fb : FormBuilder ,private  missionService : MissionService) { 
    
    this.createForm() ; 
   }
@@ -65,10 +76,15 @@ createForm(){
     typFrais:['',Validators.required]
   }) ; 
 }
-
+GoToMission(){
+  this.router.navigateByUrl('/stepper') ; 
+}
+GoToOrd(){
+  this.router.navigateByUrl('/ord') ; 
+}
   add(){
     if (this.d>this.duree){
-      alert("erreur duree") ;
+      window.alert('الرجاء التثبت من المدة') ; 
     }
    /* console.log(this.OrdMissForm.value) ; 
     this.OrdMissForm.value.numMission=this.numMission ; 
@@ -81,43 +97,112 @@ if(this.d<=this.duree)
    { 
      console.log('hay a9al') ; 
      const m = this.OrdMissForm.value ;
-    alert(JSON.stringify(m));
+  //  alert(JSON.stringify(m));
     this.missionService.addFrais(m).subscribe(
       res => {
+        window.alert('لقد تمت الاضافة بنجاح') ; 
+
         this.ngOnInit();
-        alert(JSON.stringify(res));
+       // alert(JSON.stringify(res));
       },
       error=>{ console.log(error);}
     )
- //this.router.navigateByUrl('recap') ; 
-  }  }
+  } }
 
   add1(){
     this.ngOnInit() ; 
      console.log(this.OrdMissForm.value) ; 
+     this.OrdMissForm.value.valeurP=this.Somme+"" ; 
      this.OrdMissForm.value.numMission=this.numMission ; 
      this.OrdMissForm.value.numord=this.num_ord ; 
      this.OrdMissForm.value.cin=this.username;
- this.OrdMissForm.value.code=this.cod ;
- //this.OrdMissForm.value.typFrais=this.typFrais ; 
- 
+     this.OrdMissForm.value.code=this.cod ;
      const m = this.OrdMissForm.value ;
      this.OrdMissForm.value.typFrais="1" ; 
-     console.log("3malnaa el assignements") ; 
-     alert(JSON.stringify(m));
+   //  alert(JSON.stringify(m));
      this.missionService.addFrais(m).subscribe(
-       res => {
-         console.log('lkina res'); 
+       res => {   
+        window.alert('لقد تمت الاضافة بنجاح') ; 
+        this.fraisMiss=res ; 
+         console.log('frais',res) ; 
           this.ngOnInit();
-         alert(JSON.stringify(res));
+          this.getLatestBudgetDept() ; 
        },
        error=>{ console.log(error);}
      )
-  //this.router.navigateByUrl('recap') ; 
    }  
 
+   
+ 
 
 
+   getLatestBudgetDept(){
+      this.missionService.getBudgets(this.cod).subscribe(
+      res=> {console.log(res) ;
+      this.budgetDept=res[0] ;
+      this.val=res[0].valeur_miss ; 
+      if(this.fraisMiss.supporte=== 'الهيكل المعني'){
+        console.log(this.val,'valeur'); 
+        console.log(this.fraisMiss.valeurP,'val reel'); 
+        this.diff=(+this.val)-(+this.fraisMiss.valeurP) ; 
+        console.log(this.diff,'difference');
+        this.budgetDept.valeur_miss=this.diff;  
+        this.missionService.updateBudget(this.budgetDept).subscribe(
+        res=>{console.log(res);
+        console.log('update ')},
+        error =>{console.log(error);},
+        ()=>{console.log('done update budget');}
+        );
+  };
+
+
+   
+  if(this.fraisMiss.supporte=== 'مشروع'){
+    this.missionService.getBudgetsProjet(this.cod).subscribe(
+    res=>{console.log(res) ; 
+    this.budgetProjet=res[0] ;
+    console.log(this.budgetProjet.valeur,'budget valeur') ; 
+    console.log(this.fraisMiss.valeurP);
+    this.diffProjet=(+this.budgetProjet.valeur)-(+this.fraisMiss.valeurP) ; 
+    this.budgetProjet.valeur=this.diffProjet ; 
+    console.log('diff',this.diffProjet);
+    this.missionService.updateBudgetProjet(this.budgetProjet).subscribe(
+     res=>{console.log(res);
+     console.log('update ')},
+     error =>{console.log(error);},
+     ()=>{console.log('done update budget');}
+     );
+
+ },
+   error=>{console.log(error) ;},
+   ()=>{console.log('done budget projet ');}) ;
+ };
+ if(this.fraisMiss.supCode==='تحمل مشترك بين الهيكل المعني و الاجنبي'){
+  console.log('val',this.val); 
+  console.log('valeup',this.fraisMiss.valeurP); 
+  this.diff=(+this.val)-((+this.fraisMiss.valeurP)/3) ; 
+  console.log(this.diff,'difference');
+  this.budgetDept.valeur_miss=this.diff;  
+  this.missionService.updateBudget(this.budgetDept).subscribe(
+  res=>{console.log(res);
+  console.log('update ')},
+  error =>{console.log(error);},
+  ()=>{console.log('done update budget');}
+  );
+
+} ; 
+if(this.fraisMiss.supporte==='الهيكل المضبف'){
+console.log('il y a pas de changements de budget') ; 
+} ; 
+
+      console.log('budget',this.budgetDept ,'val',this.val);},
+      error=>{console.log(error) ; } ,
+       () => {console.log('done') ; }) ;
+
+   
+
+   }
+  
   toggleRadio(event) {
     if ( event.target.checked) {
       this.radioProjet=true;
@@ -221,8 +306,49 @@ duree:number ;
     console.log('op',this.op) ; 
     this.loadProjets() ; 
     this.loadTypeFrais() ;
-    this.loadOrdeMission(this.numMission) ;   
+    this.loadOrdeMission(this.numMission) ;
+    this.getMissionnaire() ; 
  
+  }
+  name: string = '';
+  name1: string = '';
+  _timeout: any = null;
+  displayName(){
+    this._timeout  = null;
+    if(this._timeout){ 
+      window.clearTimeout(this._timeout);
+    }
+    this._timeout = window.setTimeout(() => {
+       this._timeout = null;
+    this.calcul() ; 
+    },1000);
+ 
+}
+  missionnaire : Missionnaire = new Missionnaire(); 
+  calcul(){
+    let s = +this.d ; 
+    console.log(this.d) ; 
+    console.log(s) ; 
+    if(this.missionnaire.groupe=='A'){
+      this.Somme = 200 * s ; }
+      else if (this.missionnaire.groupe=='B'){
+        this.Somme=160* s ;
+      }
+      else if (this.missionnaire.groupe=='C'){
+        this.Somme=130*s ; 
+      }
+      console.log('somme',this.Somme) ; 
+  }
+  getMissionnaire(){
+    this.missionnaireService.getOneMiss(this.username).subscribe(
+      data=>{console.log(data);
+        this.missionnaire=data ;
+    } , 
+      error => { console.log(error) ; } , 
+      ()=>{console.log('done') ; }
+    ) ; 
+    
+    
   }
   initialiser(){
  // this.createForm();

@@ -12,7 +12,7 @@ export class frais {
         public codPays?  :String , 
         public valeurP?:Number , 
         public valeurR?:Number , 
-        public supporte ?:Number , 
+        public supporte ?:String , 
         public codPrj ?:Projet , 
         public observ ?:String , 
         public  NVille?:String,

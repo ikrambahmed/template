@@ -16,7 +16,10 @@ export class MissionService {
 
   missions : Mission[];
   constructor(private http : HttpClient) { }
+  getMissionValider(dept : String) :Observable<any>{
+    return this.http.get(this.baseUrl+'/api/'+dept);
 
+  }
   getProjet(dept : String ) : Observable<any>{
     return this.http.get(this.baseUrl+'/api/listeProjetByDept?codeDept='+dept) ; 
   }
@@ -64,7 +67,12 @@ export class MissionService {
   getLatestProjetCode(code : String) : Observable<any>{
     return this.http.get(this.baseUrl+'/api/latestProjetCode?codeDept='+code,{responseType: 'text'}) ;
   }
-
+getAllBudgetProjets():Observable<any>{
+  return this.http.get(this.baseUrl+'/api/listeBudgetProjet')
+}
+getAllBudgetDepts():Observable<any>{
+  return this.http.get(this.baseUrl+'/api/listeBudget')
+}
   getBudgets(code:String): Observable<any>{
     return this.http.get(this.baseUrl+'/api/listbyDept?codeDept='+code) ;
   }
@@ -96,19 +104,23 @@ return this.http.put(this.baseUrl+'/api/updateordMiss',m)
     console.log('service frais') ; 
     return this.http.post(this.baseUrl+'/api/addFrais',m) ; }
   updateBudget(a :budget):Observable<any>{
+    console.log('service budget update') ; 
      return this.http.put(this.baseUrl+'/api/updateBudget',a) ; 
     }
-
   updateBudgetProjet(a :budgetProjet):Observable<any>{
     console.log('west service');
       return this.http.put(this.baseUrl+'/api/updateBudgetProjet',a) ; 
      }
      updateMission(m:Mission):Observable<any>{
        return this.http.put(this.baseUrl+'/api/mission/update',m) ; 
-
-
      }
      getMission(code : String , numMission:String):Observable<any>{
       return this.http.get(this.baseUrl+'/api/mission/missionValidation?codeDept='+code+'?numMission='+numMission) ; 
+     }
+     validerBudget(budgetValid : budgetProjet):Observable<any>{
+       return this.http.put(this.baseUrl+'/api/updateBudgetProjet',budgetValid);
+     }
+     validerBudgetProjet(b:budget):Observable<any>{
+       return this.http.put(this.baseUrl+'/api/updateBudget',b) ; 
      }
 }

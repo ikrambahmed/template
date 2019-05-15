@@ -6,21 +6,19 @@
 <div class="stepwizard">
     <div class="stepwizard-row">
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-primary btn-circle" (click)="affich=true;affich2=false;affich3=false;">1</button>
+            <button type="button" class="btn btn-info btn-circle">1</button>
             <p>ادخال مامورية</p>
 
         </div>
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-primary btn-circle" (click)="affich=false;affich3=false;affich2=true">2</button>
+            <button type="button" class="btn btn-secondary btn-circle" (click)="goToOrdMiss()" [disabled]="!validOrd">2</button>
             <p>اضافة منتفع بالمامورية</p>
         </div>
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-primary btn-circle" (click)="affich2=false;affich3=true;affich=false;" >3</button>
+            <button type="button" class="btn btn-secondary btn-circle" (click)="goToFrais()"  [disabled]="!validFrais">3</button>
             <p>اضافة المصاريف</p>
         </div> 
     </div>
 </div>
 <app-ajout-mission *ngIf="affich==true"></app-ajout-mission>
-<!--<app-ord-missionnaire  *ngIf="affich2==true"></app-ord-missionnaire>
-<app-frais-mission *ngIf="affich3==true"></app-frais-mission>-->
 </div>

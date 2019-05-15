@@ -1,4 +1,5 @@
 import { DeptGen } from './DeptGen';
+import { Projet } from './Projet';
 
 export class budgetProjet {
 
@@ -10,7 +11,8 @@ export class budgetProjet {
 	public  dateVal:Date ; 
 	public  typeBudgetp :String;
 	public  code :DeptGen; 
-	public  codUtil:String ;
+    public  codUtil:String ;
+    public projet : Projet ; 
     constructor(   codPrj ?: String ,	
           annee?: Date ,
           reference?:String ,
@@ -19,6 +21,7 @@ export class budgetProjet {
           dateVal?:Date , 
           typeBudgetp ?:String , 
           code ?:DeptGen , 
+          projet ?:Projet,
           codUtil?:String   ) {
           this.code=new DeptGen() ; 
           } 

@@ -36,10 +36,18 @@ import { AjoutBudgetProjetComponent } from './ajout-budget-projet/ajout-budget-p
 import { AjoutMissionComponent } from './ajout-mission/ajout-mission.component';
 import { PageHeaderModule } from '../shared';
 import { StepperComponent } from './stepper/stepper.component';
-
+import {DlDateTimePickerModule, DlDateTimeDateModule, DlDateTimeInputModule} from 'angular-bootstrap-datetimepicker';
+import { ValidationBudgetComponent } from './validation-budget/validation-budget.component';
+import { ValidationBudProjComponent } from './validation-bud-proj/validation-bud-proj.component';
+import { ValidationCTRLMissionComponent } from './validation-ctrlmission/validation-ctrlmission.component';
+import { ChangePassComponent } from './change-pass/change-pass.component';
+import { RecapComponent } from './recap/recap.component'
 @NgModule({
     imports: [
         CommonModule,
+        DlDateTimeInputModule,
+        DlDateTimeDateModule, 
+        DlDateTimePickerModule,    
         LayoutRoutingModule,
         TranslateModule,
         NgbDropdownModule,
@@ -66,6 +74,11 @@ import { StepperComponent } from './stepper/stepper.component';
     NavbarComponent,
     AjoutBudgetDeptComponent,
     AjoutBudgetProjetComponent,
-    AjoutMissionComponent]
+    AjoutMissionComponent,
+    ValidationBudgetComponent,
+    ValidationBudProjComponent,
+    ValidationCTRLMissionComponent,
+    ChangePassComponent,
+    RecapComponent]
 })
 export class LayoutModule {}

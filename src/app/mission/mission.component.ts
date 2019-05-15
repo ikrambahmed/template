@@ -10,9 +10,8 @@ import { Mission } from '../models/mission';
   styleUrls: ['./mission.component.scss']
 })
 export class MissionComponent implements OnInit {
-
-  selectedMission:Mission=new Mission() ; 
-  missions : Mission[] ; 
+  selectedMission:Mission=new Mission(); 
+  missions:Mission[]; 
   totalRec : number;
   page: number = 1;
   cod : String ; 
@@ -23,10 +22,15 @@ export class MissionComponent implements OnInit {
   constructor(private missionService : MissionService , 
     private http : HttpClient , 
     private router : Router) { }
- 
-  goToMission(){
-    this.router.navigateByUrl('/mission');
+    goToADD(){
+      this.router.navigateByUrl('/stepper') ; 
     }
+    goToMission(){
+    this.router.navigateByUrl('/stepper');
+    }
+    update(){
+      console.log("thisSelectedMission",this.selectedMission);
+      localStorage.setItem('selectedMission',JSON.stringify(this.selectedMission)) ;    }
   loadMissions()
   {this.missionService.getMissions(this.cod).subscribe(
    list => { 
@@ -40,19 +44,12 @@ export class MissionComponent implements OnInit {
   ) ;  
 }
 
- // displayedColumns: string[] = ['code_mission', 'objetA', 'objetF', 'code'];
-
-  //@ViewChild(MatPaginator) paginator: MatPaginator;
-  //dataSource = new MatTableDataSource<any>(this.missions);
   ngOnInit() {
-   // console.log(this.dataSource) ; 
-   // this.dataSource.paginator = this.paginator;
    var DeptGenVal = localStorage.getItem('deptGen') ; 
    var data = JSON.parse(DeptGenVal) ; 
    console.log('retrievedObject: ',data.departement.code) ;
    this.cod=data.departement.code ;
    this.loadMissions();
-  
   
 }
 }

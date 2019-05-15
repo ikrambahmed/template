@@ -31,8 +31,6 @@ export class BudgetProjComponent implements OnInit {
      codPrj: ['',Validators.required],
      reference: ['',Validators.required],
      valeur :['',Validators.required],
-     code : ['',Validators.required],
-     dateBproj : ['',Validators.required]
    })}
 
 
@@ -41,7 +39,6 @@ export class BudgetProjComponent implements OnInit {
    var data = JSON.parse(DeptGenVal) ; 
    console.log('retrievedObject: ',data.departement.code) ;
    this.codeDept=data.departement.code;
-
   this.d = new Date() ; 
   this.year= this.d.getFullYear() ;   
   this.y=this.year+"" ; 
@@ -50,21 +47,33 @@ export class BudgetProjComponent implements OnInit {
   this.loadProjet() ; 
   this.loadBudgets() ; 
  }
- budgets : budget[] ; 
+ budgets : budgetProjet[] ; 
+ entry:number=0 ; 
+ somme : number =0 ; 
    loadBudgets()
-   {this.missionService.getBudgetsProjet(this.codeDept).subscribe(
+   {
+     this.val=false ; 
+     this.missionService.getBudgetsProjet(this.codeDept).subscribe(
      data => { this.budgets=data;
       if((data===null)||(data===undefined)|| (data.length==0))
       this.val=false ;
       else 
       {
-      for (let entry of data) {
-        console.log(entry.date_val)
-if(entry.dateVal===null || entry.dateVal===undefined)
+        
+     /* for (let entry of data)*/
+     while((this.entry<=data.length) && (this.val!=true))
+      {
+        console.log(data[this.entry].dateVal)
+if(data[this.entry].dateVal===null || data[this.entry].dateVal===undefined)
 {console.log('date fergha')
-this.val=true ; 
+this.val=true ;
+console.log(this.val) ;  
       }
-      else this.val=false  ; 
+
+else {this.val=false  ; 
+  this.somme=this.somme+data[this.entry].valeur ; 
+this.entry=this.entry+1 ; 
+}
 }}
     },
      error => {console.log(error); } , 
@@ -73,20 +82,27 @@ this.val=true ;
  
 
  add(){
+  this.BudgetProjForm.value.code=this.codeDept ; 
+  this.BudgetProjForm.value.dateBproj=this.dateSys ; 
    console.log(this.BudgetProjForm.value) ; 
    const m = this.BudgetProjForm.value ;
-   alert(JSON.stringify(m));
+  // alert(JSON.stringify(m));
    this.missionService.addBudgetProj(m).subscribe(
      res => {
+      this.val=true ;
+
+      alert('لقد تمت الاضافة بنجاح') 
       // this.loadBudgets(); 
-      if(res.dateVal===null || res.dateVal===undefined)
+     /* if(res.dateVal===null || res.dateVal===undefined)
       {
         this.val=false ; 
-      }
+      }*/
    
-      alert(JSON.stringify(res));  
-      this.initialiser() ; 
+      //alert(JSON.stringify(res)); 
+    /*  this.loadBudgets() ;  
+      this.initialiser() ; */
       this.operationBudg='' ;  
+      window.location.reload() ; 
 
      
      }    
@@ -97,10 +113,10 @@ this.val=true ;
   this.missionService.updateBudgetProjet(this.selectedBudgetProj)
   .subscribe(
     res =>{
-      this.operationBudg='' ; 
-
+      alert('لقد تم التغيير بنجاح') ;
+      this.operationBudg='' ;
       this.loadBudgets() ; 
-     this.initialiser();
+      this.initialiser();
     }
   )} 
   

@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AjoutMissionComponent implements OnInit {
   codeMission :String; 
+  selectedDate:Date ; 
   Avoirbudg:Boolean ; 
   x:Number ; 
   Date_depart :Date ; 
@@ -86,7 +87,6 @@ dateDiff(date1, date2){
   return day;
 }
 success:boolean ; 
-
 loadBudgetsProjet()
 {this.missionService.getBudgetsProjet(this.cod).subscribe(
   data => { this.budgetsProjet=data;
@@ -139,25 +139,24 @@ loadBudgetsProjet()
 });
 
 }*/
-
-
+selectedMission:Mission=new Mission(); 
+motclevalue:String ; 
 toggle(){
-  console.log('karouma') ;
-
-
+  console.log(this.selectedMission.datdepP) ; 
+  console.log(this.selectedMission.datarrP) ; 
+  let key1 = 'datdepP';
+  localStorage.setItem(key1, JSON.stringify(this.selectedMission.datdepP));
+  let key2 = 'datarrP';
+  localStorage.setItem(key2, JSON.stringify(this.selectedMission.datarrP));
   var promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       let dateString=localStorage.getItem('datdepP') ; 
       this.Date_depart = new Date(dateString);
       console.log('daate',this.Date_depart) ; 
-     
       let dateString2=localStorage.getItem('datarrP') ; 
       this.Date_arrivee = new Date(dateString2);
-     console.log(this.Date_arrivee) ; 
-    
+     console.log('rjou3',this.Date_arrivee) ; 
      if( this.dateDiff(this.Date_depart,this.Date_arrivee)<0){
-      //alert('erreur ');
-      // this.ajout=true;
        window.alert('erreur') ; 
       }
    if(this.dateDiff(this.Date_depart,this.Date_arrivee)>0)
@@ -206,10 +205,10 @@ this.show=true ;
       duree  :  ['',Validators.required] 
   });
   }
-
+valid : boolean ; 
   add(){
     const m = this.missionForm.value ;
-   // alert(JSON.stringify(m));
+   alert(JSON.stringify(m));
     if(this.nb<0 || this.nb==undefined){
       //window.alert('erreur de duree') ; 
       window.alert('الرجاء التثبت من المدة') ; 
@@ -219,10 +218,16 @@ this.show=true ;
     if(this.nb>=0){
     this.missionService.addMission(m).subscribe(
       res => {
+        let key5='duree' ; 
+        localStorage.setItem(key5, JSON.stringify(this.nb));
 
+    this.valid=true ; 
         this.mission=res ; 
           console.log("donne") ;   
           let key = 'num_mission';
+
+          localStorage.setItem('valid',this.valid+"");
+
           localStorage.setItem(key,this.missionForm.get('numMission').value);
           let key1 = 'datdepP';
 

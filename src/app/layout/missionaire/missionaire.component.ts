@@ -18,6 +18,8 @@ import { ListeMissionnaireComponent } from '../liste-missionnaire/liste-missionn
 })
 export class MissionaireComponent implements OnInit {
 
+  missionnaires: Missionnaire[] = new Array();
+  ListeMissionnaireComponent : any ;
   missionnaireForm :FormGroup ; 
   searchText ; 
   grades : grade [];
@@ -104,16 +106,12 @@ createForm()
     date_cin : ['',Validators.required],
     place_cin : ['',Validators.required],
     niveau  : ['',Validators.required],
-    ministr: ['',Validators.required],
     rib: ['',Validators.required] , 
-    grp : ['',Validators.required],
     graade : ['',Validators.required],
     fonnction: ['',Validators.required],
     classgrd: ['',Validators.required],
     codCat : ['',Validators.required],
     groupe: ['',Validators.required],
-    code : ['',Validators.required]
-    //dept: ['',Validators.required]
 });
 }
   initMiss()
@@ -122,6 +120,7 @@ createForm()
     this.createForm(); 
   }
   update() {
+    this.selectedMissionnaire.code=this.cod ; 
   this.missionnaireService.updateMissionnaire(this.selectedMissionnaire)
   .subscribe(
     res =>{
@@ -131,51 +130,41 @@ createForm()
       this.missionnaireService.loadMissionaire() ; 
 
       this.operation='' ; 
+      window.location.reload() ; 
     },
     error => {console.log(error) ; 
     alert('الرجاءالتثبت من المعطيات') ;}
   )} 
-  remove()
-  {
-  this.missionnaireService.deleteMissionnaire(this.selectedMissionnaire.cin).subscribe(
-    res => {
-      alert('لقد تم الحذف بنجاح') ; 
 
-      this.selectedMissionnaire = new Missionnaire() ;
-      this.missionnaireService.loadMissionaire() ; 
-      this.operation='' ; 
-    },error =>{console.log(error) ; 
-      alert('الرجاءالتثبت ') ;
-    
-    }
-  )}
+  loadMissionaire()
+  {this.missionnaireService.getMissionares(this.cod.code).subscribe(
+    data => { this.missionnaires=data},
+    error => {console.log('an error occured') } , 
+    () => {console.log('loading missionnaires was done ')}
+  )
 
-  ListeMissionnaireComponent : any ;
-
+  }
   add(){
+  
+    this.missionnaireForm.value.code=this.cod ; 
+
     console.log(this.missionnaireForm.value.graade) ; 
     const m = this.missionnaireForm.value ;
-
-   // alert(JSON.stringify(m));
+    alert(this.missionnaireForm.value) ; 
     this.missionnaireService.addMissionnaire(m).subscribe(
       res => {
-       /* let element: HTMLElement = document.getElementsByClassName('btn')[0] as HTMLElement;
-        element.click();
-
-        this.myModal.nativeElement.click();*/
-
+      
         this.done=true; 
         alert('لقد تمت الاضافة بنجاح') ; 
-     //   alert(JSON.stringify(res));
-
-        //console.log('c bon lka res') ; 
-        this.initMiss() ; 
-        this.missionnaireService.loadMissionaire() ; 
+        //this.initMiss() ; 
+      //  this.missionnaires.push(res) ; 
+        this.loadMissionaire() ; 
         this.operation='' ; 
+        window.location.reload() ; 
       },
       error =>{console.log(error);
       alert("الرجاءالتثبت من المعطيات");}
       
-    )
+    ) ; 
   }
 }

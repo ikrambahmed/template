@@ -10,8 +10,8 @@
                           <th>المرجع</th>
                           <th>تاريخ الادخال</th>
                           <th>تاريخ المصادقة</th>
-                          <th *ngIf="val===false">
-                            <button class="btn btn-outline-primary"  (click)="operationBudg='ADD';" >اظافة</button>
+                          <th *ngIf="val==false">
+                            <a href="budgetProj#OneBudget"><button class="btn btn-outline-primary"  (click)="operationBudg='ADD';" >اظافة</button></a> 
                           </th>
                         </tr>
                       </thead>
@@ -22,8 +22,8 @@
                           <td>{{budget.dateBproj| date:'yyyy-MM-dd' }}</td>
                           <td>{{budget.dateVal| date:'yyyy-MM-dd'}}</td>
                           <td >
-                            <button class="btn btn-outline-primary" *ngIf="budget.dateVal=== null || budget.dateVal===undefined"
-                              (click)="operationBudg='EDIT';  selectedBudgetProj=budget">تغيير</button>  
+                           <a href="budgetProj#OneBudget"><button class="btn btn-outline-primary" *ngIf="budget.dateVal=== null || budget.dateVal===undefined"
+                              (click)="operationBudg='EDIT';  selectedBudgetProj=budget">تغيير</button> </a>  
                           </td>
                         </tr>
                       </tbody>
@@ -32,12 +32,12 @@
               </div>
               <div class="row">
                   <div class="col-md-6  text-right">
-                  <label> مجموع </label>
+                  <label> {{somme!='null' ? somme  : ''}} </label>
                   <label> مجموع الاعتمادات المرصودة </label>
                   </div>
                   </div>
                 </div>
-        <div class="card" *ngIf="operationBudg=='EDIT'|| operationBudg=='ADD'">
+        <div class="card" *ngIf="operationBudg=='EDIT'|| operationBudg=='ADD'" id="OneBudget">
         {{operationBudg == 'ADD' ? 'ادخال':
         operationBudg == 'EDIT' ? 'تغيير':''}} 
             <div class="container"  >
@@ -45,7 +45,7 @@
                     <div class="card-body ">
                         <h2 class="mb-0 text-center"> <span class="badge badge-secondary">{{y}}</span>
                         </h2>
-                      <form [formGroup]="BudgetProjForm" >
+                      <form [formGroup]="BudgetProjForm" (ngSubmit)="BudgetProjForm.valid" >
                         <div class="row" dir="rtl" lang="ar">
                             <div class="form-group col-md-6 text-right" >
                                 <label >المشروع </label>
@@ -53,24 +53,28 @@
                                     <option *ngFor="let projet of projets" [ngValue]="projet.codPrj">{{projet.libprjA}}</option>
                                   </select>    
                                 </div>
-                                <input type="text" formControlName="code" [(ngModel)]="codeDept" hidden>
-                                <input type="date" formControlName="dateBproj" [(ngModel)]="dateSys" hidden>
                             </div>
             <div class="row">
                 <div class="form-group col-md-6 text-right">
                     <label >المرجع</label>
-                    <input type="text" class="form-control" formControlName="reference" [(ngModel)]="selectedBudgetProj.reference"> 
+                    <input type="text" class="form-control" formControlName="reference" [(ngModel)]="selectedBudgetProj.reference"
+                    [ngClass]="{'is-invalid':BudgetProjForm.get('reference').touched && BudgetProjForm.get('reference').invalid}" 
+
+                    > 
                 </div>
                 <div class="form-group col-md-6 text-right">
                     <label >الاعتمادات</label>
-                    <input type="text" class="form-control" formControlName="valeur" [(ngModel)]="selectedBudgetProj.valeur">
+                    <input type="number" class="form-control" formControlName="valeur" [(ngModel)]="selectedBudgetProj.valeur"
+                    [ngClass]="{'is-invalid':BudgetProjForm.get('valeur').touched && BudgetProjForm.get('valeur').invalid}" 
+
+                    >
                 </div>
             </div>
             </form>
           
           
             <div>
-                <button class="btn btn-success" (click)="operationBudg == 'ADD' ? add() : operationBudg=='EDIT'? update(): '' ; initialiser();">
+                <button class="btn btn-success" (click)="operationBudg == 'ADD' ? add() : operationBudg=='EDIT'? update(): '' ; initialiser();"  [disabled]="!BudgetProjForm.valid">
                   إدخال  
                 </button>
             

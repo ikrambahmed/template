@@ -4,6 +4,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Missionnaire } from '../models/missionnaire';
 import { environment } from '../shared/environment';
 import { grade } from '../models/grade';
+import { ordMiss } from '../models/Ord_Miss';
 
 @Injectable()
 export class MissionnaireService {
@@ -13,6 +14,9 @@ export class MissionnaireService {
 
   constructor(private http : HttpClient){
 
+  }
+  searchMissionnaire(m:Missionnaire):Observable<any> {
+    return this.http.post(this.baseUrl+'/api/searchMissionnaire',m); 
   }
   getMissionares(codeDept:String):Observable<any> {
     console.log("err") ; 
@@ -89,6 +93,10 @@ getOneMiss(cin : String) : Observable<any>{
  getDept(cin:String):Observable<any> 
  {
    return this.http.get('http://localhost:8080/miss_cni-0.0.1-SNAPSHOT/api/DeptOfUsername?username='+cin) ; 
+ }
+ rechercheMissionnaire(miss : Missionnaire) : Observable<any>{
+  return this.http.get(this.baseUrl+'/api/') ; 
+
  }
 
 }

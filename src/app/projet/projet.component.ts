@@ -32,8 +32,9 @@ export class ProjetComponent implements OnInit {
   //  alert(JSON.stringify(m));
     this.missionService.addProjet(m).subscribe(
       res => {
-        this.reloadCodeProjet() ; 
-          alert('لقد تمت الاضافة بنجاح') 
+          alert('لقد تمت الاضافة بنجاح') ; 
+          this.reloadCodeProjet() ; 
+
          },
          error=>{console.log("erreur");}    
     )

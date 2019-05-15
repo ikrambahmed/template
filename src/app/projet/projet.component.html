@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="card-body" >
-      <button class="btn btn-outline-primary" (click)="operation='ADD'" dir="ltr">اظافة</button>
+    <a href="projet#Afficher"> <button class="btn btn-outline-primary" (click)="operation='ADD'" dir="ltr">اظافة</button></a>
   
       <table class="table table-hover table-bordered text-right" >
   
@@ -33,7 +33,7 @@
       </div>    
     </div>
     </div>
-  <div class="card"  *ngIf="operation=='ADD'" >
+  <div class="card"  *ngIf="operation=='ADD'" id="Afficher">
     <div class="card-header text-right">
         اضافة مشروع
     </div>

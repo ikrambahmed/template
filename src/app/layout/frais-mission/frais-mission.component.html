@@ -6,16 +6,16 @@
 <div class="stepwizard">
     <div class="stepwizard-row">
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-info btn-circle" (click)="affich=true;affich2=false;affich3=false;">1</button>
+            <button type="button" class="btn btn-primary btn-circle" disabled>1</button>
             <p>ادخال مامورية</p>
 
         </div>
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-info btn-circle" (click)="affich=false;affich3=false;affich2=true">2</button>
+            <button type="button" class="btn btn-primary btn-circle" disabled>2</button>
             <p>اضافة منتفع بالمامورية</p>
         </div>
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-secondary btn-circle" (click)="affich2=false;affich3=true;affich=false;" >3</button>
+            <button type="button" class="btn btn-info btn-circle" >3</button>
             <p>اضافة المصاريف</p>
         </div> 
     </div>
@@ -53,9 +53,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{{username}} </td>
-                    <td>{{prenom}}</td>
-                    <td>{{nom}} </td>
+                    <td>{{ username!='null' ? username  : ''}} </td>
+                    <td>{{prenom!='null' ? prenom  : ''}}</td>
+                    <td>{{nom !='null' ? nom : ''}} </td>
                    
                     <td>{{duree}}</td>
   
@@ -71,7 +71,7 @@
             <div class="form-group col-md-3 text-right">
               <label>المدة
               </label>
-              <input type="textbox" class="form-control" formControlName="duree" [(ngModel)]="d" >
+              <input type="textbox" class="form-control" formControlName="duree" [(ngModel)]="d" (ngModelChange)="displayName()" >
             </div>
             <div class="form-group col-md-3 text-right">
               <label>وسيلة النقل
@@ -112,11 +112,6 @@
             </div>
               <div class="card-body">
                 <div id="collapseExample" [ngbCollapse]="isCollapsed">
-                  <div class="row" dir="rtl">
-                    <div class="form-group col-md-4 text-right">
-                      <input type="text" formControlName="valeurP">
-                    </div>
-                  </div>
                   <div class="row" dir="rtl">
                     <div class="form-group col-md-4 text-right">
                       <h5><label> التحمل على</label></h5>
@@ -172,6 +167,9 @@
                       <div class="form-group col-md-4 text-right">
                         <div class="list-group radio-list-group">
   
+                          <div class="list-group-item list-group-item-info">&nbsp;<label><input type="radio"
+                            value="لا شيء" formControlName="supCode" checked="checked" ><span class="list-group-item-text">لا شيء</span></label></div>
+
                           <div class="list-group-item list-group-item-info">&nbsp;<label><input type="radio"
                                 value="على الحساب الخاص" formControlName="supCode"><span class="list-group-item-text">على
                                 الحساب الخاص</span></label></div>

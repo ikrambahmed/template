@@ -1,6 +1,6 @@
 
-<div *ngIf="operation=='ADD'|| operation=='EDIT'">
-    <div class="card">
+<div *ngIf="operation=='ADD' || operation=='EDIT'">
+  <div class="card">
       <div class="card-header">{{ operation == 'ADD' ? 'ادخال' :
           operation == 'EDIT' ? 'تغيير' : ''}}</div>
     <div *ngIf="show==true">
@@ -10,7 +10,7 @@
                 <form [formGroup]="missionForm" #f="ngForm">
                    <div class="row" dir="rtl">
                       <div class="form-group col-md-12 text-center">
-                         <div *ngIf="operation=='ADD'"><h4>رقم المأمورية<span class = "label label-default">{{cod}}/{{codeMission}}</span></h4>
+                         <div *ngIf="operation=='ADD'"><h4>رقم المأمورية<span class = "label label-default" >{{cod}}/{{codeMission}}</span></h4>
                           <input type="text" class="form-control" formControlName="numMission" [(ngModel)]="codeMission" hidden>
                         </div> 
                          <div *ngIf="operation=='EDIT'"><h4>رقم المأمورية<span class = "label label-default">{{cod}}/{{selectedMission.numMission}}</span></h4></div> 
@@ -22,8 +22,8 @@
                   <div class="row" dir="rtl">
                     <div class="form-group col-md-6 text-right">
                       <label> الكلمة المفتاح </label>
-                      <select class="form-control form-control-lg" id="select" formControlName="motcle" >
-                        <option *ngFor="let motcle of motcles" [ngValue]="motcle"  >{{motcle.amotcle}}</option>
+                      <select class="form-control" id="select" formControlName="motcle" [(ngModel)]="selectedMission.motcle" autofocus >
+                        <option *ngFor="let motcle of motcles" [ngValue]="motcle" [selected]="selectedMission.motcle">{{motcle.amotcle}}</option>
                       </select>
                     </div>
     
@@ -47,19 +47,25 @@
                   <div class="row">
                     <div class="form-group col-md-4 text-right">
                       <label>المدة </label>
-                      <input type="text" class="form-control" formControlName="duree" [(ngModel)]="nb" readonly/>
+                      <input type="text" class="form-control" formControlName="duree" [(ngModel)]="selectedMission.duree" 
+                       readonly/>
                     </div>
                     <div class="form-group col-md-4 text-right">
                       <label>تاريخ الاياب </label>
     
                       <input type="date" id="date1" class="form-control" formControlName="datarrP"
+                       [ngModel] ="selectedMission.datarrP|date:'yyyy-MM-dd'" 
+                       
                        [(ngModel)]="selectedMission.datarrP" (change)="toggle()"/>
     
                     </div>
                     <div class="form-group col-md-4 text-right">
                       <label>تاريخ الذهاب </label>
     
-                      <input type="date" id="date2" class="form-control" formControlName="datdepP" [(ngModel)]="selectedMission.datdepP" />
+                      <input type="date" id="date2" class="form-control" formControlName="datdepP"
+                      [ngModel] ="selectedMission.datdepP|date:'yyyy-MM-dd'" 
+
+                       [(ngModel)]="selectedMission.datdepP" />
     
                     </div>
     

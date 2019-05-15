@@ -6,16 +6,16 @@
 <div class="stepwizard">
     <div class="stepwizard-row">
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-info btn-circle" (click)="affich=true;affich2=false;affich3=false;">1</button>
+            <button type="button" class="btn btn-primary btn-circle" (click)="goToMission()" disabled>1</button>
             <p>ادخال مامورية</p>
 
         </div>
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-secondary btn-circle" (click)="affich=false;affich3=false;affich2=true">2</button>
+            <button type="button" class="btn btn-info btn-circle" >2</button>
             <p>اضافة منتفع بالمامورية</p>
         </div>
         <div class="stepwizard-step">
-            <button type="button" class="btn btn-secondary btn-circle" (click)="affich2=false;affich3=true;affich=false;" >3</button>
+            <button type="button" class="btn btn-secondary btn-circle" disabled>3</button>
             <p>اضافة المصاريف</p>
         </div> 
     </div>

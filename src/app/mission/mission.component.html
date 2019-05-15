@@ -19,7 +19,7 @@
                     <th>تاريخ الاياب</th>
   
                     <th>
-                          <button class="btn btn-outline-primary" (click)="operation='ADD'">اظافة</button>
+                          <button class="btn btn-outline-primary" (click)="goToADD()">اظافة</button>
                     </th>
                   </tr>
                 </thead>
@@ -33,8 +33,8 @@
                     <td>{{mission.datdepP | date:'yyyy-MM-dd'}}</td>
                     <td>{{mission.datarrP | date:'yyyy-MM-dd'}}</td>
                     <td>
-                      <button class="btn btn-outline-primary"
-                        (click)="operation='EDIT';  selectedMission = mission">تحيين</button>
+                    <a href="mission#missionAffiche">  <button class="btn btn-outline-primary"
+                        (click)="selectedMission = mission;update();operation='EDIT';" >تحيين</button></a>
                     </td>
                   </tr>
                 </tbody>
@@ -47,11 +47,11 @@
           </div>
         </div>
       </div>
-     
+     <!--[selectedMission]="selectedMission"-->
   
     </div>
-  <section >
-    <app-one-mission [operation]="operation" [selectedMission]="selectedMission"></app-one-mission>
-  </section>-->
+  <section id="missionAffiche">
+    <app-one-mission [operation]="operation" [selectedMission]="selectedMission" ></app-one-mission>
+  </section>
   
   
