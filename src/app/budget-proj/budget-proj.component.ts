@@ -52,7 +52,7 @@ export class BudgetProjComponent implements OnInit {
  somme : number =0 ; 
    loadBudgets()
    {
-     this.val=false ; 
+     //this.val=false ; 
      this.missionService.getBudgetsProjet(this.codeDept).subscribe(
      data => { this.budgets=data;
       if((data===null)||(data===undefined)|| (data.length==0))
@@ -99,10 +99,10 @@ this.entry=this.entry+1 ;
       }*/
    
       //alert(JSON.stringify(res)); 
-    /*  this.loadBudgets() ;  
-      this.initialiser() ; */
+      this.loadBudgets() ;  
+      this.initialiser() ; 
       this.operationBudg='' ;  
-      window.location.reload() ; 
+    //  window.location.reload() ; 
 
      
      }    

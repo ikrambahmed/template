@@ -41,7 +41,9 @@ import { ValidationBudgetComponent } from './validation-budget/validation-budget
 import { ValidationBudProjComponent } from './validation-bud-proj/validation-bud-proj.component';
 import { ValidationCTRLMissionComponent } from './validation-ctrlmission/validation-ctrlmission.component';
 import { ChangePassComponent } from './change-pass/change-pass.component';
-import { RecapComponent } from './recap/recap.component'
+import { RecapComponent } from './recap/recap.component';
+import { ModifMissionComponent } from './modif-mission/modif-mission.component';
+import { TabSetModifComponent } from './tab-set-modif/tab-set-modif.component'
 @NgModule({
     imports: [
         CommonModule,
@@ -79,6 +81,8 @@ import { RecapComponent } from './recap/recap.component'
     ValidationBudProjComponent,
     ValidationCTRLMissionComponent,
     ChangePassComponent,
-    RecapComponent]
+    RecapComponent,
+    ModifMissionComponent,
+    TabSetModifComponent]
 })
 export class LayoutModule {}

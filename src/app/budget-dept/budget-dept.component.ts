@@ -35,20 +35,19 @@ export class BudgetDeptComponent implements OnInit {
     somme : number =0 ;    
     sommeTr : number=0 ; 
     loadBudgets()
-    {     this.val=false ; 
-      
+    {
       this.missionService.getBudgets(this.cod).subscribe(
       data => {
         console.log('data',data) ; 
         if((data===null)||(data===undefined)|| (data.length==0))
         this.val=false ;
       else
-      {
-       this.budgets=data;
-      console.log(data) ; 
+      { this.budgets=data;
+
+      console.log(data,'dataaaaaa') ; 
       while((this.entry<=data.length) && (this.val!=true))
-{      console.log(data[this.entry].date_val)
-       if(data[this.entry].date_val==null)
+{      console.log(data[this.entry].date_val )
+       if(data[this.entry].date_val===null )
        {console.log('date fergha')
        this.val=true ; 
       }
@@ -56,7 +55,8 @@ export class BudgetDeptComponent implements OnInit {
       this.sommeTr=this.sommeTr+data[this.entry].valeur_tr ; 
       this.somme=this.somme+data[this.entry].valeur_miss ; 
       this.entry=this.entry+1 ; 
-      }}},
+      }
+    }},
       error => {console.log(error); } , 
       () => {console.log('loading budgets was done ')}
     )}
@@ -70,11 +70,12 @@ export class BudgetDeptComponent implements OnInit {
     this.missionService.updateBudget(this.selectedBudget)
     .subscribe(
       res =>{
+        alert('لقد تم التغيير بنجاح') ;
+       // this.initialiser() ; 
         this.loadBudgets() ; 
-        this.initialiser() ; 
         this.operation='' ; 
       }
-    )} 
+    );} 
   
   add(){
     this.BudgetDeptForm.value.date_budg=this.dataSys ; 
@@ -85,8 +86,14 @@ export class BudgetDeptComponent implements OnInit {
         this.missionService.addBudgetDept(m).subscribe(
           res => {
             alert('لقد تمت الاضافة بنجاح')
-            this.loadBudgets() ; 
-            this.initialiser() ;
+           // this.initialiser() ;
+            var promise = new Promise((resolve, reject) => {
+              setTimeout(() => {
+                this.loadBudgets() ; 
+       
+                resolve();
+              }, 1000);
+            })
           //  alert(JSON.stringify(res));   
             this.operation='' ;  
           }    

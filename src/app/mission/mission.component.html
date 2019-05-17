@@ -24,11 +24,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let mission of missions| filter:searchText | paginate: { id: 'listing_pagination',
+                  <tr *ngFor="let mission of missions | filter:searchText | paginate: { id: 'listing_pagination',
                   itemsPerPage: 10,
                   currentPage: page,
                   totalItems: totalRec}  ">
-                    <td>{{mission.numMission}} </td>
+                    <td>{{mission.code}}/{{mission.numMission}} </td>
                     <td>{{mission.objeta}}</td>
                     <td>{{mission.datdepP | date:'yyyy-MM-dd'}}</td>
                     <td>{{mission.datarrP | date:'yyyy-MM-dd'}}</td>
@@ -49,9 +49,12 @@
       </div>
      <!--[selectedMission]="selectedMission"-->
   
-    </div>
-  <section id="missionAffiche">
+    </div >
+ 
+ 
+    <section id="missionAffiche" >
+
     <app-one-mission [operation]="operation" [selectedMission]="selectedMission" ></app-one-mission>
-  </section>
+  </section> 
   
   

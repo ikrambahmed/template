@@ -27,7 +27,7 @@ export class MissionService {
     return this.http.get(this.baseUrl+'/api/getOneMiss?cin='+cin) ; 
    }
   getMissions(codeDept: String):Observable<any> {
-    return this.http.get('http://localhost:8080/miss_cni-0.0.1-SNAPSHOT/api/mission/listeMissionByDept?codeDept='+codeDept) ; 
+    return this.http.get(this.baseUrl+'/api/mission/listeMissionByDept?codeDept='+codeDept) ; 
   }
 
   addOrdMiss(o:ordMiss):Observable<any> {
@@ -54,7 +54,7 @@ export class MissionService {
     return this.http.get(this.baseUrl+'/api/listbyDept?codeDept='+code) ; 
   }
   addBudgetDept(m :budget):Observable<any>{
-    return this.http.post('http://localhost:8080/miss_cni-0.0.1-SNAPSHOT/api/addBudget' , m) ; 
+    return this.http.post(this.baseUrl+'/api/addBudget' , m) ; 
 
   }
   addBudgetProj(m :budgetProjet):Observable<any>{
@@ -122,5 +122,11 @@ return this.http.put(this.baseUrl+'/api/updateordMiss',m)
      }
      validerBudgetProjet(b:budget):Observable<any>{
        return this.http.put(this.baseUrl+'/api/updateBudget',b) ; 
+     }
+     getFraisByOne(f:frais):Observable<any>{
+      return this.http.post(this.baseUrl+'/api/getFrais',f) ; 
+     }
+     updateProjet(p:Projet):Observable<any>{
+      return this.http.put(this.baseUrl+'/api/updateProjet',p) ; 
      }
 }

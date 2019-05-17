@@ -9,7 +9,7 @@ import { Projet } from '../models/Projet';
   styleUrls: ['./projet.component.scss']
 })
 export class ProjetComponent implements OnInit {
-
+  selectedProjet:Projet =new Projet(); 
   PojetForm : FormGroup ; 
   operation:String ; 
   d:Date = new Date() ; 
@@ -34,6 +34,9 @@ export class ProjetComponent implements OnInit {
       res => {
           alert('لقد تمت الاضافة بنجاح') ; 
           this.reloadCodeProjet() ; 
+          this.loadProjets() ; 
+          this.operation='' ; 
+          
 
          },
          error=>{console.log("erreur");}    
@@ -60,10 +63,25 @@ reloadCodeProjet(){
     }) ; 
   
 }
-projets:Projet[] ; 
+
+ 
+//projets:Array<Projet>[]=new Array() ; 
+projets : Projet[] ; 
 loadProjets()
 {this.missionService.getprojets(this.cod).subscribe(
-  data => { this.projets=data},
+  data => { this.projets=data ; 
+    
+  //this.projets.sort() ; 
+  
+
+
+
+
+
+
+
+
+},
   error => {console.log('an error occured') } , 
   () => {console.log('loading projets was done ')}
 )
@@ -81,6 +99,16 @@ firstName: FormControl;
     this.loadProjets() ; 
     this.firstName = new FormControl('', Validators.required);
 
+  }
+  projet : Projet ; 
+  update(){this.missionService.updateProjet(this.selectedProjet).subscribe(
+    data => { this.projet=data ; 
+    this.operation='' ; 
+  this.loadProjets() ; },
+    error => {console.log(error) } , 
+    () => {console.log('loading projets was done ')}
+  ) ; 
+  
   }
 
 }

@@ -208,16 +208,19 @@ this.show=true ;
 valid : boolean ; 
   add(){
     const m = this.missionForm.value ;
-   alert(JSON.stringify(m));
+    if(this.missionForm.value.objeta==='' ||this.missionForm.value.objetl===''){
+      alert('الرجاء اضافة الموضوع') ; 
+    }
+  else {
+   //alertJSON.stringify(m));
     if(this.nb<0 || this.nb==undefined){
       //window.alert('erreur de duree') ; 
       window.alert('الرجاء التثبت من المدة') ; 
-
-
     }
     if(this.nb>=0){
     this.missionService.addMission(m).subscribe(
       res => {
+        localStorage.setItem('selectedMission',JSON.stringify(res) ); 
         let key5='duree' ; 
         localStorage.setItem(key5, JSON.stringify(this.nb));
 
@@ -244,7 +247,7 @@ valid : boolean ;
          error=>{console.log(error);
           alert("الرجاءالتثبت من المعطيات");}
     
-    );}
+    );}}
    
   }
 

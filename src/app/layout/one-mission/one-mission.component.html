@@ -54,7 +54,8 @@
                       <label>تاريخ الاياب </label>
     
                       <input type="date" id="date1" class="form-control" formControlName="datarrP"
-                       [ngModel] ="selectedMission.datarrP|date:'yyyy-MM-dd'" 
+                       [ngModel] ="selectedMission.datarrP|date:'yyyy-MM-dd'"  min="2000-01-01" max="2050-12-31"
+
                        
                        [(ngModel)]="selectedMission.datarrP" (change)="toggle()"/>
     
@@ -62,7 +63,9 @@
                     <div class="form-group col-md-4 text-right">
                       <label>تاريخ الذهاب </label>
     
-                      <input type="date" id="date2" class="form-control" formControlName="datdepP"
+                      <input type="date" id="date2" class="form-control" 
+                      formControlName="datdepP"      min="2000-01-01" max="2050-12-31"
+
                       [ngModel] ="selectedMission.datdepP|date:'yyyy-MM-dd'" 
 
                        [(ngModel)]="selectedMission.datdepP" />
@@ -91,7 +94,7 @@
           هل انت متاكد؟</div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">لا</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="operation == 'ADD' ? add() : operation=='EDIT'? update() : '' " >نعم</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="operation == 'ADD' ? add() : operation=='EDIT'? update(): ''   " >نعم</button>
         </div>
       </div>
     </div>
@@ -126,3 +129,6 @@
   </div>
     
     </div>
+<div *ngIf="next==true">
+<app-modif-mission [selectedMission]="selectedMission"></app-modif-mission>
+</div>

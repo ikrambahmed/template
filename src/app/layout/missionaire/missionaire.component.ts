@@ -34,7 +34,7 @@ operation ;
 @Input() 
 butonMsg ;
 @Input()
- selectedMissionnaire ; 
+ selectedMissionnaire; 
 
   constructor(private fb : FormBuilder , private missionnaireService : MissionnaireService, private router : Router) { 
     this.createForm() ; 
@@ -88,8 +88,11 @@ butonMsg ;
     var data = JSON.parse(DeptGenVal) ; 
     console.log('retrievedObject: ',data.departement.code) ;
     this.cod=data.departement;
+    let dateString2=this.selectedMissionnaire.datenaissance ; //localStorage.getItem('datarrP') ; 
+  this.dateNais = new Date(dateString2);
   
 }
+dateNais : Date=new Date() ; 
 createForm()
 {
   this.missionnaireForm = this.fb.group({
@@ -150,7 +153,9 @@ createForm()
 
     console.log(this.missionnaireForm.value.graade) ; 
     const m = this.missionnaireForm.value ;
-    alert(this.missionnaireForm.value) ; 
+    //if(this.missionnaireForm.value)
+   // alert(JSON.stringify(m)) ; 
+    console.log(JSON.stringify(m)) ; 
     this.missionnaireService.addMissionnaire(m).subscribe(
       res => {
       

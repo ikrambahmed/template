@@ -7,7 +7,7 @@ import { TypeFrais } from './typeFrais';
 
 export class frais {
     constructor(public numMission? : String ,
-        public numord? : number , 
+        public numord? : Number , 
         public cin?  :String,
         public codPays?  :String , 
         public valeurP?:Number , 
@@ -24,6 +24,7 @@ export class frais {
         public pays?:Pays , 
         public duree?:String ,
         public supCode?:String ,
+        public code ?:String , 
 
 
         public typFrais1?:TypeFrais)

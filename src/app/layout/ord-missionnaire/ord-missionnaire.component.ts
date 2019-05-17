@@ -5,6 +5,7 @@ import { ordMiss } from 'src/app/models/Ord_Miss';
 import { Router } from '@angular/router';
 import { MissionService } from 'src/app/services/mission.service';
 import { OrdMissService } from 'src/app/services/ord-miss.service';
+import { Mission } from 'src/app/models/mission';
 
 @Component({
   selector: 'app-ord-missionnaire',
@@ -201,31 +202,25 @@ goToFrais(){
     alert('do stuff');
 }
 affich2 : boolean ; 
+selectedMission:Mission; 
+
   ngOnInit() {
 
-
-  this.num_miss = JSON.parse(localStorage.getItem('num_mission')) ;
- // console.log('noumrou',this.num_miss); 
+  this.selectedMission=JSON.parse(localStorage.getItem('selectedMission')); 
+  this.num_miss = this.selectedMission.numMission ; //JSON.parse(localStorage.getItem('num_mission')) ;
   var DeptGenVal = localStorage.getItem('deptGen') ; 
   var data = JSON.parse(DeptGenVal) ; 
   console.log('retrievedObject:',data.departement.code) ;
   this.cod=data.departement.code;
 
-  let dateString=localStorage.getItem('datdepP') ; 
+  let dateString=this.selectedMission.datdepP ; //localStorage.getItem('datdepP') ; 
   this.Date_depart = new Date(dateString);
   console.log('daate',this.Date_depart) ; 
-
-  let dateString2=localStorage.getItem('datarrP') ; 
+  let dateString2=this.selectedMission.datarrP ; //localStorage.getItem('datarrP') ; 
   this.Date_arrivee = new Date(dateString2);
   console.log(this.Date_arrivee) ; 
   this.show1=false;
-
-  this.duree_miss=JSON.parse(localStorage.getItem('duree')) ; 
-
-
-
-
-
+  this.duree_miss=+this.selectedMission.duree ; //JSON.parse(localStorage.getItem('duree')) ; 
 this.duree =this.dateDiff(this.Date_depart,this.Date_arrivee) ;
 console.log('duree mission',this.duree);
 this.reloadCode();

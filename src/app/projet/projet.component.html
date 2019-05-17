@@ -12,8 +12,11 @@
   
         <thead>
           <tr div class="text-right">
+              <th>تغيير
+                </th>
             <th >رقم المشروع</th>
             <th>المشروع </th> 
+           
           
           </tr>
         </thead>
@@ -22,8 +25,12 @@
           itemsPerPage: 10,
           currentPage: page,
           totalItems: totalRec} ">
+          <td>
+              <a href="projet#Afficher"> <button class="btn btn-outline-primary" (click)="operation='EDIT'; selectedProjet=projet;" dir="ltr">تغيير</button></a>
+          </td>
               <td>{{projet.codPrj}}</td>
             <td>{{projet.libPrjL}} </td>
+           
           </tr>
         </tbody>
       </table>
@@ -33,10 +40,9 @@
       </div>    
     </div>
     </div>
-  <div class="card"  *ngIf="operation=='ADD'" id="Afficher">
+  <div class="card"  *ngIf="operation=='ADD' || operation=='EDIT'" id="Afficher">
     <div class="card-header text-right">
-        اضافة مشروع
-    </div>
+        {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'تغيير': ''}}    </div>
   <div class="container" >  
           <div class="card-body ">
             <form [formGroup]="PojetForm" (ngSubmit)="PojetForm.valid">
@@ -51,7 +57,7 @@
                 <div class="row">
                 <div class="form-group col-md-6 text-right">
                   <label>المشروع</label>
-                  <input type="textbox" class="form-control" formControlName="libprjA"  required
+                  <input type="textbox" class="form-control" formControlName="libprjA"  required [(ngModel)]="selectedProjet.libprjA"
                   [ngClass]="{'is-invalid':PojetForm.get('libprjA').touched && PojetForm.get('libprjA').invalid}" 
                   >
                 </div>
@@ -59,7 +65,7 @@
                 
                 <div class="form-group col-md-6 text-right">
                   <label>Projet</label>
-                  <input type="textbox" class="form-control" formControlName="libPrjL" required 
+                  <input type="textbox" class="form-control" formControlName="libPrjL" required [(ngModel)]="selectedProjet.libPrjL"
                   [ngClass]="{'is-invalid':PojetForm.get('libPrjL').touched && PojetForm.get('libPrjL').invalid}" 
 
                   >
@@ -67,7 +73,7 @@
               </div>
            
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" [disabled]="!PojetForm.valid">
-             اظافة</button>
+                  {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'تغيير':''}}</button>
               
               <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -83,7 +89,7 @@
               هل انت متاكد؟      </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal"  >لا</button>
-                      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="operation == 'ADD' ? add() : operation=='EDIT'? update() : operation=='REMOVE'? remove() : '' " >نعم</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="operation == 'ADD' ? add() : operation=='EDIT'? update():'' " >نعم</button>
                     </div>
                   </div>
                 </div>

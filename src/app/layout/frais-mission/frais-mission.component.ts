@@ -82,7 +82,10 @@ GoToMission(){
 GoToOrd(){
   this.router.navigateByUrl('/ord') ; 
 }
+valeurR:String ; 
   add(){
+  //  this.FraisForm.value.valeurR=+this.valeurR;
+
     if (this.d>this.duree){
       window.alert('الرجاء التثبت من المدة') ; 
     }
@@ -91,13 +94,13 @@ GoToOrd(){
     this.OrdMissForm.value.numord=this.num_ord ; 
     this.OrdMissForm.value.cin=this.username;
 this.OrdMissForm.value.code=this.cod ;
-this.OrdMissForm.value.typFrais=this.typFrais ; 
-*/
+this.OrdMissForm.value.typFrais=this.typFrais ; */
+
 if(this.d<=this.duree)
    { 
      console.log('hay a9al') ; 
      const m = this.OrdMissForm.value ;
-  //  alert(JSON.stringify(m));
+   alert(JSON.stringify(m));
     this.missionService.addFrais(m).subscribe(
       res => {
         window.alert('لقد تمت الاضافة بنجاح') ; 
@@ -112,14 +115,14 @@ if(this.d<=this.duree)
   add1(){
     this.ngOnInit() ; 
      console.log(this.OrdMissForm.value) ; 
-     this.OrdMissForm.value.valeurP=this.Somme+"" ; 
+     this.OrdMissForm.value.valeurR=this.Somme+"" ; 
      this.OrdMissForm.value.numMission=this.numMission ; 
      this.OrdMissForm.value.numord=this.num_ord ; 
      this.OrdMissForm.value.cin=this.username;
      this.OrdMissForm.value.code=this.cod ;
      const m = this.OrdMissForm.value ;
      this.OrdMissForm.value.typFrais="1" ; 
-   //  alert(JSON.stringify(m));
+     alert(JSON.stringify(m));
      this.missionService.addFrais(m).subscribe(
        res => {   
         window.alert('لقد تمت الاضافة بنجاح') ; 

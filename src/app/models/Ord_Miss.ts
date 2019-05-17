@@ -5,8 +5,8 @@ import { Missionnaire } from './missionnaire';
 export class ordMiss {
     constructor(public numord? :Number ,
         public numMission?:String , 
-       public mission ?: Mission ,
-        public code ?: DeptGen ,
+       public mission  ?: Mission ,
+        public code ?: String ,
     public  datarrP?:Date , 
     public  datdepP?:Date ,
     public missionnaire ?: Missionnaire ,
@@ -14,7 +14,6 @@ export class ordMiss {
     public etat?:String 
     )
     {
-        this.code = new DeptGen() ; 
         this.mission = new Mission () ; 
         this.missionnaire= new Missionnaire() ; 
     } 

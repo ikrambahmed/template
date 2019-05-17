@@ -97,16 +97,12 @@ export class NavbarComponent implements OnInit {
     console.log('libelee arabe ',data.departement.libA) ;
     this.depart=data.departement.libA;
     this.LoadNameUser() ; 
-  
     console.log('localStorage' , JSON.parse(localStorage.getItem('principal'))) ; 
     this.principal=JSON.parse(localStorage.getItem('principal')) ;
     this.hasRoleController() ; 
     this.hasRoleUser() ; 
           resolve();
-        }, 1000);
-    
-    
-      
+        }, 1000);     
       })
     } 
 

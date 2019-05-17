@@ -22,6 +22,7 @@ import { ValidationBudProjComponent } from './validation-bud-proj/validation-bud
 import { ValidationCTRLMissionComponent } from './validation-ctrlmission/validation-ctrlmission.component';
 import { ChangePassComponent } from './change-pass/change-pass.component';
 import { RecapComponent } from './recap/recap.component';
+import { ModifMissionComponent } from './modif-mission/modif-mission.component';
 
 const routes: Routes = [
     {
@@ -56,7 +57,8 @@ const routes: Routes = [
             {path:'validationProj',component:ValidationBudProjComponent},
             {path:'validMissCtrl',component:ValidationCTRLMissionComponent},
             {path:'changePassword',component:ChangePassComponent},
-            {path:'recap',component:RecapComponent}
+            {path:'recap',component:RecapComponent},
+            {path:'modif',component : ModifMissionComponent}
 
 
 

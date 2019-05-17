@@ -32,61 +32,28 @@ export class ListeMissionnaireComponent implements OnInit {
  { console.log(this.selectedMissionnaire) ; 
    this.missionnaireService.searchMissionnaire(this.selectedMissionnaire).subscribe(
   data => {
-    console.log(data,'dataaa') ; 
-  this.missionnaires=data; 
-  if (data.length===0){
-    console.log('false') ; 
-    this.exist=false ; 
+     if (data.length==0 ||data===undefined || data ===null){ 
     this.missionnaireService.deleteMissionnaire(this.selectedMissionnaire.cin).subscribe(
       res => {
         alert('لقد تم الحذف بنجاح');
         this.loadMissionaire() ; 
         this.operation='' ; 
-        //window.location.reload() ; 
+        
       },error =>{console.log(error) ; 
         alert('الرجاءالتثبت ') ;
       
       }
     )
   }
-  else {this.exist=true ;}
+  else {
+  alert("لا يمكن حذف المنتفع") ;}
 },
-  error => {console.log('an error occured') } , 
-  () => {console.log('loading missionnaires was done');}
+  error => {console.log(error) } , 
+  () => {console.log('deleting missionnaire is done');}
 ) ; 
 
 }
-  /* this.missionnaireService.rechercheMissionnaire(this.selectedMissionnaire).subscribe(
-     res=>{this.existe=true ;}, 
-     error => {console.log(error);},
-     ()=>{console.log("loading done") ; }
-   ) ; */
-  /* if(this.existe===false){
-     alert("لا يمكن حذف المنتفع") ; 
-   }
-   if (this.existe===true) */
-
- remove()
-{this.searchMissionnaire() ; 
-  console.log(this.exist) ;  //if (this.exist===false){
-    
-   /*  this.missionnaireService.deleteMissionnaire(this.selectedMissionnaire.cin).subscribe(
-   res => {
-     alert('لقد تم الحذف بنجاح') ; 
-
-     this.selectedMissionnaire = new Missionnaire() ;
-     this.missionnaireService.loadMissionaire() ; 
-     this.operation='' ; 
-   },error =>{console.log(error) ; 
-     alert('الرجاءالتثبت ') ;
-   
-   }
- )*/
-//}
- if(this.exist===true)
- {alert('لا يمكن حذف المنتفع') ; }
-  }
-
+ 
   editOp()
   {
     this.operation='EDIT' ; 

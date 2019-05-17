@@ -16,6 +16,8 @@ export class OneMissionComponent implements OnInit {
   operation :String; 
   @Input()
   selectedMission:Mission /*=new Mission()*/ ;  
+  
+  next : boolean ; 
   codeMission :String; 
   Avoirbudg:Boolean ; 
   x:Number ; 
@@ -227,10 +229,12 @@ this.motcle=this.selectedMission.motcle ;
     if(this.nb>=0){
     this.missionService.addMission(m).subscribe(
       res => {
-
-         this.mission=res ; 
+        console.log(res) ; 
+        localStorage.setItem('selectedAjoutMission',JSON.stringify(res) ); 
+        alert('just ba3ed el selected mission') ; 
+        this.mission=res ; 
          let key5='duree' ; 
-         localStorage.setItem(key5, JSON.stringify(this.nb));
+        // localStorage.setItem(key5, JSON.stringify(this.nb));
 
           let key = 'num_mission';
           localStorage.setItem(key,this.missionForm.get('numMission').value);
@@ -242,8 +246,8 @@ this.motcle=this.selectedMission.motcle ;
           this.reloadCode() ; 
           this.createForm() ; 
           this.ngOnInit();
-          this.show=false ;
-          this.router.navigateByUrl('ord') ;
+          this.show=false 
+       //   this.router.navigateByUrl('ord') ;
           this.success=true ; 
          },
          error=>{console.log(error);
@@ -312,8 +316,9 @@ update(){
         //this.createForm() ; 
         //this.ngOnInit();
         this.operation='' ; 
+      
         this.show=false ;
-        window.location.reload() ; 
+this.next=true ; 
         //this.router.navigateByUrl('ord') ;
        },
        error=>{console.log(error);
