@@ -1,5 +1,5 @@
 
-<div clas="card" >
+<div clas="card" *ngIf="changer==false">
     <div dir="rtl" lang="ar">
       <div class="container">
           <div class="card-header text-white">
@@ -34,7 +34,7 @@
                     <td>{{mission.datarrP | date:'yyyy-MM-dd'}}</td>
                     <td>
                     <a href="mission#missionAffiche">  <button class="btn btn-outline-primary"
-                        (click)="selectedMission = mission;update();operation='EDIT';" >تحيين</button></a>
+                        (click)="selectedMission = mission;update();operation='EDIT';changer=true;" >تحيين</button></a>
                     </td>
                   </tr>
                 </tbody>
@@ -51,10 +51,10 @@
   
     </div >
  
- 
-    <section id="missionAffiche" >
-
+ <div *ngIf="changer==true">
+  <section  >
     <app-one-mission [operation]="operation" [selectedMission]="selectedMission" ></app-one-mission>
   </section> 
+ </div>
   
   

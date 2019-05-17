@@ -11,6 +11,7 @@ import { Mission } from '../models/mission';
 })
 export class MissionComponent implements OnInit {
   selectedMission:Mission=new Mission(); 
+  changer:boolean ; 
   missions:Mission[]; 
   totalRec : number;
   page: number = 1;
@@ -50,6 +51,7 @@ export class MissionComponent implements OnInit {
    console.log('retrievedObject: ',data.departement.code) ;
    this.cod=data.departement.code ;
    this.loadMissions();
+   this.changer=false;
   
 }
 }

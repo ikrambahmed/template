@@ -231,7 +231,7 @@ this.motcle=this.selectedMission.motcle ;
       res => {
         console.log(res) ; 
         localStorage.setItem('selectedAjoutMission',JSON.stringify(res) ); 
-        alert('just ba3ed el selected mission') ; 
+    //    alert('just ba3ed el selected mission') ; 
         this.mission=res ; 
          let key5='duree' ; 
         // localStorage.setItem(key5, JSON.stringify(this.nb));
@@ -318,7 +318,8 @@ update(){
         this.operation='' ; 
       
         this.show=false ;
-this.next=true ; 
+       // this.router.navigateByUrl('mission') ; 
+       this.next=true ; 
         //this.router.navigateByUrl('ord') ;
        },
        error=>{console.log(error);

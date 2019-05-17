@@ -1,18 +1,17 @@
-<div class="card">
-  <div class="card-header">Tabset</div>
-  <div class="card-body">
-      <ngb-tabset>
-          <ngb-tab title="المامورية">
-              <ng-template ngbTabContent>
-                <!-- <app-one-mission [operation]="operation" [selectedMission]="selectedMission" ></app-one-mission>
-     --> 
 
-              </ng-template>
-          </ngb-tab>
-          <ngb-tab>
-              <ng-template ngbTabTitle>المنتفعيين</ng-template>
-              <ng-template ngbTabContent>
-                <table class="table table-hover table-bordered" dir="rtl">
+<div class="card">
+    <div dir="rtl" lang="ar">
+        <div class="card-header text-right" >
+        تغيير المامورية
+        
+        </div>
+        
+
+
+            <div class="card-body">
+        <div class="col-lg-12" >
+
+                <table class="table table-hover table-bordered" >
                   <thead>
                     <tr>
                       <th>رقم بطاقة التعريف</th>
@@ -22,27 +21,27 @@
                       <th>تاريخ الاياب</th>
                       <th> المدة</th>
                       <th>
-                  <button class="btn btn-outline-primary" (click)="goToOrd()">اظافة</button>
+                      <button class="btn btn-outline-primary" (click)="goToOrd()">اظافة</button>
                       </th>
-                      <th>
-                      </th>
+                    
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let ordMiss of ordreMis" (click)="selectedMissionn(ordMiss)">
                       <td >{{ordMiss.cin}} </td> 
-                      <td> </td>
-                      <td></td>
-                      <td>{{ordMiss.datarrP}}</td>
-                      <td>{{ordMiss.datdepP}} </td> 
-                      <td>{{ordMiss.objeta}}</td>
-                      <td><button class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal"  >حذف</button>
+                      <td> {{ordMiss.missionnaire.prenom}}</td>
+                      <td>{{ordMiss.missionnaire.nom}}</td>
+                      <td>{{ordMiss.datarrP | date:'yyyy-MM-dd'}}</td>
+                      <td>{{ordMiss.datdepP | date:'yyyy-MM-dd'}} </td> 
+                      <td>{{ordMiss.duree}}</td>
+                      <td><button class="btn btn-outline-primary" (click)="o=ordMiss;remove()" >حذف</button>
                       </td>
                     </tr>
                   </tbody>
                 </table>
-        
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            
+
+                <div class="modal fade" id="exampleModal11" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -57,10 +56,12 @@
                         <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="o=ordMiss;remove()">نعم</button>
                       </div>
                     </div>
-                
+                </div>
         </div>
-        <div class ="row">
-          <div class="col-lg-12" dir="rtl">
+      </div>
+
+            <div class="col-lg-12" >
+
               <table class="table table-bordered">
                 <thead>
                   <tr>
@@ -76,30 +77,20 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let i of f">
-                 <td>{{i.codPays}}</td>
-                 <td>{{i.valeurP}}</td>
-                 <td>{{i.valeurR}}</td>
-                  <td>{{i.NVille}}</td>
-        
-                </tr>
+                 <td>{{i.pays.libPaysa}}</td>
+                 <td>{{i.NVille}}</td>
+                 <td>{{i.typetransport}}</td>
+                 <td>{{i.duree}}</td>
+                  <td>{{i.valeurR}}</td>
+                  <td>{{i.valeurP}}</td>
+                  <td><button class="btn btn-outline-primary" (click)="fraisMission=i;removeFrais()" >حذف</button>
+                  </tr>
                 </tbody>
               </table>
             </div>
-            </div>
-        
         </div>
-              </ng-template>
-          </ngb-tab>
-          <ngb-tab title="Disabled" >
-              <ng-template ngbTabContent>
-                  <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-                  master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh
-                  dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum
-                  iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-              </ng-template>
-          </ngb-tab>
-      </ngb-tabset>
-  </div>
+              
+</div>
 </div>
     
   

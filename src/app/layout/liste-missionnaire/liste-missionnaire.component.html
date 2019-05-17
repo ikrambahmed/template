@@ -35,8 +35,7 @@
                     <td>
                       <a href="listeMissionnaire#missionnaire"> <button class="btn btn-outline-primary"
                         (click)="editOp() ;  selectedMissionnaire = missionnaire">تغيير</button></a>
-                      <button class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" (click)=" selectedMissionnaire = missionnaire ;searchMissionnaire()"
-                      >حذف</button>
+                      <button class="btn btn-outline-danger" (click)="selectedMissionnaire=missionnaire;searchMissionnaire()">حذف</button>
                     </td>
                   </tr>
                 </tbody>
@@ -53,7 +52,7 @@
       </div>
 
       <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="operation=='REMOVE'">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -66,7 +65,7 @@
           هل انت متاكد؟      </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal"  >لا</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="remove()" >نعم</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)=" selectedMissionnaire = missionnaire ;searchMissionnaire()" >نعم</button>
         </div>
       </div>
     </div>

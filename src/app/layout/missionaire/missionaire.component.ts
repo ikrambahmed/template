@@ -34,7 +34,7 @@ operation ;
 @Input() 
 butonMsg ;
 @Input()
- selectedMissionnaire; 
+ selectedMissionnaire=new Missionnaire() ; 
 
   constructor(private fb : FormBuilder , private missionnaireService : MissionnaireService, private router : Router) { 
     this.createForm() ; 
@@ -151,11 +151,11 @@ createForm()
   
     this.missionnaireForm.value.code=this.cod ; 
 
-    console.log(this.missionnaireForm.value.graade) ; 
+   // console.log(this.missionnaireForm.value.graade) ; 
     const m = this.missionnaireForm.value ;
     //if(this.missionnaireForm.value)
-   // alert(JSON.stringify(m)) ; 
-    console.log(JSON.stringify(m)) ; 
+  // alert(JSON.stringify(m)) ; 
+   // console.log(JSON.stringify(m)) ; 
     this.missionnaireService.addMissionnaire(m).subscribe(
       res => {
       

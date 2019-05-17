@@ -103,42 +103,6 @@ loadBudgetsProjet()
   () => {console.log('loading budgets was done ')}
 )}
 
-/*toggle(){
-  console.log('karouma') ;
-  console.log(this.datdepP1) ; 
-  console.log(this.datarrP1) ; 
-  let key1 = 'datdepP';
-
-  localStorage.setItem(key1, JSON.stringify(this.datdepP1));
-  let key2 = 'datarrP';
-
-  localStorage.setItem(key2, JSON.stringify(this.datarrP1));
-
-  var promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      let dateString=localStorage.getItem('datdepP') ; 
-      this.Date_depart = new Date(dateString);
-      console.log('daate',this.Date_depart) ; 
-     
-      let dateString2=localStorage.getItem('datarrP') ; 
-      this.Date_arrivee = new Date(dateString2);
-     console.log(this.Date_arrivee) ; 
-     this.nb =this.dateDiff(this.Date_depart,this.Date_arrivee) ;
-     if(this.nb<=0){
-      //alert('erreur ');
-      // this.ajout=true;
-       window.alert('erreur') ; 
-      }
-     else{
-     console.log('durree',this.nb) ; 
-     let key3='duree' ; 
-     localStorage.setItem(key3, JSON.stringify(this.nb));}
-      resolve();
-    }, 1000);
-  
-});
-
-}*/
 selectedMission:Mission=new Mission(); 
 motclevalue:String ; 
 toggle(){
@@ -172,7 +136,6 @@ toggle(){
 
   ngOnInit() {
 
-    //this.mission=new mission() ; 
     this.currentYea = (new Date()).getFullYear() ; 
     this.strr=this.currentYea.toString() ;
     console.log('tawa code') ; 
@@ -186,7 +149,6 @@ this.show=true ;
    
     this.loadBudgets() ; 
     this.loadBudgetsProjet() ; 
-  //  this.datdepP1= this.selectedMission.datdepP;
   this.reloadCode() ; 
 
 
@@ -212,9 +174,7 @@ valid : boolean ;
       alert('الرجاء اضافة الموضوع') ; 
     }
   else {
-   //alertJSON.stringify(m));
     if(this.nb<0 || this.nb==undefined){
-      //window.alert('erreur de duree') ; 
       window.alert('الرجاء التثبت من المدة') ; 
     }
     if(this.nb>=0){
@@ -270,16 +230,10 @@ valid : boolean ;
 
     }
     let key = 'num_mission';
- //  localStorage.setItem(key,JSON.stringify(this.codeMission));
-  // localStorage.setItem(key,this.missionForm.get('numMission').value);
-  //console.log('codeeee',this.missionForm.get('numMission').value);
 
- //  this.x =this.dateDiff(this.datdepP,this.datarrP) ; 
-  //console.log('durreeeee',this.x) ; 
 
 
   },
-  //error => { this.codeMission=this.y+"0001" ; }
   ) ; 
 }
 clickMethod(name: string) {
