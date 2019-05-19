@@ -198,7 +198,7 @@ valid : boolean ;
     if(this.nb>=0){
     this.missionService.addMission(m).subscribe(
       res => {
-        localStorage.setItem('selectedMission',JSON.stringify(res) ); 
+        localStorage.setItem('selectedOrd',JSON.stringify(res)) ; 
         let key5='duree' ; 
         localStorage.setItem(key5, JSON.stringify(this.nb));
 

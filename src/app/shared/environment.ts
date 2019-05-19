@@ -1,3 +1,4 @@
 export const environment = {
-    baseUrl:'http://localhost:8888'
+   // baseUrl:'http://localhost:8080/miss_cni-0.0.1-SNAPSHOT'
+      baseUrl:'http://localhost:8888'
   };

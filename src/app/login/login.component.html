@@ -1,20 +1,26 @@
+
 <div class="login-page" [@routerTransition] style="background-image: url('https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/EPzzjHhuxijr01n5f/4k-traveling-by-airplane-at-sunset-view-from-airplane-window_4dovfi6dl__F0000.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;" >
     <div class="row justify-content-md-center">
         <div class="col-md-4">
             <img src="assets/images/logo.png" width="150px" class="user-avatar" />
             <h1>منظومة الماموريات  بالخارج</h1>
+
             <div class="auth-box"  style=" background-color: rgba(126,123,215,0.2) " >
-                    <div class="row m-b-20">
-                      <div class="col-md-12">
-                      </div>
+                <div class="row m-b-20">
+                    <div class="col-md-12">
+                      <h4 class="text-center ">تسجيل الدخول</h4>
                     </div>
-                    <hr/>
+                  </div>
+                  <hr/>
+
                     <form class="md-float-material" [formGroup]="loginForm" (submit)="login()" #f="ngForm">
 
                     <div class="input-group">
                       <input type="text" class="form-control text-right" placeholder="بطاقة التعريف الوطنية" formControlName="username"
                       [(ngModel)]="credentials.username"
                       pattern="[0-9]{8}"  required maxlength="8"  
+
+                      [ngClass]="{'is-invalid':loginForm.get('username').touched && loginForm.get('username').invalid}"
                       > 
                       <span class="md-line"></span>
                     </div>
@@ -35,7 +41,7 @@
                     </div>
                     <div class="row m-t-30">
                       <div class="col-md-12">
-                        <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" type="submit"  [disabled]="f.invalid" (click)="login() ; onLoggedin()" >الدخول</button>
+                        <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" type="submit"  [disabled]="f.invalid" (click)="login();" >الدخول</button>
                      
                     </div>
                     </div>

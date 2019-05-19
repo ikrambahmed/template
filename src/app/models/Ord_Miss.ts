@@ -11,7 +11,8 @@ export class ordMiss {
     public  datdepP?:Date ,
     public missionnaire ?: Missionnaire ,
     public  cin?:String ,
-    public etat?:String 
+    public etat?:String ,
+    public duree?:String ,
     )
     {
         this.mission = new Mission () ; 

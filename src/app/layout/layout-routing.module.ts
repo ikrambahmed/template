@@ -12,8 +12,6 @@ import { OrdMissionnaireComponent } from './ord-missionnaire/ord-missionnaire.co
 import { FraisMissionComponent } from './frais-mission/frais-mission.component';
 import { ValidationComponent } from './validation/validation.component';
 import { ListeOrdreComponent } from './liste-ordre/liste-ordre.component';
-import { AjoutBudgetDeptComponent } from './ajout-budget-dept/ajout-budget-dept.component';
-import { AjoutBudgetProjetComponent } from './ajout-budget-projet/ajout-budget-projet.component';
 import { OneMissionComponent } from './one-mission/one-mission.component';
 import { AjoutMissionComponent } from './ajout-mission/ajout-mission.component';
 import { StepperComponent } from './stepper/stepper.component';
@@ -49,8 +47,6 @@ const routes: Routes = [
             {path:'ord',component:OrdMissionnaireComponent},
             {path:'frais',component:FraisMissionComponent},
             {path:'validation',component:ValidationComponent},
-            {path:'ajoutBudgetDept',component:AjoutBudgetDeptComponent},
-            {path:'ajoutBudgetProjet',component:AjoutBudgetProjetComponent},
             {path:'oneMission',component:OneMissionComponent},
             {path:'ajoutMission',component:AjoutMissionComponent},
             {path:'validationDept',component:ValidationBudgetComponent},
@@ -58,7 +54,7 @@ const routes: Routes = [
             {path:'validMissCtrl',component:ValidationCTRLMissionComponent},
             {path:'changePassword',component:ChangePassComponent},
             {path:'recap',component:RecapComponent},
-            {path:'modif',component : ModifMissionComponent}
+            {path:'modif',component : ModifMissionComponent}, 
 
 
 

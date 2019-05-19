@@ -10,6 +10,7 @@ import { MissionnaireService } from 'src/app/services/missionnaire.service';
 import { DeptGen } from 'src/app/models/DeptGen';
 import { Router } from '@angular/router';
 import { ListeMissionnaireComponent } from '../liste-missionnaire/liste-missionnaire.component';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-missionaire',
@@ -36,7 +37,7 @@ butonMsg ;
 @Input()
  selectedMissionnaire=new Missionnaire() ; 
 
-  constructor(private fb : FormBuilder , private missionnaireService : MissionnaireService, private router : Router) { 
+  constructor(private alertService : AlertService , private fb : FormBuilder , private missionnaireService : MissionnaireService, private router : Router) { 
     this.createForm() ; 
   
   }
@@ -76,6 +77,7 @@ butonMsg ;
     () => {console.log('loading groupes was done ')}
   )}
  cod:DeptGen ;
+ classeM:String ; 
   ngOnInit() {
     this.loadgrade(); 
     this.loadcateg(); 
@@ -83,14 +85,13 @@ butonMsg ;
     this.loadgroupe(); 
     this.loadclasse(); 
     this.loadfonction();
-
     var DeptGenVal = localStorage.getItem('deptGen') ; 
     var data = JSON.parse(DeptGenVal) ; 
     console.log('retrievedObject: ',data.departement.code) ;
     this.cod=data.departement;
-    let dateString2=this.selectedMissionnaire.datenaissance ; //localStorage.getItem('datarrP') ; 
+    let dateString2=this.selectedMissionnaire.datenaissance ;
   this.dateNais = new Date(dateString2);
-  
+  this.classeM=this.selectedMissionnaire.classgrd.libclassgrda ; 
 }
 dateNais : Date=new Date() ; 
 createForm()
@@ -111,6 +112,7 @@ createForm()
     niveau  : ['',Validators.required],
     rib: ['',Validators.required] , 
     graade : ['',Validators.required],
+ // codGrd:['',Validators.required] ,
     fonnction: ['',Validators.required],
     classgrd: ['',Validators.required],
     codCat : ['',Validators.required],
@@ -123,20 +125,19 @@ createForm()
     this.createForm(); 
   }
   update() {
+    //alert(JSON.stringify(this.selectedMissionnaire)) ; 
+
     this.selectedMissionnaire.code=this.cod ; 
   this.missionnaireService.updateMissionnaire(this.selectedMissionnaire)
   .subscribe(
     res =>{
-      alert('لقد تم التغيير بنجاح') ; 
-
+      this.success('لقد تم التغيير بنجاح') ; 
       this.initMiss() ; 
-      this.missionnaireService.loadMissionaire() ; 
-
-      this.operation='' ; 
+      this.missionnaireService.loadMissionaire() ;   
       window.location.reload() ; 
     },
     error => {console.log(error) ; 
-    alert('الرجاءالتثبت من المعطيات') ;}
+    this.error('الرجاءالتثبت من المعطيات') ;}
   )} 
 
   loadMissionaire()
@@ -147,20 +148,35 @@ createForm()
   )
 
   }
-  add(){
+  error(message: string) {
+    this.alertService.error(message);
+  }
   
+  info(message: string) {
+    this.alertService.info(message);
+  }
+  
+  warn(message: string) {
+    this.alertService.warn(message);
+  }
+  success(message: string) { 
+    this.alertService.success(message);
+  }
+  codGrd:String  ;
+  add(){
+ // alert(JSON.stringify(this.missionnaireForm.value.graade)) ; 
     this.missionnaireForm.value.code=this.cod ; 
-
+   // this.missionnaireForm.value.graade=new grade(this.codGrd) ; 
    // console.log(this.missionnaireForm.value.graade) ; 
     const m = this.missionnaireForm.value ;
     //if(this.missionnaireForm.value)
-  // alert(JSON.stringify(m)) ; 
+  //alert(JSON.stringify(m)) ; 
    // console.log(JSON.stringify(m)) ; 
     this.missionnaireService.addMissionnaire(m).subscribe(
       res => {
       
         this.done=true; 
-        alert('لقد تمت الاضافة بنجاح') ; 
+        this.success('لقد تمت الاضافة بنجاح') ; 
         //this.initMiss() ; 
       //  this.missionnaires.push(res) ; 
         this.loadMissionaire() ; 
@@ -168,7 +184,7 @@ createForm()
         window.location.reload() ; 
       },
       error =>{console.log(error);
-      alert("الرجاءالتثبت من المعطيات");}
+      this.error("الرجاءالتثبت من المعطيات");}
       
     ) ; 
   }

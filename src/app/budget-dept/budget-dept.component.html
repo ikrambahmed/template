@@ -1,3 +1,7 @@
+<div class="card">
+<div class="card-header text-right" style="background-color: #F6E7D2;">
+اعتمادات المؤسسة</div>
+<div class="card-body">
 <div class="button-page">
     <div class="row">
         <div class="col-sm-12">
@@ -39,28 +43,29 @@
                       </div>
                   </div>
                   <div class="row">
-                      <div class="col-md-6  text-right">
-                    <label> {{somme!='null' ? somme  : ''}}  </label>
-                      
-                      <label>  مجموع اعتمادات المامورية </label>
-                      
-                      
-                      </div>
+                   
                       <div class="col-md-6  text-right">
                          <label> {{sommeTr!='null' ? sommeTr  : ''}} </label>
                           
                       <label>  مجموع اعتمادات  النقل </label>
                       
                       </div>
+                      <div class="col-md-6  text-right">
+                        <label> {{somme!='null' ? somme  : ''}}  </label>
+                          
+                          <label>  مجموع اعتمادات المامورية </label>
+                          
+                          
+                          </div>
                       </div>
                     </div>
             
   
   
           <div class="card"  *ngIf="operation == 'EDIT' || operation=='ADD'" id="OneBudget"> 
-            <div class="card-header">
-            {{operation == 'ADD' ? 'ادخال' :
-          operation == 'EDIT' ? 'تغيير': ''  }}
+            <div class="card-header text-right">
+            {{operation == 'ADD' ? 'ادخال اعتمادات المؤسسة' :
+          operation == 'EDIT' ? 'تغيير اعتمادات المؤسسة': ''  }}
         </div>
   <div class="container"  >
   
@@ -117,4 +122,4 @@
         </div>
       </div>
     </div>
-    
+  </div></div>

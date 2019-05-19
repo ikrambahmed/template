@@ -12,6 +12,7 @@ import { MissionnaireService } from 'src/app/services/missionnaire.service';
 import { Missionnaire } from 'src/app/models/missionnaire';
 import { frais } from 'src/app/models/frais';
 import { budgetProjet } from 'src/app/models/budgetProjet';
+import { Mission } from 'src/app/models/mission';
 
 @Component({
   selector: 'app-frais-mission',
@@ -48,7 +49,10 @@ budgetDept : budget ;
 diff : Number ; 
 public supportes:Array<string> = [
  'التحمل على الحساب الخاص' ,
- 'التحمل على الهيكل المعني'
+ 'التحمل على الهيكل المعني' , 
+ 'التحمل على الهيكل الاجنبي' , 
+ ' تحمل مشترك بين الهيكل المعني و الاجنبي '
+ ,'التحمل على المشروع'
 ];
 d:number ; 
 typFrais :String;
@@ -284,18 +288,20 @@ loadProjets()
 nom:String ; 
 prenom : String ; 
 duree:number ; 
+selectedMission:Mission=new Mission() ; 
+selectedOrd:ordMiss=new ordMiss() ; 
   ngOnInit() {
-    this.codeMission = JSON.parse(localStorage.getItem('num_mission')) ;
-    console.log('noum Mission',this.codeMission);   
-    this.num_ord = JSON.parse(localStorage.getItem('numOrd')) ;
+    this.selectedMission=JSON.parse(localStorage.getItem('selectedMission')) ; 
+    this.selectedOrd=JSON.parse(localStorage.getItem('selectedOrd')) ; 
+    this.codeMission =this.selectedMission.code ; //JSON.parse(localStorage.getItem('num_mission')) ;
+   // console.log('noum Mission',this.codeMission);   
+    this.num_ord =this.selectedOrd.numord+"" ; //JSON.parse(localStorage.getItem('numOrd')) ;
     console.log('numOrd',this.num_ord);   
-    this.username = localStorage.getItem('cin');
+    this.username =this.selectedOrd.cin ; //localStorage.getItem('cin');
     console.log("username: "+this.username) ; 
-    this.nom = localStorage.getItem('nom');
-    console.log("nom: "+this.nom) ; 
-    this.prenom = localStorage.getItem('prenom');
-    console.log("prenom: "+this.prenom) ; 
-    this.duree = JSON.parse(localStorage.getItem('duree_ord'));
+    this.getMissionnaire() ; 
+   
+    this.duree =+this.selectedOrd.duree ; //JSON.parse(localStorage.getItem('duree_ord'));
     
 
     var DeptGenVal = localStorage.getItem('deptGen') ; 
@@ -304,7 +310,7 @@ duree:number ;
     this.cod=data.departement.code;
     this.loadpays() ; 
     this.loadBudget(this.cod) ;
-    this.numMission=JSON.parse(localStorage.getItem('num_mission'));
+    this.numMission=this.selectedMission.numMission ;//JSON.parse(localStorage.getItem('num_mission'));
     console.log('op',this.op) ; 
     this.loadProjets() ; 
     this.loadTypeFrais() ;
@@ -345,6 +351,10 @@ duree:number ;
     this.missionnaireService.getOneMiss(this.username).subscribe(
       data=>{console.log(data);
         this.missionnaire=data ;
+        this.nom = this.missionnaire.nom ; //localStorage.getItem('nom');
+        console.log("nom: "+this.nom) ; 
+        this.prenom =this.missionnaire.prenom;  //localStorage.getItem('prenom');
+        console.log("prenom: "+this.prenom) ; 
     } , 
       error => { console.log(error) ; } , 
       ()=>{console.log('done') ; }

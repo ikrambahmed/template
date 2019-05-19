@@ -1,8 +1,13 @@
+
 export class User 
 {
-    username : string ;
-    pass : String ;
+    username : String ;
+    password : String ;
     nom : String ; 
     prenom :String ;
-    constructor(){}
+    enable:boolean ; 
+  
+    constructor(username?:String , password?:String , nom?:String , prenom?:String , enable?:Boolean ){
+       
+    }
 }

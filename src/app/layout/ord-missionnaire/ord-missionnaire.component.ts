@@ -39,7 +39,6 @@ operation;
   date_debut ; 
   duree:number ; 
   date: any = { date: {year: (new Date()).getFullYear(), month: (new Date()).getMonth() + 1, day: (new Date()).getDate()} };
-   // This is an output component that tells the rest of the world that the user has entered a valid text
    timer :any = null;
   constructor(private router : Router ,private fb : FormBuilder , private missionService : MissionService , private ordMisService : OrdMissService) { 
    
@@ -57,16 +56,16 @@ operation;
   dateDiff(date1, date2){
     var tmp = date2 - date1;
  
-    tmp = Math.floor(tmp/1000);             // Nombre de secondes entre les 2 dates
-    let sec = tmp % 60;                    // Extraction du nombre de secondes
+    tmp = Math.floor(tmp/1000);             
+    let sec = tmp % 60;                   
  
-    tmp = Math.floor((tmp-sec)/60);    // Nombre de minutes (partie entière)
-    let min = tmp % 60;                    // Extraction du nombre de minutes
+    tmp = Math.floor((tmp-sec)/60);   
+    let min = tmp % 60;                    
  
-    tmp = Math.floor((tmp-min)/60);    // Nombre d'heures (entières)
-    let hour = tmp % 24;                   // Extraction du nombre d'heures
+    tmp = Math.floor((tmp-min)/60);    
+    let hour = tmp % 24;                  
  
-    tmp = Math.floor((tmp-hour)/24);   // Nombre de jours restants
+    tmp = Math.floor((tmp-hour)/24);   
     let day = tmp;
     console.log('days',day) ; 
  
@@ -113,7 +112,6 @@ x:Number ;
   add(){
     
    const m = this.OrdMissForm.value ;
-   //alert(JSON.stringify(m));
   if(this.duree_miss <0 || this.duree_miss ==undefined){
     window.alert('الرجاء التثبت من المدة') ; 
   }
@@ -123,6 +121,7 @@ x:Number ;
         window.alert('لقد تمت الاضافة بنجاح') ; 
 
          this.ordmiss=res;
+         localStorage.setItem('selectedOrd',JSON.stringify(res)) ; 
          },
          error=>{console.log(error);}    
     )
@@ -134,8 +133,7 @@ x:Number ;
       localStorage.setItem(key,ord);
       localStorage.setItem('nom',this.nom+"");
       localStorage.setItem('prenom',this.prenom+"");
-    //this.x= this.dateDiff(this.Date_depart,this.Date_arrivee) ; 
-   // localStorage.setItem('duree_ord',this.x+"") ; 
+    
       localStorage.setItem('duree_ord', JSON.stringify(this.duree_miss));
       console.log('x',this.x) ; 
       this.show1=true; 
@@ -153,9 +151,6 @@ x:Number ;
         this.missionnare=data ; 
         this.nom=data['nom']; 
         this.prenom=data.prenom ; 
-       //this.Date_arrivee=this.date_debut ; 
-       //console.log(this.Date_arrivee) ;
-       //this.Date_depart=this.mission.date_fin ; 
         console.log(this.nom , this.prenom) ; 
         console.log('lkitou el cin') ; 
         this.existe=true ; 
@@ -221,9 +216,9 @@ selectedMission:Mission;
   console.log(this.Date_arrivee) ; 
   this.show1=false;
   this.duree_miss=+this.selectedMission.duree ; //JSON.parse(localStorage.getItem('duree')) ; 
-this.duree =this.dateDiff(this.Date_depart,this.Date_arrivee) ;
-console.log('duree mission',this.duree);
-this.reloadCode();
+  this.duree =this.dateDiff(this.Date_depart,this.Date_arrivee) ;
+  console.log('duree mission',this.duree);
+  this.reloadCode();
 }
 
 reloadCode(){

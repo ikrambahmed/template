@@ -9,7 +9,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthGuard } from './shared';
+import { AuthGuard, AlertComponent } from './shared';
 import { BudgetDeptComponent } from './budget-dept/budget-dept.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppService } from './app.service';
@@ -25,6 +25,7 @@ import { BudgetProjComponent } from './budget-proj/budget-proj.component';
 import { StoreModule } from '@ngrx/store';
 import { principalReducer } from './shared/principal.reducer';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AlertService } from './services/alert.service';
 
 
 @NgModule({
@@ -45,13 +46,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         BrowserAnimationsModule,
         NgxPaginationModule,
         NgbModule.forRoot() , 
-     
-    
+
        
     ],
     declarations: [AppComponent ],
     providers: [AuthGuard,AppService,CookieService,
-     HomeService,MissionService, OrdMissService, MissionnaireService, 
+     HomeService,MissionService, OrdMissService, MissionnaireService, AlertService , 
         {provide :HTTP_INTERCEPTORS, useClass :XHrInterceptor  , multi : true }],
     bootstrap: [AppComponent]
 })

@@ -29,6 +29,7 @@ export class Missionnaire {
   codCat: categorie;
   code:DeptGen ;
   codgrp:String ;
+  id:number ; 
   constructor(
     cin?: String,
     matricule?: String,
@@ -52,7 +53,8 @@ export class Missionnaire {
     codCat?: categorie,
     code?:String ,
     dept ?:DeptGen ,
-    codgrp?:String 
+    codgrp?:String ,
+    id?:number  
     // public  group?:number ,
     //   public  dept?:number 
   ) {

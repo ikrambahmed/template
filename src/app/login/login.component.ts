@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { AppService } from '../app.service';
+import { AlertService } from '../services/alert.service';
 
 @Component({
     selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   
     constructor(private fb: FormBuilder,
       private appService: AppService,
-      private router: Router) { }
+      private router: Router ,
+      private alertService : AlertService) { }
   
   ngOnInit() {
   this.loginForm = this.fb.group({
@@ -28,12 +30,17 @@ export class LoginComponent implements OnInit {
   password: ['', Validators.compose([Validators.required, Validators.minLength(3)])]
   });
   }
-  
-  
+  authenticated:Boolean ; 
+ 
+
   login(){
-    this.appService.authenticate(this.credentials, ()=>{
-      this.router.navigateByUrl('/dashboard');
-    });
+    this.appService.authenticate(this.credentials,()=>{
+      localStorage.setItem('isLoggedin', 'true');
+
+      this.router.navigateByUrl('/dashboard');}) 
+     
+  
+  
     /*this.router.navigateByUrl('/home') ;*/
     
    // this.router.navigateByUrl('/dashboard');

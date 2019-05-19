@@ -12,108 +12,112 @@
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="dropdown" >
+                         <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{NameString}}  مرحبا <i class="fa fa-user"></i> </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a href="" [routerLink]="['/changePassword']" >  <i class="fa fa-key"></i>تغيير كلمة العبور</a></li>
 
-                    <ul class="navbar-nav mr-auto">
-                            <li><a href="#">
-                                    <img src="https://d7ieeqxtzpkza.cloudfront.net/wp-content/uploads/2019/02/logo-tranparent-cni1.png" witdth="30" height="25" >
-                                  </a>    </li>
-        
-                        <li class="active"><a href="dashboard">الصفحة الرئيسية <span class="sr-only">(current)</span></a></li>
-                      <!--  <li class="dropdown">
-                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown2</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown3</a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                                </ul>
-                            </li>
-                            </ul>
-                        </li>-->
+                        <li><a href="" [routerLink]="['/login']" (click)="onLoggedout()">  <i class="fa fa-fw fa-power-off"></i>الخروج</a></li>
 
-                        <li class="dropdown">
-                                <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">الاعتمادات</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">إدخال الاعتمادات 
-                                        </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a href="budgetDept"  >المؤسسة</a></li>
-                                    <li><a href="budgetProj" >المشاريع</a></li>
-                                    </ul>
-                                </li>
-                               <!-- <li class="dropdown">
-                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">تحيين الأعتمادات  </a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a href="budgetDept">المؤسسة</a></li>
-                                        <li><a href="budgetProj">المشاريع</a></li>
-                                        </ul>
-                                    </li>-->
+                        </ul>
+                        </li> 
+                        <li><a href=""> المؤسسة  {{depart}} <i class="fa fa-building"></i> </a></li>
 
-
-
-                                </ul>
-                            </li>
-
-                            <li class="dropdown">
-
-                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">المآموريات
-                                        </a>
-                                        
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li><a href="listeMissionnaire">إدخال المنتفعين
-                                                </a></li>
-
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">إدخال المأموريات                  </a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li><a href="mission" >قائمة المامورية</a></li>
-                                            <li><a href="stepper">إدخال مأمورية جديدة</a></li>
-                                            <li *ngIf="hasRole==true"><a href="validation"> مصادقة الآمر بالصرف</a></li>
-                                            <li *ngIf="hasRoleCTRL==true"><a href="validMissCtrl"> مصادقة  على الماموريات</a></li>
-
-                                            <li *ngIf="hasRoleCTRL==true"><a href="validationDept">المصادقة على اعتمادات المؤسسة</a></li>
-                                            <li *ngIf="hasRoleCTRL==true"><a href="validationProj"> المصادقة على اعتمادات المشروع</a></li>
-                                        </ul>
-                                    </li>
-                                    </ul>
-                                </li>
-
-                                <li class="dropdown">
-                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> الثوابت
-                                            </a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a href="projet">المشاريع</a></li>
-                                        </ul>
-                                    </li>
-                                 
-
-                                </ul>
-                                <div class="topnav-right">
+                        </ul> 
+                 
+                                <div class="topnav-right" dir="rtl">
                                         <ul class="navbar-nav mr-auto">
-                                            <li><a href=""> المؤسسة  {{depart}} <i class="fa fa-building"></i> </a></li>
-                                        <li class="dropdown" >
-                                     <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{NameString}}  مرحبا <i class="fa fa-user"></i> </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a href="" [routerLink]="['/login']" (click)="onLoggedout()">  <i class="fa fa-fw fa-power-off"></i>الخروج</a></li>
-                                    </ul>
-                                    </li> 
-
-                                    </ul> 
+                                                <li><a href="#">
+                                                        <img src="https://d7ieeqxtzpkza.cloudfront.net/wp-content/uploads/2019/02/logo-tranparent-cni1.png" witdth="30" height="25" >
+                                                      </a>    </li>
+                            
+                                            <li class="active"><a href="dashboard">الصفحة الرئيسية <span class="sr-only">(current)</span></a></li>
+                                          <!--  <li class="dropdown">
+                                                <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a href="#">Action</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something else here</a></li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown2</a>
+                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                    <li><a href="#">Action</a></li>
+                                                    <li><a href="#">Another action</a></li>
+                                                    <li><a href="#">Something else here</a></li>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown3</a>
+                                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                            <li><a href="#">Action</a></li>
+                                                            <li><a href="#">Another action</a></li>
+                                                            <li><a href="#">Something else here</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    </ul>
+                                                </li>
+                                                </ul>
+                                            </li>-->
+                    
+                                            <li class="dropdown">
+                                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">الاعتمادات</a>
+                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">إدخال الاعتمادات 
+                                                            </a>
+                                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                        <li><a href="budgetDept"  >المؤسسة</a></li>
+                                                        <li><a href="budgetProj" >المشاريع</a></li>
+                                                        </ul>
+                                                    </li>
+                                                   <!-- <li class="dropdown">
+                                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">تحيين الأعتمادات  </a>
+                                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                            <li><a href="budgetDept">المؤسسة</a></li>
+                                                            <li><a href="budgetProj">المشاريع</a></li>
+                                                            </ul>
+                                                        </li>-->
+                    
+                    
+                    
+                                                    </ul>
+                                                </li>
+                    
+                                                <li class="dropdown">
+                    
+                                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">المآموريات
+                                                            </a>
+                                                            
+                                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                                <li><a href="listeMissionnaire">إدخال المنتفعين
+                                                                    </a></li>
+                    
+                                                        <li class="dropdown">
+                                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">إدخال المأموريات                  </a>
+                                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                                <li><a href="mission" >قائمة المامورية</a></li>
+                                                                <li><a href="stepper">إدخال مأمورية جديدة</a></li>
+                                                                <li *ngIf="hasRole==true"><a href="validation"> مصادقة الآمر بالصرف</a></li>
+                                                                <li *ngIf="hasRoleCTRL==true"><a href="validMissCtrl"> مصادقة  على الماموريات</a></li>
+                    
+                                                                <li *ngIf="hasRoleCTRL==true"><a href="validationDept">المصادقة على اعتمادات المؤسسة</a></li>
+                                                                <li *ngIf="hasRoleCTRL==true"><a href="validationProj"> المصادقة على اعتمادات المشروع</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        </ul>
+                                                    </li>
+                    
+                                                    <li class="dropdown">
+                                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> الثوابت
+                                                                </a>
+                                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                            <li><a href="projet">المشاريع</a></li>
+                                                            </ul>
+                                                        </li>
+                                                     
+                    
+                                                    </ul>
                                 </div>
+                               
                               
 
 

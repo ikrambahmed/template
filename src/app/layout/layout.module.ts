@@ -31,8 +31,6 @@ import { StoreModule } from '@ngrx/store';
 import { principalReducer } from '../shared/principal.reducer';
 import { ListeOrdreComponent } from './liste-ordre/liste-ordre.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { AjoutBudgetDeptComponent } from './ajout-budget-dept/ajout-budget-dept.component';
-import { AjoutBudgetProjetComponent } from './ajout-budget-projet/ajout-budget-projet.component';
 import { AjoutMissionComponent } from './ajout-mission/ajout-mission.component';
 import { PageHeaderModule } from '../shared';
 import { StepperComponent } from './stepper/stepper.component';
@@ -43,7 +41,8 @@ import { ValidationCTRLMissionComponent } from './validation-ctrlmission/validat
 import { ChangePassComponent } from './change-pass/change-pass.component';
 import { RecapComponent } from './recap/recap.component';
 import { ModifMissionComponent } from './modif-mission/modif-mission.component';
-import { TabSetModifComponent } from './tab-set-modif/tab-set-modif.component'
+import { TabSetModifComponent } from './tab-set-modif/tab-set-modif.component';
+import { AlertComponent } from './alert/alert.component'
 @NgModule({
     imports: [
         CommonModule,
@@ -74,8 +73,6 @@ import { TabSetModifComponent } from './tab-set-modif/tab-set-modif.component'
     ValidationComponent,
     ListeOrdreComponent,
     NavbarComponent,
-    AjoutBudgetDeptComponent,
-    AjoutBudgetProjetComponent,
     AjoutMissionComponent,
     ValidationBudgetComponent,
     ValidationBudProjComponent,
@@ -83,6 +80,6 @@ import { TabSetModifComponent } from './tab-set-modif/tab-set-modif.component'
     ChangePassComponent,
     RecapComponent,
     ModifMissionComponent,
-    TabSetModifComponent]
+    TabSetModifComponent,AlertComponent]
 })
 export class LayoutModule {}

@@ -1,15 +1,19 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
     <div class="list-group ">
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-dashboard "></i>&nbsp;
+            <i class="fa fa-home"></i>&nbsp;
             <span class="text-white">{{ 'الصفحة الرئيسية ' | translate }}</span>
         </a>
         <a [routerLink]="['/mission']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;
+            <i class="fa fa-bars"></i>&nbsp;
             <span class="text-white">{{ 'قائمة الماموريات ' | translate }}</span>
         </a>
+        <a [routerLink]="['/stepper']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-edit"></i>&nbsp;
+            <span class="text-white">{{ 'ادخال مامورية ' | translate }}</span>
+        </a>
         <a [routerLink]="['/listeMissionnaire']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;
+            <i class="fa fa-bars"></i>&nbsp;
             <span class="text-white">{{ 'قائمة المنتفعين ' | translate }}</span>
         </a>
         <div class="nested-menu">
@@ -21,13 +25,13 @@
                     <ul class="submenu">
                         <li>
                             <a href="javascript:void(0)" [routerLink]="['/budgetDept']">
-                                <i class="fa fa-monument"></i>&nbsp;
+                                <i class="fa fa-edit"></i>&nbsp;
                                 <span>{{ 'للمؤسسة ' | translate }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" [routerLink]="['/budgetProj']" >
-                                <i class="fa fa-monument"></i>&nbsp;
+                                <i class="fa fa-edit"></i>&nbsp;
                                 <span>{{ 'لمشروع ' | translate }}</span>
                             </a>
                         </li>
@@ -37,7 +41,7 @@
             </div>
     
         <a [routerLink]="['/projet']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-edit"></i>&nbsp;
+            <i class="fa fa-bars"></i>&nbsp;
             <span class="text-white">{{ 'المشاريع' | translate }}</span>
         </a>
         <a [routerLink]="['/bs-element']" [routerLinkActive]="['router-link-active']" class="list-group-item">

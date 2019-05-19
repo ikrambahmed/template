@@ -6,7 +6,7 @@ import { PrincipalState } from './shared/principal.state';
 import { SAVE_PRINCIPAL } from './shared/save.principal.action';
 import { environment } from './shared/environment';
 import { Observable } from 'rxjs';
-
+import { User } from './models/User';
 
 @Injectable()
 export class AppService {
@@ -27,19 +27,17 @@ export class AppService {
     if(credentials){
       let user = credentials.username ; 
       const token = btoa(credentials.username + ':' + credentials.password);
-      console.log('create token') ;
-     // this.cookieService.set('token',token);
-localStorage.setItem('token',token) ; 
+    
+      localStorage.setItem('token',token) ; 
       this.http.get(this.baseUrl+'/api/user').subscribe(response => {
          if (response && response['name']) {
-        localStorage.setItem('principal',JSON.stringify(response)
-        ) ; 
-          console.log(response);
+        localStorage.setItem('principal',JSON.stringify(response)) ; 
+          console.log('response',response);
            // this.response=response; 
             this.authenticated = true;
             //on met le principal dans le store 
 
-          this.store.dispatch({
+            this.store.dispatch({
               type : SAVE_PRINCIPAL , 
               payload : response
             }) ; 
@@ -49,16 +47,45 @@ localStorage.setItem('token',token) ;
               this.authenticated = false;
           }
           return callback && callback();
-      });
+      },
+      error=>{console.log('erreur',error);
+      this.authenticated=false ;
+    });
     }
     else {
       this.authenticated = false;
     }
+  //  return callback && callback();
+    
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   logout(callback){
     this.authenticated = false;
     return callback && callback();
   }
 
+  changerMotDePasse(u:User):Observable<any>
+  {
+    return this.http.put(this.baseUrl+'/api/updatePassword',u) ; 
+  }
+  verifierUser(u:User):Observable<any>{
+    return this.http.post(this.baseUrl+'/api/verifierUser',u) ; 
+  }
 }

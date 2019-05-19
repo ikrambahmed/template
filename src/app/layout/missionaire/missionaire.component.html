@@ -21,163 +21,117 @@
 
 
 <div class="card-body">
-    <form [formGroup]="missionnaireForm" (ngSubmit)="missionnaireForm.valid" >
+    <form [formGroup]="missionnaireForm">
       <div class="row">
       <div class="form-group col-md-4  text-right" >
         <label> مكانها </label>
-        <input type="text" class="form-control text-right" formControlName="place_cin" 
-        [(ngModel)]="selectedMissionnaire.place_cin"  required
-        [ngClass]="{'is-invalid':missionnaireForm.get('place_cin').touched && missionnaireForm.get('place_cin').invalid}"
-        >
+        <input type="text" class="form-control" formControlName="place_cin" 
+        [(ngModel)]="selectedMissionnaire.place_cin" >
       </div>
       <div class="form-group col-md-4 text-right" >
         <label for="delivre"> المسلمة يوم </label>
-        <input type="date" class="form-control text-right" formControlName="date_cin"      
-        [(ngModel)]="selectedMissionnaire.date_cin" required
-        [ngModel] ="selectedMissionnaire.date_cin|date:'yyyy-MM-dd'"
-        [ngClass]="{'is-invalid':missionnaireForm.get('date_cin').touched && missionnaireForm.get('date_cin').invalid}"
-
-        >
+        <input type="date" class="form-control" formControlName="date_cin"      
+        [(ngModel)]="selectedMissionnaire.date_cin" >
       </div>
      
       <div class="form-group col-md-4 text-right">
         <label for="cin"> الهوية الوطنية </label>
-        <input type="text" class="form-control text-right" formControlName="cin"  required
+        <input type="text" class="form-control" formControlName="cin" 
         placeholder="Tapez dans ce champ 8 chiffres" autofocus pattern="[0-9]{8}" 
-        name="cin" [(ngModel)]="selectedMissionnaire.cin" maxlength="8" 
-        [ngClass]="{'is-invalid':missionnaireForm.get('cin').touched && missionnaireForm.get('cin').invalid}"
-
-        >
+        name="cin" [(ngModel)]="selectedMissionnaire.cin" maxlength="8" >
       </div>
     </div>
     <div class="row">
 
       <div class="form-group col-md-6 text-right">
         <label>مكانها</label>
-        <input type="text" class="form-control text-right" formControlName="place_naissance" required
-        [(ngModel)]="selectedMissionnaire.place_naissance" 
-        [ngClass]="{'is-invalid':missionnaireForm.get('place_naissance').touched && missionnaireForm.get('place_naissance').invalid}"
-
-        >
+        <input type="text" class="form-control" formControlName="place_naissance" 
+        [(ngModel)]="selectedMissionnaire.place_naissance" >
       </div>
         <div class="form-group col-md-6 text-right">
           <label> تاريخ الولادة </label>
-         
-          <input type="date" class="form-control" formControlName="datenaissance" required
-          min="1930-01-01" max="1999-12-31"
-          [(ngModel)]="selectedMissionnaire.datenaissance"
-          [ngModel] ="dateNais|date:'yyyy-MM-dd'"
-          [ngClass]="{'is-invalid':missionnaireForm.get('datenaissance').touched && missionnaireForm.get('datenaissance').invalid}"
-
-          >
+          <input type="date" class="form-control" formControlName="datenaissance" 
+          [(ngModel)]="selectedMissionnaire.datenaissance" >
         </div>
     </div>
     <div class="row">
 
         <div class="form-group col-md-6">
           <label> RIB </label>
-          <input type="text" class="form-control text-right" formControlName="rib" required
-          [(ngModel)]="selectedMissionnaire.rib" 
-          [ngClass]="{'is-invalid':missionnaireForm.get('rib').touched && missionnaireForm.get('rib').invalid}"
-
-          >
+          <input type="text" class="form-control" formControlName="rib" 
+          [(ngModel)]="selectedMissionnaire.rib" >
         </div>
 
         <div class="form-group col-md-6 text-right">
           <label> المعرف الوحيد </label>
-          <input type="text" class="form-control text-right" formControlName="matricule" required
-          [(ngModel)]="selectedMissionnaire.matricule" 
-          [ngClass]="{'is-invalid':missionnaireForm.get('matricule').touched && missionnaireForm.get('matricule').invalid}"
-
-          >
+          <input type="text" class="form-control" formControlName="matricule" 
+          [(ngModel)]="selectedMissionnaire.matricule" >
         </div>
     </div>
     <div class="row">
 
         <div class="form-group col-md-6">
           <label> Prenom </label>
-          <input type="text" class="form-control" formControlName="prenomL" required
-          [(ngModel)]="selectedMissionnaire.prenomL" 
-          [ngClass]="{'is-invalid':missionnaireForm.get('prenomL').touched && missionnaireForm.get('prenomL').invalid}"
-
-          >
+          <input type="text" class="form-control" formControlName="prenomL"
+          [(ngModel)]="selectedMissionnaire.prenomL" >
         </div>
 
         <div class="form-group col-md-6 text-right">
             <label>الاسم</label>
-            <input type="text" class="form-control text-right" formControlName="prenom" required
-            [(ngModel)]="selectedMissionnaire.prenom" 
-            [ngClass]="{'is-invalid':missionnaireForm.get('prenom').touched && missionnaireForm.get('prenom').invalid}"
-
-            >
+            <input type="text" class="form-control" formControlName="prenom" 
+            [(ngModel)]="selectedMissionnaire.prenom" >
           </div>
     </div>
     <div class="row">
 
         <div class="form-group col-md-6 ">
           <label> Nom </label>
-          <input type="text" class="form-control" formControlName="nomL" required
-          [(ngModel)]="selectedMissionnaire.nomL" 
-          [ngClass]="{'is-invalid':missionnaireForm.get('nomL').touched && missionnaireForm.get('nomL').invalid}"
-
-          >
+          <input type="text" class="form-control" formControlName="nomL" 
+          [(ngModel)]="selectedMissionnaire.nomL" >
         </div>
 
         <div class="form-group col-md-6 text-right">
           <label>اللقب  </label>
-          <input type="text" class="form-control text-right" formControlName="nom" required
-          [(ngModel)]="selectedMissionnaire.nom"
-          [ngClass]="{'is-invalid':missionnaireForm.get('nom').touched && missionnaireForm.get('nom').invalid}"
-
-          >
+          <input type="text" class="form-control" formControlName="nom" 
+          [(ngModel)]="selectedMissionnaire.nom" >
         </div>
     </div>
     <div class="row">
+
             <div class="form-group col-md-6">
               <label>Nationalite </label>
-              <input type="text" class="form-control" formControlName="nationaliteL"  required
-              [(ngModel)]="selectedMissionnaire.nationaliteL" 
-              [ngClass]="{'is-invalid':missionnaireForm.get('nationaliteL').touched && missionnaireForm.get('nationaliteL').invalid}"
-
-              > 
+              <input type="text" class="form-control" formControlName="nationaliteL"  
+              [(ngModel)]="selectedMissionnaire.nationaliteL" > 
             </div>
+
             <div class="form-group col-md-6 text-right">
                 <label>الجنسية</label>
-                <input type="text" class="form-control text-right" formControlName="nationalite" required
-                [(ngModel)]="selectedMissionnaire.nationalite" 
-                [ngClass]="{'is-invalid':missionnaireForm.get('nationalite').touched && missionnaireForm.get('nationalite').invalid}"
-
-                >
+                <input type="text" class="form-control" formControlName="nationalite" [(ngModel)]="selectedMissionnaire.nationalite" >
               </div>
     </div>
     <div class="row">
 
               <div class="form-group col-md-6 text-right">
                <label> الرتبة </label>
-             <!-- <input list="browsers" name="browser"  class="form-control" formControlName="graade" (ngModel)="selectedMissionnaire.graade" [ngModel]="selectedMissionnaire.graade.libGrda">
+               <input list="browsers" name="browser"  class="form-control" formControlName="graade" [(ngModel)]="selectedMissionnaire.graade.libGrda" *ngIf="operation=='EDIT'">
                <datalist id="browsers">
                   <option *ngFor="let grade of grades" [ngValue]="grade" >{{grade.libGrda}}</option>
                 
-               </datalist>--> 
-             
-            <select class="form-control text-right"  formControlName="graade" [(ngModel)]="selectedMissionnaire.graade" required
->                
- 
-                  <option *ngFor="let grade of grades" [ngValue]="grade" >{{grade.libGrda}}</option>
+               </datalist>
+          <select class="form-control" formControlName="graade" [(ngModel)]="selectedMissionnaire.graade" *ngIf="operation=='ADD'">
+                  <option *ngFor="let grade of grades" [ngValue]="grade">{{grade.libGrda}}</option>
                 </select>
               </div>
 
               <div class="form-group col-md-6 text-right">
                 <label>الوظيفة</label>
-               <!--   <input list="fctM" name="fct" class="form-control" formControlName="fonnction" 
-                required [ngModel]="selectedMissionnaire.fonnction.libFonca" >
-             <datalist id="fctM">
-                    <option *ngFor="let fonction of fonctions" [ngValue]="fonction">{{fonction.libFonca}}</option>
-                </datalist>-->
-               
-                <select class="form-control text-right" formControlName="fonnction" [(ngModel)]="selectedMissionnaire.fonnction" required>
-                
-                  <option *ngFor="let fonction of fonctions" [ngValue]="fonction" >{{fonction.libFonca}}</option>
+                <input list="browsers1" name="browser1"  class="form-control" formControlName="fonnction" [(ngModel)]="selectedMissionnaire.fonnction.libFonca" *ngIf="operation=='EDIT'">
+                <datalist id="browsers1">
+                  <option *ngFor="let fonction of fonctions" [ngValue]="fonction">{{fonction.libFonca}}</option>
+                 
+                </datalist>
+                <select class="form-control" formControlName="fonnction" [(ngModel)]="selectedMissionnaire.fonnction" *ngIf="operation=='ADD'">
+                  <option *ngFor="let fonction of fonctions" [ngValue]="fonction">{{fonction.libFonca}}</option>
                 </select>
               </div>
     </div>
@@ -185,19 +139,25 @@
 
               <div class="form-group col-md-6 text-right">
                   <label>صنف</label>
-                  <select class="form-control text-right" formControlName="codCat" [(ngModel)]="selectedMissionnaire.codCat" required
-                 >
-                  
-                    <option *ngFor="let categorie of categories" [ngValue]="categorie" >{{categorie.libCatAr}}</option>
+                  <input list="browsers2" name="browser2"  class="form-control" formControlName="codCat" [(ngModel)]="selectedMissionnaire.codCat.libCatAr" *ngIf="operation=='EDIT'">
+                  <datalist id="browsers2">
+                    <option *ngFor="let categorie of categories" [ngValue]="categorie">{{categorie.libCatAr}}</option>
+                   
+                  </datalist>
+                  <select class="form-control" formControlName="codCat" [(ngModel)]="selectedMissionnaire.codCat" *ngIf="operation=='ADD'">
+                    <option *ngFor="let categorie of categories" [ngValue]="categorie">{{categorie.libCatAr}}</option>
                   </select>
                 </div>
                 
                 <div class="form-group col-md-6 text-right">
                   <label>سلك</label>
-                  <select class="form-control text-right" formControlName="classgrd" [(ngModel)]="selectedMissionnaire.classgrd" required
-
-                  >
-                    <option *ngFor="let classe of classes" [ngValue]="classe" >{{classe.libclassgrda}}</option>
+                  <input list="browsers3" name="browser3"  class="form-control" formControlName="classgrd" [(ngModel)]="selectedMissionnaire.classgrd" [ngModel]="classeM" *ngIf="operation=='EDIT'" >
+                  <datalist id="browsers3" >
+                    <option *ngFor="let classe of classes" [ngValue]="classe">{{classe.libclassgrda}}</option>
+                   
+                  </datalist>
+                  <select class="form-control" formControlName="classgrd" [(ngModel)]="selectedMissionnaire.classgrd" *ngIf="operation=='ADD'">
+                    <option *ngFor="let classe of classes" [ngValue]="classe">{{classe.libclassgrda}}</option>
                   </select>
               </div>
     </div>
@@ -205,59 +165,26 @@
 
                <div class="form-group col-md-6 text-right">
                   <label>المجموع</label>
-                  <input type="text text-right" class="form-control" formControlName="groupe"  
-                  [(ngModel)]="selectedMissionnaire.groupe" required
-                  [ngClass]="{'is-invalid':missionnaireForm.get('groupe').touched && missionnaireForm.get('groupe').invalid}"
-
-                  
-                  >
+                  <input type="text" class="form-control" formControlName="groupe"  
+                  [(ngModel)]="selectedMissionnaire.groupe">
                 </div>
                 <div class="form-group col-md-6 text-right">
                   <label>مستوى التاجير</label>
-                  <input type="text" class="form-control text-right" formControlName="niveau" 
-                  [(ngModel)]="selectedMissionnaire.niveau"  required
-                  [ngClass]="{'is-invalid':missionnaireForm.get('niveau').touched && missionnaireForm.get('niveau').invalid}" >
-               
+                  <input type="text" class="form-control" formControlName="niveau" 
+                  [(ngModel)]="selectedMissionnaire.niveau">
+                 
 
                 </div>
     </div>
               <div>
-            <!-- <button class="btn btn-success"  
-              (click)="operation == 'ADD' ? add() : operation=='EDIT'? update() : operation=='REMOVE'? remove() : '' ">
+              <button class="btn btn-success"  
+              (click)="operation == 'ADD' ? add() : operation=='EDIT'? update() : operation=='REMOVE'? remove() : ''  ; operation=''">
                 {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'تغيير':operation == 'REMOVE' ? 'حذف' : ''}}
-                </button>--> 
+                </button>
               </div>
-              <!-- Button trigger modal
-<button type="button" class="btn btn-primary"  (click)="operation == 'ADD' ? add() : operation=='EDIT'? update() : operation=='REMOVE'? remove() : '' ">
-  {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'تغيير':operation == 'REMOVE' ? 'حذف' : ''}} [disabled]="!missionnaireForm.valid"
-</button> -->
-
-   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"  >
-  {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'تغيير':operation == 'REMOVE' ? 'حذف' : ''}}</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-right">
-هل انت متاكد؟      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"  >لا</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="operation == 'ADD' ? add() : operation=='EDIT'? update() : '' " >نعم</button>
-      </div>
-    </div>
-  </div>
-</div>
- 
       </form>
 </div>
+
 </div>
 </div>
 </body>

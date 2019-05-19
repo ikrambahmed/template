@@ -1,48 +1,43 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
- <div class="view" style="background-image: url('https://cdn.pixabay.com/photo/2015/07/11/23/02/plane-841441_960_720.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
   <div class="card" dir="rtl" lang="ar">
 	<div class="row">
-		<div class="col-md-4 col-md-offset-4 text-center">
+		<div class="col-md-6 text-center " style="align-items: center; right: 25%;margin-bottom: 3%;margin-top:3%;">
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="text-center">
                   <h3><i class="fa fa-lock fa-4x"></i></h3>
                   <h2 class="text-center">  تغيير كلمة العبور </h2>
-                  <div class="panel-body">
+                  <div class="panel-body"  >
     
-                    <form id="register-form" role="form" autocomplete="off" class="form" method="post">
-                     <div class="form-group">
-                        <div class="input-group">
+                     <div  >
+                        <div class="input-group" >
 
-                          <input type="password"  name="password" placeholder=" كلمة العبور" class="form-control" autocomplete="off">
+                          <input type="password"  name="password" placeholder=" كلمة العبور" class="form-control " autocomplete="off">
 
                         
-                        </div>
-                        <div class="input-group">
+<div class="input-group">
+
                           
-                            <input type="password"  name="password1" placeholder="كلمة العبور الجديدة" class="form-control"  autocomplete="off">
+                            <input type="password"  name="password1" placeholder="كلمة العبور الجديدة"  [(ngModel)]="newPassword" class="form-control" autocomplete="off">
   
-                          
                           </div>
                           <div class="input-group">
+
+                      
                           
-                              <input type="password"  name="password2" placeholder="اعادة ادخال كلمة العبور" class="form-control" autocomplete="off">
+                              <input type="password"  name="password2" placeholder="اعادة ادخال كلمة العبور" ([ngModel])="newPassword2" class="form-control" autocomplete="off">
     
                             
-                            </div>
+                    </div>
   
                       </div>
-                      <div class="form-group">
-                        <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="ارسال" type="submit">
+                      <div >
+                          <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"  (click)="verifier()" >الدخول</button>
+
                       </div>
                       
-                      <input type="hidden" class="hide" name="token" id="token" value=""> 
-                    </form>
+              
     
                   </div>
                 </div>
