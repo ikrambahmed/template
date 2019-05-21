@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-<div class="card">
 <div class="stepwizard">
     <div class="stepwizard-row">
         <div class="stepwizard-step">
@@ -21,7 +20,7 @@
     </div>
 </div>
 <div class="card" >
-  <div class="card-header">إضافة منتفع بالمأمورية </div> 
+  <div class="card-header text-right" style="background-color: #F6E7D2;">إضافة منتفع بالمأمورية </div> 
     <div *ngIf="show1==false">
     <div class="container"  >
             <div class="card-body ">
@@ -51,20 +50,29 @@
                   </div>
                 </div>
                 <div *ngIf="existe==true">
-                  <div class="row">
                     <input type="textbox" class="form-control" formControlName="numMission" required [(ngModel)]="num_miss" hidden >
                     <input type="textbox" class="form-control" formControlName="code" required [(ngModel)]="cod" hidden >
-    
-                    <div class="col-md-6 text-right">
-                      <label >{{nom}}  </label>
-                      <label>اللقب </label>
+    <div class="row" dir="rtl">
+                    <div class="col-md-3 text-right">
+                      <label class="form-control" >  اللقب </label>
+
                     </div>
-                    <div class="col-md-6 text-right">
-                      <label >{{prenom}}  </label>
-                      <label>الإسم </label>
+                    <div class="col-md-3 text-right">
+                        <label class="form-control"> {{nom}}</label>
+  
+                      </div>
+                      <div class="col-md-3 text-right">
+                          <label class="form-control">  الإسم </label>
     
+                        </div>
+                      <div class="col-md-3 text-right">
+                          <label class="form-control"> {{prenom}}  </label>
+
+                        </div>
                     </div>
-                  </div>
+
+                    
+              
                   <div class="row">
                       <div class="form-group col-md-4 text-right">
                           <label>المدة </label>
@@ -131,7 +139,7 @@
       </div>
     </div>
     
-</div>
+
     
     <!--<div class="card">
       <div class="card-header bg-info text-white text-right">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { budget } from 'src/app/models/budget';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { MissionService } from 'src/app/services/mission.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-validation-budget',
@@ -21,7 +22,7 @@ export class ValidationBudgetComponent implements OnInit {
   cod : String ;  
   operation:String ; 
   searchText:String ; 
-  constructor(private fb : FormBuilder ,  private missionService: MissionService) { 
+  constructor(private alertService : AlertService ,  private fb : FormBuilder ,  private missionService: MissionService) { 
     this.createForm() ; 
 
   }
@@ -45,13 +46,15 @@ export class ValidationBudgetComponent implements OnInit {
       console.log(this.selectedBudget) ;
    this.selectedBudget.date_val=new Date();
    this.missionService.validerBudgetProjet(this.selectedBudget).subscribe(data=>{
-     alert(' لقد تمت المصادقة بنجاح');
+     this.success(' لقد تمت المصادقة بنجاح');
     console.log(data); 
      this.select=false ; 
-     window.location.reload() ; 
+     //window.location.reload() ; 
 
    }, 
-   error => {console.log(error) ; } , 
+   error => {console.log(error) ;
+    this.error('لم تتم المصادقة على اعتمادات المؤسسة')
+  } , 
    () => {console.log('done');}
    );
     
@@ -122,5 +125,23 @@ if (this.budgets.length==0){
     this.selectedBudget=new budget() ; 
     this.createForm() ;
      }
+
+     error(message: string) {
+      this.alertService.error(message);
+    }
+    
+    info(message: string) {
+      this.alertService.info(message);
+    }
+    
+    warn(message: string) {
+      this.alertService.warn(message);
+    }
+    clear() {
+      this.alertService.clear();
+    }
+    success(message: string) { 
+      this.alertService.success(message);
+    }
     
     }

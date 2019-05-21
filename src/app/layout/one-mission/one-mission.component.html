@@ -1,7 +1,8 @@
 
 <div *ngIf="operation=='ADD' || operation=='EDIT'">
   <div class="card">
-      <div class="card-header">{{ operation == 'ADD' ? 'ادخال' :
+      <div class="card-header text-right" style="background-color: #F6E7D2;">
+          {{ operation == 'ADD' ? 'ادخال' :
           operation == 'EDIT' ? 'تغيير' : ''}}</div>
     <div *ngIf="show==true">
         <div class="container" >
@@ -77,12 +78,13 @@
                   
 
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >
-  {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'تغيير': ''}}
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'التغيير و التالي': ''}} 
 </button>
-<a href="mission#missionnaires" ><button type="button" class="btn btn-primary" (click)="next=true" >
+
+<!--a href="mission#missionnaires" ><button type="button" class="btn btn-primary" (click)="next=true" >
     المنتفعيين و المصاريف
-  </button></a>
+  </button></a>-->
 
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

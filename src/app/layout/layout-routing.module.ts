@@ -39,7 +39,7 @@ const routes: Routes = [
             {path:'budgetDept',component:BudgetDeptComponent} ,
             {path:'projet',component:ProjetComponent} , 
             {path:'missionnaire', component:MissionnaireComponent},
-            {path:'listeMissionnaire', component:ListeMissionnaireComponent},
+            {path:'missionn', component:ListeMissionnaireComponent},
             {path:'mission', component:MissionComponent},
             {path:'listeOdreMission',component:ListeOrdreComponent} , 
             {path:'budgetProj',component:BudgetProjComponent} , 
@@ -55,6 +55,7 @@ const routes: Routes = [
             {path:'changePassword',component:ChangePassComponent},
             {path:'recap',component:RecapComponent},
             {path:'modif',component : ModifMissionComponent}, 
+            {path:'listeMissionnaire',component:MissionnaireComponent}
 
 
 

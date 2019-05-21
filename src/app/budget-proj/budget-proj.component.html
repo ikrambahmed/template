@@ -15,7 +15,7 @@
                           <th>تاريخ الادخال</th>
                           <th>تاريخ المصادقة</th>
                           <th *ngIf="val==false">
-                            <a href="budgetProj#OneBudget"><button class="btn btn-outline-primary"  (click)="operationBudg='ADD';" >اظافة</button></a> 
+                            <a href="budgetProj#OneBudget"><button class="btn btn-outline-primary"  (click)="operationBudg='ADD';" [disabled]="enabled==false" >اظافة</button></a> 
                           </th>
                         </tr>
                       </thead>
@@ -42,7 +42,7 @@
                   </div>
                 </div>
         <div class="card" *ngIf="operationBudg=='EDIT'|| operationBudg=='ADD'" id="OneBudget">
-        <div class="card-header text-right">{{operationBudg == 'ADD' ? ' ادخال اعتمادات المشروع':
+        <div class="card-header text-right" style="background-color: #F6E7D2;">{{operationBudg == 'ADD' ? ' ادخال اعتمادات المشروع':
         operationBudg == 'EDIT' ? 'تغيير اعتمادات المشروع':''}} </div>
             <div class="container"  >
             

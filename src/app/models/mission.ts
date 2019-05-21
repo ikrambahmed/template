@@ -12,6 +12,7 @@ export class Mission {
 	public datarrP: Date;
 	public motcle: Motcle;
 	public duree : String ; 
+	public annee :String; 
 	
 	constructor(
 		numMission?:String , 
@@ -21,7 +22,8 @@ export class Mission {
 		objetl?: String,
 		datdepP?: Date,
 		datarrP?: Date,
-		motcle?: Motcle
+		motcle?: Motcle,
+		annee?:String
 	) 
 	{
 		this.deptGen=new DeptGen() ; 

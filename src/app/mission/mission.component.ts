@@ -31,7 +31,7 @@ export class MissionComponent implements OnInit {
     }
     update(){
       console.log("thisSelectedMission",this.selectedMission);
-      localStorage.setItem('selectedMission',JSON.stringify(this.selectedMission)) ;    }
+      localStorage.setItem('selectedMission',JSON.stringify(this.selectedMission)) ;}
   loadMissions()
   {this.missionService.getMissions(this.cod).subscribe(
    list => { 

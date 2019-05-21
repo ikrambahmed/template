@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-<div class="card">
 <div class="stepwizard">
     <div class="stepwizard-row">
         <div class="stepwizard-step">
@@ -22,7 +21,7 @@
 </div>
 
 <div class=card >
-  <div class="card-header">
+  <div class="card-header text-right" style="background-color: #F6E7D2;">
     إضافة الاعتمادات للمأمورية
   </div>
     <div class="container">
@@ -41,7 +40,7 @@
   
           </div>
           <div class="row">
-            <div class="col-lg-12" dir="rtl">
+            <div class="col-lg-12 text-right" dir="rtl">
               <table class="table table-hover table-bordered">
                 <thead>
                   <tr>
@@ -57,7 +56,7 @@
                     <td>{{prenom!='null' ? prenom  : ''}}</td>
                     <td>{{nom !='null' ? nom : ''}} </td>
                    
-                    <td>{{duree}}</td>
+                    <td>{{duree!='null'?duree :''}}</td>
   
                   </tr>
                 </tbody>
@@ -71,12 +70,12 @@
             <div class="form-group col-md-3 text-right">
               <label>المدة
               </label>
-              <input type="textbox" class="form-control" formControlName="duree" [(ngModel)]="d" (ngModelChange)="displayName()" >
+              <input type="textbox" class="form-control text-right" formControlName="duree" [(ngModel)]="d" (ngModelChange)="displayName()" >
             </div>
             <div class="form-group col-md-3 text-right">
               <label>وسيلة النقل
               </label>
-              <select class="form-control form-control-lg" formControlName="typetransport">
+              <select class="form-control form-control-lg text-right" formControlName="typetransport">
                 <option selected>اختار وسيلة نقل</option>
                 <option value="1" [ngValue]="'الحافلة'">الحافلة</option>
                 <option value="2" [ngValue]="'القطار'">القطار</option>
@@ -88,13 +87,13 @@
             <div class="form-group col-md-3 text-right">
               <label>المدينة
               </label>
-              <input type="textbox" class="form-control" formControlName="NVille" required [(ngModel)]="ville">
+              <input type="textbox" class="form-control text-right" formControlName="NVille" required [(ngModel)]="ville">
             </div>
             <div class="form-group col-md-3 text-right">
               <label>البلد
               </label>
   
-              <select class="form-control form-control-lg" id="select" formControlName="codPays">
+              <select class="form-control form-control-lg text-right" id="select" formControlName="codPays">
                 <option>ادخال بلد</option>
                 <option *ngFor="let pays of payss" [ngValue]="pays.codPays">{{pays.libPaysa}}</option>
               </select>
@@ -102,7 +101,7 @@
           </div>
   
           <div class="card" dir="rtl">
-            <div class="card-header">
+            <div class="card-header text-right" style="background-color: #F6E7D2;">
               <div class="row" dir="rtl">
                 <div class="form-group col-md-4 text-right">
               <h4 (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
@@ -260,12 +259,13 @@
               </div>-->
   
             <div class="card" dir="rtl">
-              <div class="card-header">
+              <div class="card-header text-right" style="background-color: #F6E7D2;">
                 <div class="row">
                   <!--*ngIf="affich===false"-->
                   <h4><label (click)="isCollapsed1 = !isCollapsed1" [attr.aria-expanded]="!isCollapsed1"
                       aria-controls="collapseExample1"><ins>بقية المصاريف</ins></label></h4>
                 </div>
+              </div>
                 <div class="card-body">
   
                   <div id="collapseExample1" [ngbCollapse]="isCollapsed1">
@@ -281,7 +281,7 @@
                         <tr *ngFor="let field of fieldArray; let i = index">
                           <td>
                             <div class="form-group">
-                              <select class="form-control" formControlName="typFrais">
+                              <select class="form-control" formControlName="typFrais">codPays
                                 <option *ngFor="let type of typeFrais" [ngValue]="type.typFrais">{{type.libFrais}}
                                 </option>
                               </select></div>
@@ -346,7 +346,7 @@
                           </td>
                           <td>
                             <div class="form-group">
-                              <input class="form-control" type="text" formControlName="valeurR" />
+                              <input class="form-control" type="text" formControlName="valeurP" />
                             </div>
                           </td>
                           <td>
@@ -364,7 +364,7 @@
                       </tbody>
                     </table>
                   </div>
-                </div>
+              
               </div>
             </div>
             <div class="row">
@@ -379,5 +379,3 @@
   
     </div>
   
-  
-  </div>

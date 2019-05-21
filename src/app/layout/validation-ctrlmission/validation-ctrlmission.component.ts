@@ -146,7 +146,7 @@ this.missionnaireService.getOneMiss(this.selectedOrd.cin).subscribe(
   console.log('data missionnaire',data);
 this.nom=data.nom ; 
 this.prenom=data.prenom ;
-this.name=this.nom+''+this.prenom ; 
+this.name=this.nom+' '+this.prenom ; 
 this.cin=data.cin ; 
 let i=0; 
 let found : Boolean=false; 

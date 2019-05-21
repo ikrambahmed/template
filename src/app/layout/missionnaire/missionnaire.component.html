@@ -1,165 +1,272 @@
-<div class="row">
-    <div class="col-sm-12">
 
       <div class="card">
-          <div class="container"  >
+          <!-- <button class="btn btn-success" (click)="success('Success!!')">Success</button>-->
+ 
+         <div class="card-header" style="background-color: #F6E7D2;" >
+           <div class="search-missionnaire" dir="rtl">
+               <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+                 placeholder="&#61442; ابحث هنا ">
+           </div>
+       </div>
+           
+             <div class="card-body">
+             <div  dir="rtl">
+               <table class="table table-hover">
+                 <thead>
+                   <tr>
+                     <th>ب.ت </th>
+                     <th>المعرف الوحيد </th>
+                     <th>الاسم</th>
+                     <th>اللقب</th>
+                     <th>الجنسية</th>
+                     <th>
+                       <a href="listeMissionnaire#AjoutMissionnaire">   <button class="btn btn-outline-primary" (click)="operation ='ADD' ;initMiss() ;">اظافة</button></a>
+                     </th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr *ngFor="let missionnaire of missionnaires | filter:searchText | paginate: { id: 'listing_pagination',
+                   itemsPerPage: 10,
+                   currentPage: page,
+                   totalItems: totalRec} " (click)="selectedMissionnaire=missionnaire;">
+                     <td>{{missionnaire.cin}} </td>
+                     <td>{{missionnaire.matricule}}</td>
+                     <td>{{missionnaire.prenom}}</td>
+                     <td>{{missionnaire.nom}} </td>
+                     <td>{{missionnaire.nationalite}} </td>
+                     <td>
+                       <a href="listeMissionnaire#AjoutMissionnaire"> <button class="btn btn-outline-primary"
+                         (click)="editOp() ;  selectedMissionnaire = missionnaire">تغيير</button></a>
+                       <button class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" (click)="selectedMissionnaire=missionnaire ; " >حذف</button>
+                     </td>
+                   </tr>
+                 </tbody>
+               </table>
+               <div>
+                 <pagination-controls id="listing_pagination" maxSize="10" directionLinks="true"
+                   (pageChange)="page = $event" previousLabel="السابقة" nextLabel="الاخرى"></pagination-controls>
+               </div>  
+             </div>
+           
+       
+             </div>
+           
+       </div>
+ 
+       <!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel"></h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body text-right">
+           هل انت متاكد؟      </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal"  >لا</button>
+           <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="searchMissionnaire() ; " >نعم</button>
+         </div>
+       </div>
+     </div>
+   </div>
+   <div id="AjoutMissionnaire" *ngIf="operation=='ADD' || operation=='EDIT'" >
 
-          <!--  <div class="card-heades text-right" >
-              {{operation == 'ADD' ? 'ادخال' :
-                operation == 'EDIT' ? 'تغيير' :
-                operation == 'REMOVE' ? 'جذف' : ''}}
-          منتفع
-          
-          </div>
-            <div *ngIf="operation == 'ADD' || operation =='EDIT' || operation =='REMOVE'">-->
-          
+      <html >
+          <head>
+              <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+              <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+              <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+        <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css"> 
+        </head>
+          <body> 
+              <div class="card">
         
-          
-          
-          <div class="card-body">
-              <form [formGroup]="missionnaireForm">
-                <div class="row">
-                <div class="form-group col-md-4  text-right" >
-                  <label> مكانها </label>
-                  <input type="text" class="form-control" formControlName="place_cin" 
-                  [(ngModel)]="selectedMissionnaire.place_cin" >
-                </div>
-                <div class="form-group col-md-4 text-right" >
-                  <label for="delivre"> المسلمة يوم </label>
-                  <input type="date" class="form-control" formControlName="date_cin"      
-                  [(ngModel)]="selectedMissionnaire.date_cin" >
-                </div>
-               
-                <div class="form-group col-md-4 text-right">
-                  <label for="cin"> الهوية الوطنية </label>
-                  <input type="text" class="form-control" formControlName="cin" 
-                  placeholder="Tapez dans ce champ 8 chiffres" autofocus pattern="[0-9]{8}" 
-                  name="cin" [(ngModel)]="selectedMissionnaire.cin" maxlength="8" >
-                </div>
-              </div>
+        <div *ngIf="operation == 'ADD' || operation =='EDIT'">
+            <div class="card-header text-right" style="background-color: #F6E7D2;">
+                {{operation == 'ADD' ? 'ادخال' :
+              operation == 'EDIT' ? 'تغيير' :''}}
+        منتفع
+        
+        </div>
+        
+        
+        <div class="card-body">
+            <form [formGroup]="missionnaireForm">
               <div class="row">
-
+              <div class="form-group col-md-4  text-right" >
+                <label> مكانها </label>
+                <input type="text" class="form-control" formControlName="place_cin" 
+                [(ngModel)]="selectedMissionnaire.place_cin" >
+              </div>
+              <div class="form-group col-md-4 text-right" >
+                <label for="delivre"> المسلمة يوم </label>
+                <input type="date" class="form-control" formControlName="date_cin"      
+                [(ngModel)]="selectedMissionnaire.date_cin" >
+              </div>
+             
+              <div class="form-group col-md-4 text-right">
+                <label for="cin"> الهوية الوطنية </label>
+                <input type="text" class="form-control" formControlName="cin" 
+                placeholder="Tapez dans ce champ 8 chiffres" autofocus pattern="[0-9]{8}" 
+                name="cin" [(ngModel)]="selectedMissionnaire.cin" maxlength="8" >
+              </div>
+            </div>
+            <div class="row">
+        
+              <div class="form-group col-md-6 text-right">
+                <label>مكانها</label>
+                <input type="text" class="form-control" formControlName="place_naissance" 
+                [(ngModel)]="selectedMissionnaire.place_naissance" >
+              </div>
                 <div class="form-group col-md-6 text-right">
-                  <label>مكانها</label>
-                  <input type="text" class="form-control" formControlName="place_naissance" 
-                  [(ngModel)]="selectedMissionnaire.place_naissance" >
+                  <label> تاريخ الولادة </label>
+                  <input type="date" class="form-control" formControlName="datenaissance" 
+                  [(ngModel)]="selectedMissionnaire.datenaissance" >
                 </div>
-                  <div class="form-group col-md-6 text-right">
-                    <label> تاريخ الولادة </label>
-                    <input type="date" class="form-control" formControlName="datenaissance" 
-                    [(ngModel)]="selectedMissionnaire.datenaissance" >
+            </div>
+            <div class="row">
+        
+                <div class="form-group col-md-6">
+                  <label> RIB </label>
+                  <input type="text" class="form-control" formControlName="rib" 
+                  [(ngModel)]="selectedMissionnaire.rib" >
+                </div>
+        
+                <div class="form-group col-md-6 text-right">
+                  <label> المعرف الوحيد </label>
+                  <input type="text" class="form-control" formControlName="matricule" 
+                  [(ngModel)]="selectedMissionnaire.matricule" >
+                </div>
+            </div>
+            <div class="row">
+        
+                <div class="form-group col-md-6">
+                  <label> Prenom </label>
+                  <input type="text" class="form-control" formControlName="prenomL"
+                  [(ngModel)]="selectedMissionnaire.prenomL" >
+                </div>
+        
+                <div class="form-group col-md-6 text-right">
+                    <label>الاسم</label>
+                    <input type="text" class="form-control" formControlName="prenom" 
+                    [(ngModel)]="selectedMissionnaire.prenom" >
                   </div>
-              </div>
-              <div class="row">
-
-                  <div class="form-group col-md-6">
-                    <label> RIB </label>
-                    <input type="text" class="form-control" formControlName="rib" 
-                    [(ngModel)]="selectedMissionnaire.rib" >
-                  </div>
-          
-                  <div class="form-group col-md-6 text-right">
-                    <label> المعرف الوحيد </label>
-                    <input type="text" class="form-control" formControlName="matricule" 
-                    [(ngModel)]="selectedMissionnaire.matricule" >
-                  </div>
-              </div>
-              <div class="row">
-
-                  <div class="form-group col-md-6">
-                    <label> Prenom </label>
-                    <input type="text" class="form-control" formControlName="prenomL"
-                    [(ngModel)]="selectedMissionnaire.prenomL" >
-                  </div>
-          
-                  <div class="form-group col-md-6 text-right">
-                      <label>الاسم</label>
-                      <input type="text" class="form-control" formControlName="prenom" 
-                      [(ngModel)]="selectedMissionnaire.prenom" >
+            </div>
+            <div class="row">
+        
+                <div class="form-group col-md-6 ">
+                  <label> Nom </label>
+                  <input type="text" class="form-control" formControlName="nomL" 
+                  [(ngModel)]="selectedMissionnaire.nomL" >
+                </div>
+        
+                <div class="form-group col-md-6 text-right">
+                  <label>اللقب  </label>
+                  <input type="text" class="form-control" formControlName="nom" 
+                  [(ngModel)]="selectedMissionnaire.nom" >
+                </div>
+            </div>
+            <div class="row">
+        
+                    <div class="form-group col-md-6">
+                      <label>Nationalite </label>
+                      <input type="text" class="form-control" formControlName="nationaliteL"  
+                      [(ngModel)]="selectedMissionnaire.nationaliteL" > 
                     </div>
-              </div>
-              <div class="row">
-
-                  <div class="form-group col-md-6 ">
-                    <label> Nom </label>
-                    <input type="text" class="form-control" formControlName="nomL" 
-                    [(ngModel)]="selectedMissionnaire.nomL" >
-                  </div>
-          
-                  <div class="form-group col-md-6 text-right">
-                    <label>اللقب  </label>
-                    <input type="text" class="form-control" formControlName="nom" 
-                    [(ngModel)]="selectedMissionnaire.nom" >
-                  </div>
-              </div>
-              <div class="row">
-
-                      <div class="form-group col-md-6">
-                        <label>Nationalite </label>
-                        <input type="text" class="form-control" formControlName="nationaliteL"  
-                        [(ngModel)]="selectedMissionnaire.nationaliteL" > 
+        
+                    <div class="form-group col-md-6 text-right">
+                        <label>الجنسية</label>
+                        <input type="text" class="form-control" formControlName="nationalite" [(ngModel)]="selectedMissionnaire.nationalite" >
                       </div>
-          
+            </div>
+            <div class="row">
+        
                       <div class="form-group col-md-6 text-right">
-                          <label>الجنسية</label>
-                          <input type="text" class="form-control" formControlName="nationalite" [(ngModel)]="selectedMissionnaire.nationalite" >
-                        </div>
-              </div>
-              <div class="row">
-
-                        <div class="form-group col-md-6 text-right">
-                          <label> الرتبة </label>
-                          <select class="form-control" formControlName="graade" [(ngModel)]="selectedMissionnaire.graade">
-                            <option *ngFor="let grade of grades" [ngValue]="grade">{{grade.libGrda}}</option>
+                       <label> الرتبة </label>
+                       <input list="browsers" name="browser"  class="form-control" formControlName="graade" [(ngModel)]="selectedMissionnaire.graade.libGrda" *ngIf="operation=='EDIT'">
+                       <datalist id="browsers">
+                          <option *ngFor="let grade of grades" [ngValue]="grade" >{{grade.libGrda}}</option>
+                        
+                       </datalist>
+                  <select class="form-control" formControlName="graade" [(ngModel)]="selectedMissionnaire.graade" *ngIf="operation=='ADD'">
+                          <option *ngFor="let grade of grades" [ngValue]="grade">{{grade.libGrda}}</option>
+                        </select>
+                      </div>
+        
+                      <div class="form-group col-md-6 text-right">
+                        <label>الوظيفة</label>
+                        <input list="browsers1" name="browser1"  class="form-control" formControlName="fonnction" [(ngModel)]="selectedMissionnaire.fonnction.libFonca" *ngIf="operation=='EDIT'">
+                        <datalist id="browsers1">
+                          <option *ngFor="let fonction of fonctions" [ngValue]="fonction">{{fonction.libFonca}}</option>
+                         
+                        </datalist>
+                        <select class="form-control" formControlName="fonnction" [(ngModel)]="selectedMissionnaire.fonnction" *ngIf="operation=='ADD'">
+                          <option *ngFor="let fonction of fonctions" [ngValue]="fonction">{{fonction.libFonca}}</option>
+                        </select>
+                      </div>
+            </div>
+            <div class="row">
+        
+                      <div class="form-group col-md-6 text-right">
+                          <label>صنف</label>
+                          <input list="browsers2" name="browser2"  class="form-control" formControlName="codCat" [(ngModel)]="selectedMissionnaire.codCat.libCatAr" *ngIf="operation=='EDIT'">
+                          <datalist id="browsers2">
+                            <option *ngFor="let categorie of categories" [ngValue]="categorie">{{categorie.libCatAr}}</option>
+                           
+                          </datalist>
+                          <select class="form-control" formControlName="codCat" [(ngModel)]="selectedMissionnaire.codCat" *ngIf="operation=='ADD'">
+                            <option *ngFor="let categorie of categories" [ngValue]="categorie">{{categorie.libCatAr}}</option>
                           </select>
                         </div>
-          
+                        
                         <div class="form-group col-md-6 text-right">
-                          <label>الوظيفة</label>
-                          <select class="form-control" formControlName="fonnction" [(ngModel)]="selectedMissionnaire.fonnction">
-                            <option *ngFor="let fonction of fonctions" [ngValue]="fonction">{{fonction.libFonca}}</option>
+                          <label>سلك</label>
+                          <input list="browsers3" name="browser3"  class="form-control" formControlName="classgrd" [(ngModel)]="selectedMissionnaire.classgrd" [ngModel]="classeM" *ngIf="operation=='EDIT'" >
+                          <datalist id="browsers3" >
+                            <option *ngFor="let classe of classes" [ngValue]="classe">{{classe.libclassgrda}}</option>
+                           
+                          </datalist>
+                          <select class="form-control" formControlName="classgrd" [(ngModel)]="selectedMissionnaire.classgrd" *ngIf="operation=='ADD'">
+                            <option *ngFor="let classe of classes" [ngValue]="classe">{{classe.libclassgrda}}</option>
                           </select>
+                      </div>
+            </div>
+            <div class="row">
+        
+                       <div class="form-group col-md-6 text-right">
+                          <label>المجموع</label>
+                          <input type="text" class="form-control" formControlName="groupe"  
+                          [(ngModel)]="selectedMissionnaire.groupe">
                         </div>
-              </div>
-              <div class="row">
-
                         <div class="form-group col-md-6 text-right">
-                            <label>صنف</label>
-                            <select class="form-control" formControlName="codCat" [(ngModel)]="selectedMissionnaire.codCat">
-                              <option *ngFor="let categorie of categories" [ngValue]="categorie">{{categorie.libCatAr}}</option>
-                            </select>
-                          </div>
-                          
-                          <div class="form-group col-md-6 text-right">
-                            <label>سلك</label>
-                            <select class="form-control" formControlName="classgrd" [(ngModel)]="selectedMissionnaire.classgrd">
-                              <option *ngFor="let classe of classes" [ngValue]="classe">{{classe.libclassgrda}}</option>
-                            </select>
+                          <label>مستوى التاجير</label>
+                          <input type="text" class="form-control" formControlName="niveau" 
+                          [(ngModel)]="selectedMissionnaire.niveau">
+                         
+        
                         </div>
-              </div>
-              <div class="row">
+            </div>
+                      <div>
+                      <button class="btn btn-success"  
+                      (click)="operation == 'ADD' ? add() : operation=='EDIT'? update() : operation=='REMOVE'? remove() : ''  ; operation=''">
+                        {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'تغيير':operation == 'REMOVE' ? 'حذف' : ''}}
+                        </button>
+                      </div>
+              </form>
+        </div>
+        
+        </div>
+        </div>
+        </body>
+        </html>
 
-                         <div class="form-group col-md-6 text-right">
-                            <label>المجموع</label>
-                            <input type="text" class="form-control" formControlName="groupe"  
-                            [(ngModel)]="selectedMissionnaire.groupe">
-                          </div>
-                          <div class="form-group col-md-6 text-right">
-                            <label>مستوى التاجير</label>
-                            <input type="text" class="form-control" formControlName="niveau" 
-                            [(ngModel)]="selectedMissionnaire.niveau">
-                            <input type="text" class="form-control" formControlName="code" 
-                            [(ngModel)]="cod" hidden>
-          
-                          </div>
-              </div>
-                        <div>
-                        <button class="btn btn-success"  
-                        (click)="operation == 'ADD' ? add() : operation=='EDIT'? update() : operation=='REMOVE'? remove() : '' ">
-                          {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'تغيير':operation == 'REMOVE' ? 'حذف' : ''}}
-                          </button>
-                        </div>
-                </form>
-          </div></div>
-          </div>
-    </div></div>
+   </div>
+  
+ 
+       

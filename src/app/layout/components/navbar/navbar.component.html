@@ -14,7 +14,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="dropdown" >
-                         <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{NameString}}  مرحبا <i class="fa fa-user"></i> </a>
+                         <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  مرحبا  {{NameString}} <i class="fa fa-user"></i> </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a href="" [routerLink]="['/changePassword']" >  <i class="fa fa-key"></i>تغيير كلمة العبور</a></li>
 
@@ -22,7 +22,7 @@
 
                         </ul>
                         </li> 
-                        <li><a href=""> المؤسسة  {{depart}} <i class="fa fa-building"></i> </a></li>
+                        <li><a href="">  {{depart}} <i class="fa fa-building"></i> </a></li>
 
                         </ul> 
                  
@@ -94,7 +94,7 @@
                                                         <li class="dropdown">
                                                             <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">إدخال المأموريات                  </a>
                                                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                                <li><a href="mission" >قائمة المامورية</a></li>
+                                                                <li><a href="mission" >قائمة الماموريات</a></li>
                                                                 <li><a href="stepper">إدخال مأمورية جديدة</a></li>
                                                                 <li *ngIf="hasRole==true"><a href="validation"> مصادقة الآمر بالصرف</a></li>
                                                                 <li *ngIf="hasRoleCTRL==true"><a href="validMissCtrl"> مصادقة  على الماموريات</a></li>

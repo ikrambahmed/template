@@ -9,37 +9,48 @@
                   <h3><i class="fa fa-lock fa-4x"></i></h3>
                   <h2 class="text-center">  تغيير كلمة العبور </h2>
                   <div class="panel-body"  >
+                      <form  [formGroup]="myForm"  (ngSubmit)="myForm.valid">
+
     
                      <div  >
                         <div class="input-group" >
 
-                          <input type="password"  name="password" placeholder=" كلمة العبور" class="form-control " autocomplete="off">
+                          <input type="password" formControlName="password" name="password" placeholder=" كلمة العبور" class="form-control " autocomplete="off" [(ngModel)]="password"
+                          [ngClass]="{'is-invalid':myForm.get('password').touched && myForm.get('password').invalid}"
+                          >
 
                         
 <div class="input-group">
 
                           
-                            <input type="password"  name="password1" placeholder="كلمة العبور الجديدة"  [(ngModel)]="newPassword" class="form-control" autocomplete="off">
+                            <input type="password" formControlName="password1" name="password1" placeholder="كلمة العبور الجديدة"  [(ngModel)]="password1" class="form-control" autocomplete="off"
+                            [ngClass]="{'is-invalid':myForm.get('password1').touched && myForm.get('password1').invalid}"
+
+                            >
   
                           </div>
                           <div class="input-group">
 
                       
                           
-                              <input type="password"  name="password2" placeholder="اعادة ادخال كلمة العبور" ([ngModel])="newPassword2" class="form-control" autocomplete="off">
+                              <input type="password" formControlName="password2" name="password2" placeholder=" اعادة ادخال كلمة العبور الجديدة" ([ngModel])="password2" class="form-control" autocomplete="off"
+                              [ngClass]="{'is-invalid':myForm.get('password2').touched && myForm.get('password2').invalid}"
+
+                              >
     
                             
                     </div>
   
                       </div>
                       <div >
-                          <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20"  (click)="verifier()" >الدخول</button>
+                          <button type="button" [disabled]="!myForm.valid" class="btn  btn-md btn-block waves-effect text-center m-b-20 text-white"  (click)="verifier()" style="background-color: rgb(61, 50, 50)" >الدخول</button>
 
                       </div>
                       
               
     
                   </div>
+                  </form>
                 </div>
               </div>
             </div>

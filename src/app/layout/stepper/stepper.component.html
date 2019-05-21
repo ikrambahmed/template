@@ -22,7 +22,7 @@
 <!--<app-ajout-mission *ngIf="affich==true"></app-ajout-mission>-->
 <div >
         <div class="card">
-          <div class="card-header">ادخال مامورية جديدة</div>
+          <div class="card-header text-right" style="background-color: #F6E7D2;">ادخال مامورية جديدة</div>
         <div *ngIf="show==true">
             <div class="container" >
                   <div class="card-body">
@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group col-md-6 text-right">
                                 <label for="exampleFormControlTextarea1">موضوع المأمورية </label>
-                                <textarea class="form-control rounded-0" formControlName="objeta" id="exampleFormControlTextarea1"  rows="10"
+                                <textarea class="form-control rounded-0 text-right" formControlName="objeta" id="exampleFormControlTextarea1"  rows="10"
                                 [ngClass]="{'is-invalid':missionForm.get('objeta').touched && missionForm.get('objeta').invalid}" 
     
                                 ></textarea>

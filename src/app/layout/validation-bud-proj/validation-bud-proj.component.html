@@ -2,7 +2,7 @@
   <div class="row" dir="rtl" *ngIf="show==false">
       <div class="col-md-12">
         <div class="alert alert-danger text-right" role="alert">
-            <h4 class="alert-heading">لا توجد ماموريات في انتضار المصادقة حاليا </h4>
+            <h4 class="alert-heading">لا توجد اعتمادات لمشاريع في انتضار المصادقة حاليا </h4>
             <hr>
             <p> الرجاء التثبت </p>
           
@@ -10,8 +10,10 @@
         </div>
     </div>
 </div>
+   
+
 <div class="card" *ngIf="show==true">
-    <div class="card-header">
+    <div class="card-header text-right" style="background-color: #F6E7D2;">
         <div class="search-missionnaire" dir="rtl">
             <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
               placeholder="&#61442; ابحث هنا ">
@@ -47,7 +49,11 @@
     </div>
 </div>
 </div>
+
 <div class="card" *ngIf="select==true">
+    <div class="card-header text-right" style="background-color: #F6E7D2;">
+        <div class="card-header text-right" > المصادقة على اعتمادات المشروع
+    </div>
     <div class="card-body">
           <div class="row" dir="rtl">
           <div class="form-group col-md-6  text-right" >
@@ -56,7 +62,7 @@
         </div>
         <div class="row" dir="rtl">
             <div class="form-group col-md-6  text-right" >
-             <h4><label> اعتمادات المؤسسة</label></h4> 
+             <h4><label> اعتمادات المشروع</label></h4> 
             </div>
           </div>
           <div class="row" dir="rtl">
@@ -75,10 +81,12 @@
                  <label class="form-control" >{{selectedBudget.reference}}</label>
                     </div>
                   </div>
+                  <div class="row" dir="ltr">
                   <button type="button" class="btn btn-danger">الغاء
                     </button>
                     <button type="button" class="btn btn-primary" (click)="ValiderMission()">مصادقة
-                      </button>             
+                      </button>   
+                    </div>          
 </div>
 
 </div>

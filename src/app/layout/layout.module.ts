@@ -80,6 +80,7 @@ import { AlertComponent } from './alert/alert.component'
     ChangePassComponent,
     RecapComponent,
     ModifMissionComponent,
-    TabSetModifComponent,AlertComponent]
+    TabSetModifComponent,
+    AlertComponent]
 })
 export class LayoutModule {}

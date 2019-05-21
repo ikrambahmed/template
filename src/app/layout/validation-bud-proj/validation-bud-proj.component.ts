@@ -4,6 +4,7 @@ import { budget } from 'src/app/models/budget';
 import { MissionService } from 'src/app/services/mission.service';
 import { budgetProjet } from 'src/app/models/budgetProjet';
 import { Projet } from 'src/app/models/Projet';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-validation-bud-proj',
@@ -24,7 +25,7 @@ export class ValidationBudProjComponent implements OnInit {
   budgets :Array<budget>[] =new Array(); 
   selectedBudgetProj:budgetProjet = new budgetProjet(); 
   show: boolean ; 
- constructor(private Fb:FormBuilder , private missionService:MissionService){
+ constructor(private alertService:AlertService, private Fb:FormBuilder , private missionService:MissionService){
  this.createForm() ; 
  }
  createForm()
@@ -91,8 +92,9 @@ if(this.budgets.length==0){
    
      // alert(JSON.stringify(res));  
       this.initialiser() ; 
+      
       this.operationBudg='' ;  
-      window.location.reload() ; 
+     // window.location.reload() ; 
 
      
      }    
@@ -129,16 +131,35 @@ this.createForm() ;
     console.log(this.selectedBudget) ;
  this.selectedBudget.dateVal=new Date();
  this.missionService.validerBudget(this.selectedBudget).subscribe(data=>{
-   alert(' لقد تمت المصادقة بنجاح');
+  this.success(' لقد تمت المصادقة بنجاح');
   // console.log(data); 
    this.select=false ; 
-   window.location.reload() ; 
+  // window.location.reload() ; 
 
  }, 
- error => {console.log(error) ; } , 
+ error => {console.log(error) ;
+this.error('لم تتم المصادقة بنجاح') } , 
  () => {console.log('done');}
  );
   
  }
+
+ error(message: string) {
+  this.alertService.error(message);
+}
+
+info(message: string) {
+  this.alertService.info(message);
+}
+
+warn(message: string) {
+  this.alertService.warn(message);
+}
+clear() {
+  this.alertService.clear();
+}
+success(message: string) { 
+  this.alertService.success(message);
+}
 }
 

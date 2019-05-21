@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
+import { environment } from 'src/app/shared/environment';
+import { Observable } from 'rxjs';
+import { MissionService } from 'src/app/services/mission.service';
 
 @Component({
     selector: 'app-charts',
@@ -14,21 +17,62 @@ export class ChartsComponent implements OnInit {
         responsive: true
     };
     public barChartLabels: string[] = [
-        '2006',
-        '2007',
-        '2008',
+        '2018',
+        '2019',
+      /*  '2008',
         '2009',
         '2010',
         '2011',
-        '2012'
+    '2012'*/
     ];
+
     public barChartType: string;
     public barChartLegend: boolean;
-
+    result1:Number[] = new Array();
+    result2:Number[] = new Array();
+ 
+    result3:Number[]=new Array() ; 
     public barChartData: any[] = [
-        { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-        { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+        // { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+        { /*data: [28, 48/*, 40, 19, 86, 27, 90]*/data:[], label: 'Series B' }
     ];
+
+    loadNumberOfMissions()
+   {
+    /*let x=0  ;
+    while(x<=this.barChartLabels.length)
+    {   
+    x=x+1 ; 
+    
+    this.missionService.getMissionNumbers(this.barChartLabels[x]).subscribe(
+        data => { this.result2.push(data) ; 
+        console.log('result',this.result2);},
+        error => {console.log(error); } , 
+        () => {console.log('loading numbers was done ') ; }
+      ); 
+}*/
+    this.missionService.getMissionNumbers('2018').subscribe(
+    data => { this.result3.push(data) ; 
+    
+    console.log('result',this.result3);},
+    error => {console.log(error); } , 
+    () => {console.log('loading numbers was done ')}
+   ); 
+  this.missionService.getMissionNumbers('2019').subscribe(
+    data => { this.result3.push(data) ;  },
+    error => {console.log(error); } , 
+    () => {console.log('loading numbers was done ')}
+  )  ; 
+console.log(this.result3,'res final') ; 
+  const clone = JSON.parse(JSON.stringify(this.barChartData));
+  clone[0].data = this.result3;
+  this.barChartData = clone;}
+
+
+    
+
+
+
 
     // Doughnut
     public doughnutChartLabels: string[] = [
@@ -36,7 +80,7 @@ export class ChartsComponent implements OnInit {
         'In-Store Sales',
         'Mail-Order Sales'
     ];
-    public doughnutChartData: number[] = [350, 450, 100];
+    public doughnutChartData: number[] = [600, 450, 100];
     public doughnutChartType: string;
 
     // Radar
@@ -158,9 +202,10 @@ export class ChartsComponent implements OnInit {
          */
     }
 
-    constructor() {}
+    constructor(private missionService : MissionService) {}
 
     ngOnInit() {
+        this.loadNumberOfMissions() ;
         this.barChartType = 'bar';
         this.barChartLegend = true;
         this.doughnutChartType = 'doughnut';
@@ -170,5 +215,7 @@ export class ChartsComponent implements OnInit {
         this.polarAreaChartType = 'polarArea';
         this.lineChartLegend = true;
         this.lineChartType = 'line';
+       // this.randomize() ; 
+
     }
 }

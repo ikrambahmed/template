@@ -13,6 +13,7 @@ import { Missionnaire } from 'src/app/models/missionnaire';
 import { frais } from 'src/app/models/frais';
 import { budgetProjet } from 'src/app/models/budgetProjet';
 import { Mission } from 'src/app/models/mission';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-frais-mission',
@@ -56,7 +57,7 @@ public supportes:Array<string> = [
 ];
 d:number ; 
 typFrais :String;
-  constructor(private missionnaireService :MissionnaireService  ,private ordMissService : OrdMissService,private router : Router, private fb : FormBuilder ,private  missionService : MissionService) { 
+  constructor(private alertService:AlertService ,private missionnaireService :MissionnaireService  ,private ordMissService : OrdMissService,private router : Router, private fb : FormBuilder ,private  missionService : MissionService) { 
    
    this.createForm() ; 
   }
@@ -94,7 +95,7 @@ valeurR:String ;
  // alert(JSON.stringify(m));
 
     if (this.d>this.duree){
-      window.alert('الرجاء التثبت من المدة') ; 
+      this.error('الرجاء التثبت من المدة') ; 
     }
    /* console.log(this.OrdMissForm.value) ; 
     this.OrdMissForm.value.numMission=this.numMission ; 
@@ -105,12 +106,12 @@ this.OrdMissForm.value.typFrais=this.typFrais ; */
 
 if(this.d<=this.duree)
    { 
-     console.log('hay a9al') ; 
+   //  console.log('hay a9al') ; 
      const m = this.OrdMissForm.value ;
    //alert(JSON.stringify(m));
     this.missionService.addFrais(m).subscribe(
       res => {
-        window.alert('لقد تمت الاضافة بنجاح') ; 
+       this.success('لقد تمت الاضافة بنجاح') ; 
 
         this.ngOnInit();
        // alert(JSON.stringify(res));
@@ -132,7 +133,7 @@ if(this.d<=this.duree)
     // alert(JSON.stringify(m));
      this.missionService.addFrais(m).subscribe(
        res => {   
-        window.alert('لقد تمت الاضافة بنجاح') ; 
+        this.success('لقد تمت الاضافة بنجاح') ; 
         this.fraisMiss=res ; 
        //  console.log('frais',res) ; 
           this.ngOnInit();
@@ -291,6 +292,18 @@ duree:number ;
 selectedMission:Mission=new Mission() ; 
 selectedOrd:ordMiss=new ordMiss() ; 
   ngOnInit() {
+
+
+
+    var promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+       
+     
+
+
+
+
+
     this.selectedMission=JSON.parse(localStorage.getItem('selectedMission')) ; 
     this.selectedOrd=JSON.parse(localStorage.getItem('selectedOrd')) ; 
     this.codeMission =this.selectedMission.code ; //JSON.parse(localStorage.getItem('num_mission')) ;
@@ -316,6 +329,10 @@ selectedOrd:ordMiss=new ordMiss() ;
     this.loadTypeFrais() ;
     this.loadOrdeMission(this.numMission) ;
     this.getMissionnaire() ; 
+    resolve();
+  }, 1000);
+
+})
  
   }
   name: string = '';
@@ -375,5 +392,22 @@ selectedOrd:ordMiss=new ordMiss() ;
 this.OrdMissForm.value.code=this.cod ;
 this.OrdMissForm.value.typFrais=this.typFrais;
 
+  }
+  error(message: string) {
+    this.alertService.error(message);
+  }
+  
+  info(message: string) {
+    this.alertService.info(message);
+  }
+  
+  warn(message: string) {
+    this.alertService.warn(message);
+  }
+  clear() {
+    this.alertService.clear();
+  }
+  success(message: string) { 
+    this.alertService.success(message);
   }
 }

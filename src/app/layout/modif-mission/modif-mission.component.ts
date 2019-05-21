@@ -7,6 +7,7 @@ import { MissionService } from 'src/app/services/mission.service';
 import { frais } from 'src/app/models/frais';
 import { Missionnaire } from 'src/app/models/missionnaire';
 import { MissionnaireService } from 'src/app/services/missionnaire.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-modif-mission',
@@ -21,7 +22,7 @@ export class ModifMissionComponent implements OnInit {
  
   ordreMis:ordMiss[]; 
   ord: ordMiss ; 
-  constructor( private missionnaireService : MissionnaireService ,private router : Router,private ordMissService:OrdMissService,private missionService : MissionService) { }
+  constructor(private alertService : AlertService,  private missionnaireService : MissionnaireService ,private router : Router,private ordMissService:OrdMissService,private missionService : MissionService) { }
 
   ngOnInit() {
 
@@ -73,10 +74,10 @@ fr : frais ;
       this.ordMissService.deleteOrd(this.o).subscribe(res=>
         {
       if (res==true){
-        alert('لقد تم الحذف بنجاح');
+        this.success('لقد تم الحذف بنجاح');
       }
       else if(res==false){
-        alert('لقد وقع خطا');
+        this.error('لقد وقع خطا');
   
       }
       },
@@ -85,7 +86,8 @@ fr : frais ;
   
         ) ; 
     }
-      else if (res==false){alert('not done deleting frais') ; }
+      else if (res==false){//alert('not done deleting frais') ;
+    this.error('لا يمكن الحذف') }
     },
       error =>{console.log(error);},
       ()=>{console.log('done') ; }
@@ -95,10 +97,10 @@ fr : frais ;
       this.ordMissService.deleteOrd(this.o).subscribe(res=>
         {
       if (res==true){
-        alert('لقد تم الحذف بنجاح');
+        this.success('لقد تم الحذف بنجاح');
       }
       else if(res==false){
-        alert('لقد وقع خطا');
+        this.error('لقد وقع خطا');
   
       }
       this.loadOrdeMission() ; 
@@ -120,11 +122,13 @@ fr : frais ;
         alert('لقد وقع خطا');
   
       }*/
-      alert('لقد تم الحذف بنجاح');
-      window.location.reload() ; 
+      this.success('لقد تم الحذف بنجاح');
+     // window.location.reload() ; 
 
       },
-         error => {console.log(error) ; } , 
+         error => {console.log(error) ;
+     
+        } , 
          ()=>{console.log('done') ; }
       );
        
@@ -155,4 +159,23 @@ fr : frais ;
     
     
   }*/
+
+  error(message: string) {
+    this.alertService.error(message);
+  }
+  
+  info(message: string) {
+    this.alertService.info(message);
+  }
+  
+  warn(message: string) {
+    this.alertService.warn(message);
+  }
+  clear() {
+    this.alertService.clear();
+  }
+  success(message: string) { 
+    this.alertService.success(message);
+  }
+
 }

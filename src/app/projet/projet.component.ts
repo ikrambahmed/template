@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MissionService } from '../services/mission.service';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Projet } from '../models/Projet';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-projet',
@@ -18,13 +19,13 @@ export class ProjetComponent implements OnInit {
   codeProjet:String ; 
   DateSaisie : Date = new Date() ; 
   searchText:String ; 
-  constructor(private fb : FormBuilder , private missionService : MissionService) {
-    this.PojetForm = this.fb.group({  
-      libprjA: ['',Validators.required],
-      libPrjL: ['',Validators.required],
-     });
+  constructor(private alertService : AlertService , private fb : FormBuilder , private missionService : MissionService) {
+    this.createForm() ; 
       }
-
+createForm(){this.PojetForm = this.fb.group({  
+  libprjA: ['',Validators.required],
+  libPrjL: ['',Validators.required],
+ });}
    add(){
      this.PojetForm.value.codPrj=this.codeProjet ; 
      this.PojetForm.value.code=this.cod ; 
@@ -32,12 +33,11 @@ export class ProjetComponent implements OnInit {
   //  alert(JSON.stringify(m));
     this.missionService.addProjet(m).subscribe(
       res => {
-          alert('لقد تمت الاضافة بنجاح') ; 
+          this.success('لقد تمت الاضافة بنجاح') ; 
           this.reloadCodeProjet() ; 
           this.loadProjets() ; 
+          this.PojetForm.reset() ; 
           this.operation='' ; 
-          
-
          },
          error=>{console.log("erreur");}    
     )
@@ -73,14 +73,6 @@ loadProjets()
     
   //this.projets.sort() ; 
   
-
-
-
-
-
-
-
-
 },
   error => {console.log('an error occured') } , 
   () => {console.log('loading projets was done ')}
@@ -102,13 +94,34 @@ firstName: FormControl;
   }
   projet : Projet ; 
   update(){this.missionService.updateProjet(this.selectedProjet).subscribe(
-    data => { this.projet=data ; 
+    data => { 
+      this.success('تم تغيير المشروع بنجاح')
+      this.projet=data ;
+      this.PojetForm.reset() ;  
     this.operation='' ; 
   this.loadProjets() ; },
-    error => {console.log(error) } , 
+    error => {console.log(error)  } , 
     () => {console.log('loading projets was done ')}
   ) ; 
+  this.PojetForm.reset() ; 
+
+  }
+  error(message: string) {
+    this.alertService.error(message);
+  }
   
+  info(message: string) {
+    this.alertService.info(message);
+  }
+  
+  warn(message: string) {
+    this.alertService.warn(message);
+  }
+  clear() {
+    this.alertService.clear();
+  }
+  success(message: string) { 
+    this.alertService.success(message);
   }
 
 }

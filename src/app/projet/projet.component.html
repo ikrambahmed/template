@@ -1,5 +1,5 @@
 <div class="card" >
-  <div class="card-header">
+  <div class="card-header text-right" style="background-color: #F6E7D2;">
     <div class="search-projets">
       <input class="form-control text-right" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
         placeholder="&#61442; ابحث هنا">
@@ -29,7 +29,7 @@
               <a href="projet#Afficher"> <button class="btn btn-outline-primary" (click)="operation='EDIT'; selectedProjet=projet;" dir="ltr">تغيير</button></a>
           </td>
               <td>{{projet.codPrj}}</td>
-            <td>{{projet.libPrjL}} </td>
+            <td>{{projet.libprjA}} </td>
            
           </tr>
         </tbody>
@@ -41,8 +41,8 @@
     </div>
     </div>
   <div class="card"  *ngIf="operation=='ADD' || operation=='EDIT'" id="Afficher">
-    <div class="card-header text-right">
-        {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'تغيير': ''}}    </div>
+      <div class="card-header text-right" style="background-color: #F6E7D2;">
+          {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'تغيير': ''}}    </div>
   <div class="container" >  
           <div class="card-body ">
             <form [formGroup]="PojetForm" (ngSubmit)="PojetForm.valid">

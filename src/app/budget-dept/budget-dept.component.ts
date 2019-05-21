@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MissionService } from '../services/mission.service';
 import { budget } from '../models/budget';
+import { AlertService } from '../services/alert.service';
 @Component({
   selector: 'app-budget-dept',
   templateUrl: './budget-dept.component.html',
   styleUrls: ['./budget-dept.component.scss']
 })
 export class BudgetDeptComponent implements OnInit {
-
+  enabled:boolean=true; 
   BudgetDeptForm:FormGroup ; 
   budgets : budget[] ;
   val:boolean; 
@@ -19,7 +20,7 @@ export class BudgetDeptComponent implements OnInit {
   dataSys :Date = new Date() ;
   cod : String ;  
   operation:String ; 
-  constructor(private fb : FormBuilder ,  private missionService: MissionService) { 
+  constructor(private alertService :AlertService  ,private fb : FormBuilder ,  private missionService: MissionService) { 
     this.createForm() ; 
 
   }
@@ -70,7 +71,7 @@ export class BudgetDeptComponent implements OnInit {
     this.missionService.updateBudget(this.selectedBudget)
     .subscribe(
       res =>{
-        alert('لقد تم التغيير بنجاح') ;
+        this.success('لقد تم التغيير بنجاح') ;
        // this.initialiser() ; 
         this.loadBudgets() ; 
         this.operation='' ; 
@@ -85,7 +86,8 @@ export class BudgetDeptComponent implements OnInit {
        // alert(JSON.stringify(m));
         this.missionService.addBudgetDept(m).subscribe(
           res => {
-            alert('لقد تمت الاضافة بنجاح')
+            this.success('لقد تمت الاضافة بنجاح') ; 
+           this.enabled=false;
            // this.initialiser() ;
             var promise = new Promise((resolve, reject) => {
               setTimeout(() => {
@@ -117,5 +119,21 @@ export class BudgetDeptComponent implements OnInit {
     this.createForm() ;
      }
     
-
+     error(message: string) {
+      this.alertService.error(message);
+    }
+    
+    info(message: string) {
+      this.alertService.info(message);
+    }
+    
+    warn(message: string) {
+      this.alertService.warn(message);
+    }
+    clear() {
+      this.alertService.clear();
+    }
+    success(message: string) { 
+      this.alertService.success(message);
+    }
 }

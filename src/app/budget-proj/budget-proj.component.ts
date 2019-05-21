@@ -4,6 +4,7 @@ import { Projet } from '../models/Projet';
 import { MissionService } from '../services/mission.service';
 import { budget } from '../models/budget';
 import { budgetProjet } from '../models/budgetProjet';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-budget-proj',
@@ -13,6 +14,7 @@ import { budgetProjet } from '../models/budgetProjet';
 
 export class BudgetProjComponent implements OnInit {
   codeDept:String ; 
+  enabled:boolean ; 
   y :String='' ;
   d:Date ; 
   val : Boolean; 
@@ -22,7 +24,7 @@ export class BudgetProjComponent implements OnInit {
   projets : Projet[] ; 
   operationBudg:String ; 
   selectedBudgetProj:budgetProjet = new budgetProjet(); 
- constructor(private Fb:FormBuilder , private missionService:MissionService){
+ constructor(private alertService : AlertService, private Fb:FormBuilder , private missionService:MissionService){
  this.createForm() ; 
  }
  createForm()
@@ -91,7 +93,9 @@ this.entry=this.entry+1 ;
      res => {
       this.val=true ;
 
-      alert('لقد تمت الاضافة بنجاح') 
+      this.success('لقد تمت الاضافة بنجاح')
+      this.enabled=false;
+ 
       // this.loadBudgets(); 
      /* if(res.dateVal===null || res.dateVal===undefined)
       {
@@ -113,7 +117,7 @@ this.entry=this.entry+1 ;
   this.missionService.updateBudgetProjet(this.selectedBudgetProj)
   .subscribe(
     res =>{
-      alert('لقد تم التغيير بنجاح') ;
+      this.success('لقد تم التغيير بنجاح') ;
       this.operationBudg='' ;
       this.loadBudgets() ; 
       this.initialiser();
@@ -131,6 +135,26 @@ this.entry=this.entry+1 ;
 this.selectedBudgetProj=new budgetProjet() ; 
 this.createForm() ;
  }
+
+    
+ error(message: string) {
+  this.alertService.error(message);
+}
+
+info(message: string) {
+  this.alertService.info(message);
+}
+
+warn(message: string) {
+  this.alertService.warn(message);
+}
+clear() {
+  this.alertService.clear();
+}
+success(message: string) { 
+  this.alertService.success(message);
+}
+
 
 }
 

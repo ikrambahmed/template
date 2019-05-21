@@ -1,17 +1,17 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <div class="card" *ngIf="hasRoleController()==true">
-  <div class="card-body">
+  <div class="card-body" style="background-color: #F6E7D2;">
     <div class="row" dir="center">
-        <div class="form-group col-md-12 text-center">
-            <label>المؤسسة</label>
-            <select class="form-control" [(ngModel)]="depart" required (change)="ListMissionValid();">
-              <option *ngFor="let depart of depts" [ngValue]="depart" >{{depart.libA}}</option>
+        <div class="form-group col-md-12 text-center"  >
+            <label>اختيار المؤسسة </label>
+            <select class="form-control" dir="rtl" [(ngModel)]="depart" required (change)="ListMissionValid();">
+              <option *ngFor="let depart of depts" [ngValue]="depart" dir="rtl" >{{depart.libA}}</option>
             </select>
           </div>
         </div>
         <div class="row" dir="rtl" *ngIf="showIt==false">
           <div class="col-md-12">
-            <div class="alert alert-danger text-right" role="alert">
+            <div class="alert  text-right" role="alert" style="background-color:rgb(245, 236, 223);">
                 <h4 class="alert-heading">لا توجد ماموريات في انتضار المصادقة حاليا </h4>
                 <hr>
                 <p> الرجاء التثبت او اختيار  مؤسسة اخرى </p>
@@ -23,7 +23,8 @@
 </div>
 
 <div class="card" *ngIf="showIt==true">
-  <div class="card-header" autofocus>مصادقة الامر بالصرف</div>
+    <div class="card-header text-right" style="background-color: rgb(218, 202, 181);">
+        مصادقة الامر بالصرف</div>
                 <div class="container" >
                       <div class="card-body"dir="rtl">
 

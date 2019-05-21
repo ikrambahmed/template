@@ -129,4 +129,11 @@ return this.http.put(this.baseUrl+'/api/updateordMiss',m)
      updateProjet(p:Projet):Observable<any>{
       return this.http.put(this.baseUrl+'/api/updateProjet',p) ; 
      }
+     getMissionNumbers(annee : String) :Observable<any>{
+       console.log('west el srvice') ; 
+      return this.http.get(this.baseUrl+'/api/mission/CountMission?annee='+annee) ; 
+    }
+
+
+
 }

@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
       username: '',
       password: ''
     };
-  
+ isLoggedin:boolean ; 
     constructor(private fb: FormBuilder,
       private appService: AppService,
       private router: Router ,
@@ -31,24 +31,23 @@ export class LoginComponent implements OnInit {
   });
   }
   authenticated:Boolean ; 
- 
+  error(message: string) {
+    this.alertService.error(message);
+  }
 
   login(){
     this.appService.authenticate(this.credentials,()=>{
-      localStorage.setItem('isLoggedin', 'true');
+      this.isLoggedin=JSON.parse(localStorage.getItem('isLoggedin') ); 
+if(this.isLoggedin==true)
+      {this.router.navigateByUrl('/dashboard');}
+else
+        {alert('usename or password is invalid');}
+      })}
 
-      this.router.navigateByUrl('/dashboard');}) 
-     
-  
-  
-    /*this.router.navigateByUrl('/home') ;*/
-    
-   // this.router.navigateByUrl('/dashboard');
-
-  }
-  
-    
     onLoggedin() {
         localStorage.setItem('isLoggedin', 'true');
+    }
+    success(message: string) { 
+      this.alertService.success(message);
     }
 }

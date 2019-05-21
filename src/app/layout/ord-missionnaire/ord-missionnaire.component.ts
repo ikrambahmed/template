@@ -202,6 +202,7 @@ selectedMission:Mission;
   ngOnInit() {
 
   this.selectedMission=JSON.parse(localStorage.getItem('selectedMission')); 
+  //alert(this.selectedMission) ; 
   this.num_miss = this.selectedMission.numMission ; //JSON.parse(localStorage.getItem('num_mission')) ;
   var DeptGenVal = localStorage.getItem('deptGen') ; 
   var data = JSON.parse(DeptGenVal) ; 

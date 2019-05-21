@@ -134,7 +134,7 @@ createForm()
       this.success('لقد تم التغيير بنجاح') ; 
       this.initMiss() ; 
       this.missionnaireService.loadMissionaire() ;   
-      window.location.reload() ; 
+     // window.location.reload() ; 
     },
     error => {console.log(error) ; 
     this.error('الرجاءالتثبت من المعطيات') ;}
@@ -181,7 +181,7 @@ createForm()
       //  this.missionnaires.push(res) ; 
         this.loadMissionaire() ; 
         this.operation='' ; 
-        window.location.reload() ; 
+      //  window.location.reload() ; 
       },
       error =>{console.log(error);
       this.error("الرجاءالتثبت من المعطيات");}
