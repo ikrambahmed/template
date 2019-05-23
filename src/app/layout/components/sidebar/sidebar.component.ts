@@ -1,6 +1,8 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Principal } from 'src/app/shared/principal.model';
+import { DeptGen } from 'src/app/models/DeptGen';
 
 @Component({
     selector: 'app-sidebar',
@@ -12,6 +14,7 @@ export class SidebarComponent implements OnInit {
     collapsed: boolean;
     showMenu: string;
     pushRightClass: string;
+    depart:DeptGen ; 
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
@@ -26,12 +29,51 @@ export class SidebarComponent implements OnInit {
             }
         });
     }
+    hasRoleController(){
+        console.log('principal',this.principal) ; 
+        this.principal.authorities.forEach(item => {
+          if (item.authority === 'ROLE_CONTROL')
+          {
+            this.hasRoleCTRL=true ;  
+            console.log('role controller') ; 
+          }
+          
+        });
+        return this.hasRoleCTRL ; 
+      }
+       
+      hasRole :Boolean=false ; 
+      private principal : Principal ; 
+      hasRoleCTRL:boolean ;
+    
+       hasRoleUser(){
+        console.log('principal',this.principal) ; 
 
+         this.principal.authorities.forEach(item => {
+           if (item.authority === 'ROLE_ORD')
+           {
+             this.hasRole=true ;  
+             console.log('role ord') ; 
+           }
+           
+         });
+         return this.hasRole ; 
+       }
     ngOnInit() {
         this.isActive = false;
         this.collapsed = false;
         this.showMenu = '';
         this.pushRightClass = 'push-right';
+        var DeptGenVal = localStorage.getItem('deptGen') ; 
+        var data = JSON.parse(DeptGenVal) ; 
+        console.log('libelee arabe ',data.departement.libA) ;
+        this.depart=data.departement.libA;
+        console.log('localStorage' , JSON.parse(localStorage.getItem('principal'))) ; 
+        this.principal=JSON.parse(localStorage.getItem('principal')) ;
+    
+        this.hasRoleController() ; 
+        this.hasRoleUser() ; 
+    
     }
 
 

@@ -5,6 +5,7 @@ import { Missionnaire } from '../models/missionnaire';
 import { environment } from '../shared/environment';
 import { grade } from '../models/grade';
 import { ordMiss } from '../models/Ord_Miss';
+import { DeptGen } from '../models/DeptGen';
 
 @Injectable()
 export class MissionnaireService {
@@ -18,18 +19,19 @@ export class MissionnaireService {
   searchMissionnaire(m:Missionnaire):Observable<any> {
     return this.http.post(this.baseUrl+'/api/searchMissionnaire',m); 
   }
-  getMissionares(codeDept:String):Observable<any> {
-    console.log("err") ; 
-    return this.http.get(this.baseUrl+'/api/listeMissionnaireByDept?codeDept='+codeDept); 
+  getMissionares(m:DeptGen):Observable<any> {
+    return this.http.post(this.baseUrl+'/api/listeMissionnaireByDept',m); 
   }
   cod :String ; 
+  m:DeptGen ; 
   loadMissionaire()
-  {
+  {   this.m=new DeptGen() ; 
+    this.m.code=this.cod ; 
     var DeptGenVal = localStorage.getItem('deptGen') ; 
     var data = JSON.parse(DeptGenVal) ; 
     console.log('retrievedObject: ',data.code) ;
     this.cod=data.code;
-    this.getMissionares(this.cod).subscribe(
+    this.getMissionares(this.m).subscribe(
     data => { this.missionnaires=data},
     error => {console.log(error) } , 
     () => {console.log('loading missionnaires was done ')}
@@ -86,13 +88,13 @@ console.log('Token '+jsonObject) ;
  {
   return this.http.get(this.rl+'/listegrade?name='+lib)
 }*/
-
-getOneMiss(cin : String) : Observable<any>{
-  return this.http.get(this.baseUrl+'/api/getOneMiss?cin='+cin) ; 
+//getMissionnaireByCin
+getOneMiss(missCin : Missionnaire) : Observable<any>{
+  return this.http.post(this.baseUrl+'/api/getOneMiss',missCin) ; 
  }
- getDept(cin:String):Observable<any> 
+ getDept(cin:Missionnaire):Observable<any> 
  {
-   return this.http.get('http://localhost:8080/miss_cni-0.0.1-SNAPSHOT/api/DeptOfUsername?username='+cin) ; 
+   return this.http.post(this.baseUrl+'/api/DeptOfUsername',cin) ; 
  }
  rechercheMissionnaire(miss : Missionnaire) : Observable<any>{
   return this.http.get(this.baseUrl+'/api/') ; 

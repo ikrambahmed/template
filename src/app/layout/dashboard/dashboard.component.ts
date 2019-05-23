@@ -6,6 +6,7 @@ import { PrincipalState } from '../../shared/principal.state';
 import { UserStruct } from 'src/app/models/UserStruct';
 import { DeptGen } from 'src/app/models/DeptGen';
 import { HomeService } from 'src/app/services/home.service';
+import { Missionnaire } from 'src/app/models/missionnaire';
 
 @Component({
     selector: 'app-dashboard',
@@ -87,8 +88,9 @@ export class DashboardComponent implements OnInit {
     }
 
     DeptOfUsername(){
-        console.log("dkhalna lfonctions dept")
-        this.homeService.getDept(this.cin_user).subscribe(
+        let m : Missionnaire=new Missionnaire() ; 
+m.cin=this.cin_user ; 
+        this.homeService.getDept(m).subscribe(
           data => { this.dept=data;
             let key = 'deptGen';
             localStorage.setItem(key, JSON.stringify(this.dept));

@@ -10,14 +10,14 @@ export class OrdMissService {
 
   constructor(private http : HttpClient) { }
 
-  getOrdreMission(numMission : String) : Observable<any>{
-    return this.http.get(this.baseUrl+'/api/getMissionnByMision?numMission='+numMission); }
-    getLatestOrdreCode(code : String , numMission:String) : Observable<any>{
+  getOrdreMission(ord : ordMiss) : Observable<any>{
+    return this.http.post(this.baseUrl+'/api/getMissionnByMision',ord); }
+    getLatestOrdreCode(ord:ordMiss) : Observable<any>{
       console.log('service') ; 
-      return this.http.get(this.baseUrl+'/api/latestOrdreCode?codeDept='+code+'&numMission='+numMission) ;
+      return this.http.post(this.baseUrl+'/api/latestOrdreCode',ord) ;
     }
-    getOrdsMiss(code : String):Observable<any>{
-      return this.http.get(this.baseUrl+'/api/getOrdreMission?codeDept='+code) ; 
+    getOrdsMiss(ord : ordMiss):Observable<any>{
+      return this.http.post(this.baseUrl+'/api/getOrdreMission',ord) ; 
 
     }
     getOrdre(o:ordMiss):Observable<any>{

@@ -33,9 +33,11 @@ export class MissionComponent implements OnInit {
       console.log("thisSelectedMission",this.selectedMission);
       localStorage.setItem('selectedMission',JSON.stringify(this.selectedMission)) ;}
   loadMissions()
-  {this.missionService.getMissions(this.cod).subscribe(
+  {
+    let m : Mission= new Mission() ; 
+    m.code=this.cod ; 
+    this.missionService.getMissions(m).subscribe(
    list => { 
-     console.log('missions loading') ; 
      this.missions=list ;
      this.totalRec = this.missions.length;
 

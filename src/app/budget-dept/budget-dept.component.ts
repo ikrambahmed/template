@@ -37,7 +37,9 @@ export class BudgetDeptComponent implements OnInit {
     sommeTr : number=0 ; 
     loadBudgets()
     {
-      this.missionService.getBudgets(this.cod).subscribe(
+      let budg : budget = new budget() ; 
+      budg.code=this.cod ; 
+      this.missionService.getBudget(budg).subscribe(
       data => {
         console.log('data',data) ; 
         if((data===null)||(data===undefined)|| (data.length==0))

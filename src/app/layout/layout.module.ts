@@ -42,7 +42,8 @@ import { ChangePassComponent } from './change-pass/change-pass.component';
 import { RecapComponent } from './recap/recap.component';
 import { ModifMissionComponent } from './modif-mission/modif-mission.component';
 import { TabSetModifComponent } from './tab-set-modif/tab-set-modif.component';
-import { AlertComponent } from './alert/alert.component'
+import { AlertComponent } from './alert/alert.component';
+import { FicheBlocageComponent } from './fiche-blocage/fiche-blocage.component'
 @NgModule({
     imports: [
         CommonModule,
@@ -81,6 +82,7 @@ import { AlertComponent } from './alert/alert.component'
     RecapComponent,
     ModifMissionComponent,
     TabSetModifComponent,
-    AlertComponent]
+    AlertComponent,
+    FicheBlocageComponent]
 })
 export class LayoutModule {}

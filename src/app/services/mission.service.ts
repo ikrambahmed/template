@@ -8,6 +8,8 @@ import { Projet } from '../models/Projet';
 import { ordMiss } from '../models/Ord_Miss';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../shared/environment';
+import { DeptGen } from '../models/DeptGen';
+import { Missionnaire } from '../models/missionnaire';
 
 @Injectable()
 export class MissionService {
@@ -18,16 +20,14 @@ export class MissionService {
   constructor(private http : HttpClient) { }
   getMissionValider(dept : String) :Observable<any>{
     return this.http.get(this.baseUrl+'/api/'+dept);
+  }
 
-  }
-  getProjet(dept : String ) : Observable<any>{
-    return this.http.get(this.baseUrl+'/api/listeProjetByDept?codeDept='+dept) ; 
-  }
-  getOneMiss(cin : String) : Observable<any>{
-    return this.http.get(this.baseUrl+'/api/getOneMiss?cin='+cin) ; 
+  getOneMiss(m : Missionnaire) : Observable<any>{
+    return this.http.post(this.baseUrl+'/api/getOneMiss',m) ; 
    }
-  getMissions(codeDept: String):Observable<any> {
-    return this.http.get(this.baseUrl+'/api/mission/listeMissionByDept?codeDept='+codeDept) ; 
+
+  getMissions(m: Mission):Observable<any> {
+    return this.http.post(this.baseUrl+'/api/mission/listeMissionByDept',m) ; 
   }
 
   addOrdMiss(o:ordMiss):Observable<any> {
@@ -44,14 +44,14 @@ export class MissionService {
     return this.http.get(this.baseUrl+'/api/allMotcle') ; 
   }
 
-  getLatestMissionCode(code : String) :Observable<any>{
-    return this.http.get(this.baseUrl+'/api/mission/latestCode?codeDept='+code) ; 
+  getLatestMissionCode(codeDept : DeptGen) :Observable<any>{
+    return this.http.post(this.baseUrl+'/api/mission/latestCode',codeDept) ; 
   }
   getPays() :Observable<any>{
     return this.http.get(this.baseUrl+'/api/listPays') ; 
   }
-  getBudget(code :String) :Observable<any>{
-    return this.http.get(this.baseUrl+'/api/listbyDept?codeDept='+code) ; 
+  getBudget(budg :budget) :Observable<any>{
+    return this.http.post(this.baseUrl+'/api/listbyDept',budg) ; 
   }
   addBudgetDept(m :budget):Observable<any>{
     return this.http.post(this.baseUrl+'/api/addBudget' , m) ; 
@@ -73,27 +73,25 @@ getAllBudgetProjets():Observable<any>{
 getAllBudgetDepts():Observable<any>{
   return this.http.get(this.baseUrl+'/api/listeBudget')
 }
-  getBudgets(code:String): Observable<any>{
-    return this.http.get(this.baseUrl+'/api/listbyDept?codeDept='+code) ;
-  }
-  getBudgetsProjet(code:String):Observable<any>{
-    return this.http.get(this.baseUrl+'/api/listBudgetProjetbydept?codeDept='+code) ; 
+
+  getBudgetsProjet(d:DeptGen):Observable<any>{
+    return this.http.post(this.baseUrl+'/api/listBudgetProjetbydept',d) ; 
 
   }
   getTypeFrais():Observable<any>{
     return this.http.get(this.baseUrl+'/api/listType') ; 
   }
-  getprojets(cod:String):Observable<any>{
-    return this.http.get(this.baseUrl+'/api/listeProjetByDept?codeDept='+cod) ; 
+  getprojets(cod:DeptGen):Observable<any>{
+
+    return this.http.post(this.baseUrl+'/api/listeProjetByDept',cod) ; 
   }
 
   getOneMission(m:Mission):Observable<any>{
     console.log("inside service");
     return this.http.post(this.baseUrl+'/api/mission/findById',m) ; 
   }
-  getFraisMission(codeDept:String , numMission :String ,numOrd:Number , cin : String ):Observable<any>{
-    console.log('données',cin,numOrd,numMission,codeDept) ; 
-    return this.http.get(this.baseUrl+'/api/getFraisMission?codeDept='+codeDept+'&numMission='+numMission+'&cin='+cin+'&numOrd='+numOrd,{responseType: 'json'}) ; 
+  getFraisMission(m:frais ):Observable<any>{
+    return this.http.post(this.baseUrl+'/api/getFraisMission',m,{responseType: 'json'}) ; 
   }
   
   validerMission(m:ordMiss):Observable<any> {
@@ -114,8 +112,8 @@ return this.http.put(this.baseUrl+'/api/updateordMiss',m)
      updateMission(m:Mission):Observable<any>{
        return this.http.put(this.baseUrl+'/api/mission/update',m) ; 
      }
-     getMission(code : String , numMission:String):Observable<any>{
-      return this.http.get(this.baseUrl+'/api/mission/missionValidation?codeDept='+code+'?numMission='+numMission) ; 
+     getMission(m:Mission):Observable<any>{
+      return this.http.post(this.baseUrl+'/api/mission/missionValidation',m) ; 
      }
      validerBudget(budgetValid : budgetProjet):Observable<any>{
        return this.http.put(this.baseUrl+'/api/updateBudgetProjet',budgetValid);

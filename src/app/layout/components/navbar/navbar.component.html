@@ -58,7 +58,7 @@
                                                 </ul>
                                             </li>-->
                     
-                                            <li class="dropdown">
+                                            <li class="dropdown" *ngIf="hasRoleUser()==true">
                                                     <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">الاعتمادات</a>
                                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                     <li class="dropdown">
@@ -82,31 +82,42 @@
                                                     </ul>
                                                 </li>
                     
+
                                                 <li class="dropdown">
                     
-                                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">المآموريات
+                                                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  *ngIf="hasRoleCTRL==true" >المصادقة
+                                                        </a>
+                                                        
+                                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                                        <li *ngIf="hasRoleCTRL==true"><a href="validMissCtrl"> المصادقة  على الماموريات</a></li>
+                    
+                                                        <li *ngIf="hasRoleCTRL==true"><a href="validationDept">المصادقة على اعتمادات المؤسسة</a></li>
+                                                        <li *ngIf="hasRoleCTRL==true"><a href="validationProj"> المصادقة على اعتمادات المشروع</a></li>
+
+</ul>
+                                                </li>
+
+                                                <li class="dropdown"  *ngIf="hasRoleUser()==true">
+                    
+                                                        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >المآموريات
                                                             </a>
                                                             
-                                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                                <li><a href="listeMissionnaire">إدخال المنتفعين
+                                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                                                                <li><a href="listeMissionnaire" *ngIf="hasRoleUser()==true">إدخال المنتفعين
                                                                     </a></li>
                     
                                                         <li class="dropdown">
-                                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">إدخال المأموريات                  </a>
+                                                            <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >إدخال المأموريات                  </a>
                                                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                                <li><a href="mission" >قائمة الماموريات</a></li>
-                                                                <li><a href="stepper">إدخال مأمورية جديدة</a></li>
-                                                                <li *ngIf="hasRole==true"><a href="validation"> مصادقة الآمر بالصرف</a></li>
-                                                                <li *ngIf="hasRoleCTRL==true"><a href="validMissCtrl"> مصادقة  على الماموريات</a></li>
-                    
-                                                                <li *ngIf="hasRoleCTRL==true"><a href="validationDept">المصادقة على اعتمادات المؤسسة</a></li>
-                                                                <li *ngIf="hasRoleCTRL==true"><a href="validationProj"> المصادقة على اعتمادات المشروع</a></li>
+                                                                <li><a href="mission" *ngIf="hasRoleUser()==true">قائمة الماموريات</a></li>
+                                                                <li><a href="stepper" *ngIf="hasRoleUser()==true">إدخال مأمورية جديدة</a></li>
+                                                                <li *ngIf="hasRole==true"><a href="validation" *ngIf="hasRoleUser()==true"> مصادقة الآمر بالصرف</a></li>
                                                             </ul>
                                                         </li>
                                                         </ul>
                                                     </li>
                     
-                                                    <li class="dropdown">
+                                                    <li class="dropdown" *ngIf="hasRoleUser()==true">
                                                             <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> الثوابت
                                                                 </a>
                                                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

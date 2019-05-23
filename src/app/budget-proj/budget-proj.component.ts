@@ -5,6 +5,7 @@ import { MissionService } from '../services/mission.service';
 import { budget } from '../models/budget';
 import { budgetProjet } from '../models/budgetProjet';
 import { AlertService } from '../services/alert.service';
+import { DeptGen } from '../models/DeptGen';
 
 @Component({
   selector: 'app-budget-proj',
@@ -55,7 +56,9 @@ export class BudgetProjComponent implements OnInit {
    loadBudgets()
    {
      //this.val=false ; 
-     this.missionService.getBudgetsProjet(this.codeDept).subscribe(
+     let b : DeptGen= new DeptGen() ; 
+     b.code= this.codeDept ;
+     this.missionService.getBudgetsProjet(b).subscribe(
      data => { this.budgets=data;
       if((data===null)||(data===undefined)|| (data.length==0))
       this.val=false ;
@@ -125,7 +128,10 @@ this.entry=this.entry+1 ;
   )} 
   
  loadProjet()
- {this.missionService.getProjet(this.codeDept).subscribe(
+ {
+   let d:DeptGen = new DeptGen() ; 
+   d.code=this.codeDept ; 
+     this.missionService.getprojets(d).subscribe(
    data => { this.projets=data;},
    error => {console.log(error); } , 
    () => {console.log('loading projets was done') ;}

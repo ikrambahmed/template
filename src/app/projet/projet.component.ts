@@ -3,6 +3,7 @@ import { MissionService } from '../services/mission.service';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Projet } from '../models/Projet';
 import { AlertService } from '../services/alert.service';
+import { DeptGen } from '../models/DeptGen';
 
 @Component({
   selector: 'app-projet',
@@ -68,7 +69,10 @@ reloadCodeProjet(){
 //projets:Array<Projet>[]=new Array() ; 
 projets : Projet[] ; 
 loadProjets()
-{this.missionService.getprojets(this.cod).subscribe(
+{
+  let d:DeptGen=new DeptGen() ; 
+  d.code=this.cod ; 
+  this.missionService.getprojets(d).subscribe(
   data => { this.projets=data ; 
     
   //this.projets.sort() ; 
@@ -93,12 +97,13 @@ firstName: FormControl;
 
   }
   projet : Projet ; 
-  update(){this.missionService.updateProjet(this.selectedProjet).subscribe(
+  update(){
+    this.missionService.updateProjet(this.selectedProjet).subscribe(
     data => { 
       this.success('تم تغيير المشروع بنجاح')
       this.projet=data ;
       this.PojetForm.reset() ;  
-    this.operation='' ; 
+      this.operation='' ; 
   this.loadProjets() ; },
     error => {console.log(error)  } , 
     () => {console.log('loading projets was done ')}

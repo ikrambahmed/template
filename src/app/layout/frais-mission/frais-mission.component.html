@@ -110,7 +110,7 @@
               </div>
             </div>
               <div class="card-body">
-                <div id="collapseExample" [ngbCollapse]="isCollapsed">
+                <div id="collapseExample" [ngbCollapse]="!isCollapsed">
                   <div class="row" dir="rtl">
                     <div class="form-group col-md-4 text-right">
                       <h5><label> التحمل على</label></h5>
@@ -203,7 +203,7 @@
                                   هل انت متاكد؟      </div>
                                <div class="modal-footer">
                                  <button type="button" class="btn btn-secondary" data-dismiss="modal"  >لا</button>
-                                 <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="add1();affich=false;">نعم</button>
+                                 <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="isCollapsed1=!isCollapsed1;isCollapsed=!isCollapsed;add1();affich=false;">نعم</button>
                                </div>
                              </div>
                            </div>
@@ -268,7 +268,7 @@
               </div>
                 <div class="card-body">
   
-                  <div id="collapseExample1" [ngbCollapse]="isCollapsed1">
+                  <div id="collapseExample1" [ngbCollapse]="!isCollapsed1">
                     <table class="table table-striped table-bordered">
                       <thead>
                         <tr>
@@ -320,7 +320,7 @@
                                               هل انت متاكد؟      </div>
                                            <div class="modal-footer">
                                              <button type="button" class="btn btn-secondary" data-dismiss="modal"  >لا</button>
-                                             <button type="button" class="btn btn-primary" data-dismiss="modal"(click)=" add();">نعم</button>
+                                             <button type="button" class="btn btn-primary" data-dismiss="modal"(click)="isCollapsed1 = !isCollapsed1; add();">نعم</button>
                                            </div>
                                          </div>
                                        </div>

@@ -81,7 +81,10 @@ export class ValidationCTRLMissionComponent implements OnInit {
   
     }
  loadOrdreMission()
-  {this.ordMisService.getOrdsMiss(this.depart.code)
+  {
+    let o:ordMiss=new ordMiss() ; 
+o.code=this.depart.code ; 
+    this.ordMisService.getOrdsMiss(o)
     .subscribe(
     data => { 
       console.log(data ,'data') ; 
@@ -141,7 +144,10 @@ cinF :String;
  numF : Number;
 loadMissionnaire()
  {console.log('cin') ; 
-this.missionnaireService.getOneMiss(this.selectedOrd.cin).subscribe(
+ let m :Missionnaire= new Missionnaire() ; 
+ m.cin=this.selectedOrd.cin ; 
+m.code.code=this.cod ; 
+this.missionnaireService.getOneMiss(m).subscribe(
   data=>{console.log(data);
   console.log('data missionnaire',data);
 this.nom=data.nom ; 
@@ -163,31 +169,6 @@ this.numF= this.selectedOrd.numord ;
 
 this.loadFraisMission(this.cod,this.numMissF,this.cinF,this.numF ) ; 
 
-/*while (( i <= this.ords.length) && (found==false)) {
- console.log('dkhalna lil iteration');
- console.log('el i ',i) ; 
-  if ((this.ords[i].cin===this.cin ) && (this.ords[i].numMission))
-  {console.log('ors cin',this.ords[i].cin ,this.ords[i].numMission)
-  this.cinF = this.ords[i].cin ;
-  this.numMissF= this.ords[i].numMission ;
-  this.numF= this.ords[i].numord ;
-
-    console.log('el if tawa') ; 
-    this.ordMiss=this.ords[i] ; 
-    this.dateAller=this.ordMiss.datdepP ; 
-    this.dateRetour=this.ordMiss.datarrP ; 
-    this.numOrd = this.ordMiss.numord ; 
-    console.log(this.dateAller) ; 
-    console.log(this.dateRetour);
-    found=true ; 
-    
-   // this.loadFraisMission(this.cinF, this.numMissF , this.numF , this.cod)
-}
-  else {
-  i=i+1 ; }
-
- }
-*/
 
 },
   error => {console.log(error)}, 
@@ -196,9 +177,13 @@ this.loadFraisMission(this.cod,this.numMissF,this.cinF,this.numF ) ;
   }
 
   loadFraisMission(code : String , numMission:String , cin : String , numOrd:Number )
-  {
+  { let f:frais=new frais() ; 
+    f.code=this.cod ; 
+    f.numMission=numMission ; 
+    f.numord=this.numOrd ; 
+    f.cin=cin ; 
     console.log('données kbal el services',cin , numMission , numOrd , code)
-    this.missionService.getFraisMission(code ,numMission ,numOrd, cin)
+    this.missionService.getFraisMission(f)
     .subscribe(
     data => {
       this.fraisMiss=data ; 

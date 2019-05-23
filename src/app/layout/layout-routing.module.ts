@@ -21,6 +21,8 @@ import { ValidationCTRLMissionComponent } from './validation-ctrlmission/validat
 import { ChangePassComponent } from './change-pass/change-pass.component';
 import { RecapComponent } from './recap/recap.component';
 import { ModifMissionComponent } from './modif-mission/modif-mission.component';
+import { RoleGuard } from '../shared/guard/role.guard';
+import { RoleCTRLGuard } from '../shared/guard/role-ctrl.guard';
 
 const routes: Routes = [
     {
@@ -36,26 +38,26 @@ const routes: Routes = [
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
-            {path:'budgetDept',component:BudgetDeptComponent} ,
-            {path:'projet',component:ProjetComponent} , 
-            {path:'missionnaire', component:MissionnaireComponent},
-            {path:'missionn', component:ListeMissionnaireComponent},
-            {path:'mission', component:MissionComponent},
-            {path:'listeOdreMission',component:ListeOrdreComponent} , 
-            {path:'budgetProj',component:BudgetProjComponent} , 
-            {path:'stepper',component:StepperComponent},
-            {path:'ord',component:OrdMissionnaireComponent},
-            {path:'frais',component:FraisMissionComponent},
-            {path:'validation',component:ValidationComponent},
-            {path:'oneMission',component:OneMissionComponent},
-            {path:'ajoutMission',component:AjoutMissionComponent},
-            {path:'validationDept',component:ValidationBudgetComponent},
-            {path:'validationProj',component:ValidationBudProjComponent},
-            {path:'validMissCtrl',component:ValidationCTRLMissionComponent},
+            {path:'budgetDept',component:BudgetDeptComponent ,canActivate: [RoleGuard] } ,
+            {path:'projet',component:ProjetComponent,canActivate: [RoleGuard]} , 
+            {path:'missionnaire', component:MissionnaireComponent,canActivate: [RoleGuard]},
+            {path:'missionn', component:ListeMissionnaireComponent, canActivate: [RoleGuard]},
+            {path:'mission', component:MissionComponent,canActivate: [RoleGuard]},
+            {path:'listeOdreMission',component:ListeOrdreComponent,canActivate: [RoleGuard]} , 
+            {path:'budgetProj',component:BudgetProjComponent,canActivate: [RoleGuard]} , 
+            {path:'stepper',component:StepperComponent,canActivate: [RoleGuard]},
+            {path:'ord',component:OrdMissionnaireComponent,canActivate: [RoleGuard]},
+            {path:'frais',component:FraisMissionComponent,canActivate: [RoleGuard]},
+            {path:'validation',component:ValidationComponent,canActivate: [RoleGuard]},
+            {path:'oneMission',component:OneMissionComponent,canActivate: [RoleGuard]},
+            {path:'ajoutMission',component:AjoutMissionComponent,canActivate: [RoleGuard]},
+            {path:'validationDept',component:ValidationBudgetComponent, canActivate: [RoleCTRLGuard]},
+            {path:'validationProj',component:ValidationBudProjComponent, canActivate: [RoleCTRLGuard]},
+            {path:'validMissCtrl',component:ValidationCTRLMissionComponent ,  canActivate: [RoleCTRLGuard]},
             {path:'changePassword',component:ChangePassComponent},
-            {path:'recap',component:RecapComponent},
-            {path:'modif',component : ModifMissionComponent}, 
-            {path:'listeMissionnaire',component:MissionnaireComponent}
+            {path:'recap',component:RecapComponent,canActivate: [RoleGuard]},
+            {path:'modif',component : ModifMissionComponent,canActivate: [RoleGuard]}, 
+            {path:'listeMissionnaire',component:MissionnaireComponent,canActivate: [RoleGuard]}
 
 
 

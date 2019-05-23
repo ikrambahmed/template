@@ -5,6 +5,7 @@ import { ordMiss } from 'src/app/models/Ord_Miss';
 import { OrdMissService } from 'src/app/services/ord-miss.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Observable } from 'rxjs';
+import { DeptGen } from 'src/app/models/DeptGen';
 
 @Component({
   selector: 'app-liste-missionnaire',
@@ -117,8 +118,12 @@ success(message: string) {
 
     
   }
+  m:DeptGen ; 
  loadMissionaire()
-  {this.missionnaireService.getMissionares(this.cod).subscribe(
+  {this.m=new DeptGen() ; 
+    this.m.code=this.cod ; 
+
+    this.missionnaireService.getMissionares(this.m).subscribe(
     data => { this.missionnaires=data},
     error => {console.log('an error occured') } , 
     () => {console.log('loading missionnaires was done ')}

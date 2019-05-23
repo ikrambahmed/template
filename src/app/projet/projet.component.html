@@ -1,4 +1,4 @@
-<div class="card" >
+<div class="card">
   <div class="card-header text-right" style="background-color: #F6E7D2;">
     <div class="search-projets">
       <input class="form-control text-right" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
@@ -26,7 +26,7 @@
           currentPage: page,
           totalItems: totalRec} ">
           <td>
-              <a href="projet#Afficher"> <button class="btn btn-outline-primary" (click)="operation='EDIT'; selectedProjet=projet;" dir="ltr">تغيير</button></a>
+              <a href="projet#Afficher"> <button class="btn btn-outline-primary" (click)="selectedProjet=projet;operation='EDIT' " dir="ltr">تغيير</button></a>
           </td>
               <td>{{projet.codPrj}}</td>
             <td>{{projet.libprjA}} </td>

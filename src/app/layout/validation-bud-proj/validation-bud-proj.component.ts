@@ -5,6 +5,7 @@ import { MissionService } from 'src/app/services/mission.service';
 import { budgetProjet } from 'src/app/models/budgetProjet';
 import { Projet } from 'src/app/models/Projet';
 import { AlertService } from 'src/app/services/alert.service';
+import { DeptGen } from 'src/app/models/DeptGen';
 
 @Component({
   selector: 'app-validation-bud-proj',
@@ -116,7 +117,10 @@ if(this.budgets.length==0){
 } 
   
  loadProjet()
- {this.missionService.getProjet(this.codeDept).subscribe(
+ {
+  let d:DeptGen= new DeptGen() ; 
+  d.code=this.codeDept ;
+  this.missionService.getprojets(d).subscribe(
    data => { this.projets=data;},
    error => {console.log(error); } , 
    () => {console.log('loading projets was done') ;}

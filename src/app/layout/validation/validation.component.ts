@@ -53,15 +53,17 @@ export class ValidationComponent implements OnInit {
   ngOnInit() {
     this.selectedOrd = new ordMiss() ;  
     this.mission = new Mission() ;
-    var DeptGenVal = localStorage.getItem('deptGen') ; 
+    var DeptGenVal =localStorage.getItem('deptGen') ; 
     var data = JSON.parse(DeptGenVal) ; 
+    //this.depart=data.departement ; 
     console.log('retrievedObject:',data.departement.code) ;
     this.cod=data.departement.code;
     this.loadOrdreMission() ;
     console.log('localStorage' , JSON.parse(localStorage.getItem('principal'))) ; 
     this.principal=JSON.parse(localStorage.getItem('principal')) 
     console.log(this.hasRoleUser()) ; 
-    this.loadDepartments() ;   }
+    this.loadDepartments() ;  
+   }
   
 
     loadDepartments()  {this.homeService.getDepartments()
@@ -76,7 +78,9 @@ export class ValidationComponent implements OnInit {
 
  loadOrdreMission()
   {this.showIt=false;
-    this.ordMisService.getOrdsMiss(this.cod)
+    let o:ordMiss=new ordMiss() ; 
+o.code=this.cod ; 
+    this.ordMisService.getOrdsMiss(o)
     .subscribe(
     data => { 
       console.log(data ,'data') ; 
@@ -137,7 +141,10 @@ cinF :String;
  numF : Number;
 loadMissionnaire()
  {console.log('cin') ; 
-this.missionnaireService.getOneMiss(this.selectedOrd.cin).subscribe(
+ let m :Missionnaire= new Missionnaire() ; 
+ m.cin=this.selectedOrd.cin ; 
+ m.code.code=this.cod ;
+this.missionnaireService.getOneMiss(m).subscribe(
   data=>{console.log(data);
   console.log('data missionnaire',data);
 this.nom=data.nom ; 
@@ -192,9 +199,13 @@ this.loadFraisMission(this.cod,this.numMissF,this.cinF,this.numF ) ;
   }
 
   loadFraisMission(code : String , numMission:String , cin : String , numOrd:Number )
-  {
+  {let f:frais=new frais() ; 
+    f.code=this.cod ; 
+    f.numMission=numMission ; 
+    f.numord=this.numOrd ; 
+    f.cin=cin ; 
     console.log('données kbal el services',cin , numMission , numOrd , code)
-    this.missionService.getFraisMission(code ,numMission ,numOrd, cin)
+    this.missionService.getFraisMission(f)
     .subscribe(
     data => {
       this.fraisMiss=data ; 

@@ -139,9 +139,11 @@ createForm()
     error => {console.log(error) ; 
     this.error('الرجاءالتثبت من المعطيات') ;}
   )} 
-
+m:DeptGen ; 
   loadMissionaire()
-  {this.missionnaireService.getMissionares(this.cod.code).subscribe(
+  {this.m=new DeptGen() ; 
+    this.m.code=this.cod.code ; 
+    this.missionnaireService.getMissionares(this.m).subscribe(
     data => { this.missionnaires=data},
     error => {console.log('an error occured') } , 
     () => {console.log('loading missionnaires was done ')}

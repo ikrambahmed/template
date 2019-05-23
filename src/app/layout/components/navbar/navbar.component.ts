@@ -4,6 +4,8 @@ import { DeptGen } from 'src/app/models/DeptGen';
 import { UserStruct } from 'src/app/models/UserStruct';
 import { User } from 'src/app/models/User';
 import { Principal } from 'src/app/shared/principal.model';
+import { Missionnaire } from 'src/app/models/missionnaire';
+import { Mission } from 'src/app/models/mission';
 
 @Component({
   selector: 'app-navbar',
@@ -23,9 +25,9 @@ export class NavbarComponent implements OnInit {
   }
   
   DeptOfUsername(){
-
-    console.log("dkhalna lfonctions dept")
-    this.homeService.getDept(this.cin_user).subscribe(
+let m : Missionnaire=new Missionnaire() ; 
+m.cin=this.cin_user ; 
+    this.homeService.getDept(m).subscribe(
       data => { this.dept=data;
         let key = 'deptGen';
         localStorage.setItem(key, JSON.stringify(this.dept));
@@ -40,7 +42,9 @@ export class NavbarComponent implements OnInit {
     localStorage.clear() ; 
   }
     LoadNameUser(){
-      this.homeService.getuserName(this.cin_user).subscribe(
+      let user :User=new User() ; 
+      user.username=this.cin_user ; 
+      this.homeService.getuserName(user).subscribe(
         data => { 
           console.log(data) ; 
           this.user=data;
@@ -78,15 +82,8 @@ export class NavbarComponent implements OnInit {
          });
          return this.hasRole ; 
        }
-  
-  
-  
-  
-  
-  
-        
 
-    ngOnInit() {
+      ngOnInit() {
       var promise = new Promise((resolve, reject) => {
         setTimeout(() => {
           this.cin_user = localStorage.getItem('username');

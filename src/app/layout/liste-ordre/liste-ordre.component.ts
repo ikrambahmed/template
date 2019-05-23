@@ -24,7 +24,9 @@ operation:String ;
 
   }
   loadOrdMissionnaire(){
-    this.ordMissService.getOrdsMiss(this.cod).subscribe(
+let o:ordMiss=new ordMiss() ; 
+o.code=this.cod ; 
+this.ordMissService.getOrdsMiss(o).subscribe(
       data => { this.ords=data},
       error => {console.log('an error occured') } , 
       () => {console.log('loading missionnaires was done ')}

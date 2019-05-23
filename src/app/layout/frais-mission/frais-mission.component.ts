@@ -14,6 +14,7 @@ import { frais } from 'src/app/models/frais';
 import { budgetProjet } from 'src/app/models/budgetProjet';
 import { Mission } from 'src/app/models/mission';
 import { AlertService } from 'src/app/services/alert.service';
+import { DeptGen } from 'src/app/models/DeptGen';
 
 @Component({
   selector: 'app-frais-mission',
@@ -144,7 +145,9 @@ if(this.d<=this.duree)
    }  
 
    getLatestBudgetDept(){
-      this.missionService.getBudgets(this.cod).subscribe(
+    let b : budget = new budget() ; 
+    b.code=this.cod ; 
+      this.missionService.getBudget(b).subscribe(
       res=> {console.log(res) ;
       this.budgetDept=res[0] ;
       this.val=res[0].valeur_miss ; 
@@ -165,7 +168,9 @@ if(this.d<=this.duree)
 
    
   if(this.fraisMiss.supporte=== 'مشروع'){
-    this.missionService.getBudgetsProjet(this.cod).subscribe(
+    let b : DeptGen= new DeptGen() ; 
+    b.code= this.cod ;
+    this.missionService.getBudgetsProjet(b).subscribe(
     res=>{console.log(res) ; 
     this.budgetProjet=res[0] ;
     console.log(this.budgetProjet.valeur,'budget valeur') ; 
@@ -227,7 +232,10 @@ console.log('il y a pas de changements de budget') ;
      {this.op=false ;    }
 }
 
-loadBudget(cod : String){this.missionService.getBudget(this.cod).subscribe(
+loadBudget(cod : String){
+  let budgt:budget = new budget() ; 
+  budgt.code=this.cod ; 
+  this.missionService.getBudget(budgt).subscribe(
     data => { this.budget_mission=data;
     console.log(this.budget_mission) ;
     this.val_miss=this.budget_mission.valeur_miss ; 
@@ -258,7 +266,11 @@ loadBudget(cod : String){this.missionService.getBudget(this.cod).subscribe(
 
  
 loadProjets()
-  {this.missionService.getProjet(this.cod).subscribe(
+  {
+    
+    let d:DeptGen= new DeptGen() ; 
+    d.code=this.cod ;
+    this.missionService.getprojets(d).subscribe(
     data => { this.projets=data;},
     error => {console.log(error); } , 
     () => {console.log('loading projets was done ');}
@@ -280,7 +292,10 @@ loadProjets()
   }
 
   loadOrdeMission(numMission:String)
-  {this.ordMissService.getOrdreMission(this.numMission).subscribe(
+  {
+    let o : ordMiss=new ordMiss() ; 
+    o.numMission=this.numMission ; 
+    this.ordMissService.getOrdreMission(o).subscribe(
     data => { this.ordreMis=data ; 
       console.log("done");},
     error => {console.log(error); } , 
@@ -300,7 +315,9 @@ selectedOrd:ordMiss=new ordMiss() ;
        
      
 
-
+        var DeptGenVal = localStorage.getItem('deptGen') ; 
+        var data = JSON.parse(DeptGenVal) ; 
+        this.depart=data.departement;
 
 
 
@@ -364,8 +381,13 @@ selectedOrd:ordMiss=new ordMiss() ;
       }
       console.log('somme',this.Somme) ; 
   }
+  depart:DeptGen ; 
   getMissionnaire(){
-    this.missionnaireService.getOneMiss(this.username).subscribe(
+    let m : Missionnaire= new Missionnaire() ;
+    m.cin=this.username ; 
+    m.code=this.depart ; 
+    alert(JSON.stringify(m) ); 
+    this.missionnaireService.getOneMiss(m).subscribe(
       data=>{console.log(data);
         this.missionnaire=data ;
         this.nom = this.missionnaire.nom ; //localStorage.getItem('nom');
@@ -376,23 +398,19 @@ selectedOrd:ordMiss=new ordMiss() ;
       error => { console.log(error) ; } , 
       ()=>{console.log('done') ; }
     ) ; 
-    
-    
   }
   initialiser(){
- // this.createForm();
- //this.OrdMissForm=new frais() ;
  this.OrdMissForm.reset();
  this.ngOnInit() ; 
- //this.username = localStorage.getItem('cin');
-
- this.OrdMissForm.value.numMission=this.numMission ; 
-  this.OrdMissForm.value.numord=this.num_ord ; 
-  this.OrdMissForm.value.cin=this.username;
+this.OrdMissForm.value.numMission=this.numMission ; 
+this.OrdMissForm.value.numord=this.num_ord ; 
+this.OrdMissForm.value.cin=this.username;
 this.OrdMissForm.value.code=this.cod ;
 this.OrdMissForm.value.typFrais=this.typFrais;
 
-  }
+
+
+}
   error(message: string) {
     this.alertService.error(message);
   }

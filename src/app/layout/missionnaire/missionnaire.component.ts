@@ -203,9 +203,12 @@ createForm()
     error => {console.log(error) ; 
     this.error('الرجاءالتثبت من المعطيات') ;}
   )} 
-
+  m : DeptGen
   loadMissionaire()
-  {this.missionnaireService.getMissionares(this.cod.code).subscribe(
+  {
+    this.m=new DeptGen() ; 
+    this.m.code=this.cod.code ; 
+    this.missionnaireService.getMissionares(this.m).subscribe(
     data => { this.missionnaires=data},
     error => {console.log('an error occured') } , 
     () => {console.log('loading missionnaires was done ')}
@@ -228,24 +231,20 @@ createForm()
   }
   codGrd:String  ;
   add(){
- // alert(JSON.stringify(this.missionnaireForm.value.graade)) ; 
+    //Ajout d'un missionnaire
     this.missionnaireForm.value.code=this.cod ; 
-   // this.missionnaireForm.value.graade=new grade(this.codGrd) ; 
-   // console.log(this.missionnaireForm.value.graade) ; 
+   
     const m = this.missionnaireForm.value ;
-    //if(this.missionnaireForm.value)
-  //alert(JSON.stringify(m)) ; 
-   // console.log(JSON.stringify(m)) ; 
+   
     this.missionnaireService.addMissionnaire(m).subscribe(
       res => {
       
         this.done=true; 
         this.success('لقد تمت الاضافة بنجاح') ; 
-        //this.initMiss() ; 
-      //  this.missionnaires.push(res) ; 
+      
         this.loadMissionaire() ; 
         this.operation='' ; 
-      //  window.location.reload() ; 
+    
       },
       error =>{console.log(error);
       this.error("الرجاءالتثبت من المعطيات");}

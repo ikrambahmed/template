@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MissionService } from 'src/app/services/mission.service';
 import { OrdMissService } from 'src/app/services/ord-miss.service';
 import { Mission } from 'src/app/models/mission';
+import { DeptGen } from 'src/app/models/DeptGen';
 
 @Component({
   selector: 'app-ord-missionnaire',
@@ -144,8 +145,11 @@ x:Number ;
 
   Search(cin)
   {
+    let m:Missionnaire=new Missionnaire(); 
+    m.cin=this.cin; 
+    m.code=this.depart; 
     if((cin!=null) || (cin.length!=0)|| (cin !=''))
-    return this.missionService.getOneMiss(cin).subscribe(
+    return this.missionService.getOneMiss(m).subscribe(
       data => { 
         if (data && data['cin']) {
         this.missionnare=data ; 
@@ -177,8 +181,6 @@ x:Number ;
       this._timeout = window.setTimeout(() => {
          this._timeout = null;
         // this.lc.run(() => this.name1 = this.name);
-         console.log('ikrammmm',this.name1) ;
-         console.log(this.cin.length) ;
          if( (this.cin.length==0)|| (this.cin =='')||(this.cin.length!=8))
          console.log("erreur") ; 
          else 
@@ -198,7 +200,7 @@ goToFrais(){
 }
 affich2 : boolean ; 
 selectedMission:Mission; 
-
+depart:DeptGen ; 
   ngOnInit() {
 
   this.selectedMission=JSON.parse(localStorage.getItem('selectedMission')); 
@@ -208,6 +210,7 @@ selectedMission:Mission;
   var data = JSON.parse(DeptGenVal) ; 
   console.log('retrievedObject:',data.departement.code) ;
   this.cod=data.departement.code;
+  this.depart=data.departement ; 
 
   let dateString=this.selectedMission.datdepP ; //localStorage.getItem('datdepP') ; 
   this.Date_depart = new Date(dateString);
@@ -224,7 +227,10 @@ selectedMission:Mission;
 
 reloadCode(){
   console.log('numMission',this.num_miss);
-  this.ordMisService.getLatestOrdreCode(this.cod,this.num_miss).subscribe(
+  let o :ordMiss=new ordMiss() ; 
+  o.code=this.cod ; 
+  o.numMission=this.num_miss ; 
+  this.ordMisService.getLatestOrdreCode(o).subscribe(
     d=>{
       if((d==null) || (d == undefined) || (d == 0 ))
       {

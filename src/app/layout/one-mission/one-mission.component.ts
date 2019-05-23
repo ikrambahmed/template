@@ -5,6 +5,8 @@ import { Mission } from 'src/app/models/mission';
 import { Motcle } from 'src/app/models/Motcle';
 import { MissionService } from 'src/app/services/mission.service';
 import { Router } from '@angular/router';
+import { budgetProjet } from 'src/app/models/budgetProjet';
+import { DeptGen } from 'src/app/models/DeptGen';
 
 @Component({
   selector: 'app-one-mission',
@@ -55,7 +57,9 @@ export class OneMissionComponent implements OnInit {
    )}
 budgets : budget[] ; 
 loadBudgets()
-{this.missionService.getBudgets(this.cod).subscribe(
+{ let b : budget = new budget() ; 
+  b.code=this.cod ; 
+  this.missionService.getBudget(b).subscribe(
   data => { this.budgets=data;
   console.log('length',data.length) ;
 if((data.length==0)||(data==null) || (data==undefined)){
@@ -94,7 +98,11 @@ dateDiff(date1, date2){
 success:boolean ; 
 
 loadBudgetsProjet()
-{this.missionService.getBudgetsProjet(this.cod).subscribe(
+{
+  let b : DeptGen= new DeptGen() ; 
+  b.code= this.cod ;
+  
+  this.missionService.getBudgetsProjet(b).subscribe(
   data => { this.budgetsProjet=data;
     console.log(data.length) ; 
     if((data.length==0)||(data==null) || (data==undefined)){
@@ -258,8 +266,9 @@ this.motcle=this.selectedMission.motcle ;
   }
 
   reloadCode()
-  {
-  this.missionService.getLatestMissionCode(this.cod).subscribe(
+  {   let d : DeptGen=new DeptGen() ; 
+    d.code=this.cod ; 
+  this.missionService.getLatestMissionCode(d).subscribe(
   d=>{
     if((d===null) || (d===undefined) || (d.length ===0 ))
     {console.log('d') ; 

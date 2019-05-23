@@ -36,7 +36,12 @@ numOrd:number ;
 f: frais [] ; 
 loadFrais()
 { 
-  this.missionService.getFraisMission(this.cod,this.numMission,this.numOrd,this.numCin).subscribe(
+  let f:frais=new frais() ; 
+  f.code=this.cod ; 
+  f.numMission=this.numMission ; 
+  f.numord=this.numOrd ; 
+  f.cin=this.numCin ; 
+  this.missionService.getFraisMission(f).subscribe(
   data => { this.f=data ; 
     console.log(data) ; 
     console.log("done ");},
@@ -65,7 +70,10 @@ deleteFieldValue(index) {
 }
 
 loadOrdeMission(numMission:String)
-  {this.ordMissService.getOrdreMission(this.numMission).subscribe(
+  {
+    let o : ordMiss=new ordMiss() ; 
+    o.numMission=this.numMission ; 
+    this.ordMissService.getOrdreMission(o).subscribe(
     data => { this.ordreMis=data ; 
       console.log("errur");},
     error => {console.log(error); } , 

@@ -1,5 +1,5 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
-    <div class="list-group ">
+    <div class="list-group " *ngIf="hasRoleUser()==true" >
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-home"></i>&nbsp;
             <span class="text-white">{{ 'الصفحة الرئيسية ' | translate }}</span>
@@ -142,6 +142,39 @@
             </div>
         </div>
     </div>
+    <div class="list-group " *ngIf="hasRoleController()==true">
+        
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('pages')">
+                <i class="fa fa-plus"></i>&nbsp;
+                <span class="text-white">{{ ' المصادقة  على الاعتمادات ' | translate }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'pages'">
+                <ul class="submenu">
+                    <li>
+                        <a href="javascript:void(0)" [routerLink]="['/validationDept']">
+                            <i class="fa fa-edit"></i>&nbsp;
+                            <span>{{ 'للمؤسسة ' | translate }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" [routerLink]="['/validationProj']" >
+                            <i class="fa fa-edit"></i>&nbsp;
+                            <span>{{ 'لمشروع ' | translate }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" [routerLink]="['/validMissCtrl']" >
+                            <i class="fa fa-edit"></i>&nbsp;
+                            <span>{{ 'للماموريات ' | translate }}</span>
+                        </a>
+                    </li>
+                   
+                </ul>
+            </li>
+        </div>
+    </div>
+   
     <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
         <i class="fa fa-fw fa-angle-double-{{collapsed?'right':'left'}}"></i>&nbsp;
         <span>{{ 'Collapse Sidebar' | translate }}</span>
