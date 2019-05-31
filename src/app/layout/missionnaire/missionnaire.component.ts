@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 
 import { MissionnaireService } from '../../services/missionnaire.service';
 import { Missionnaire } from '../../models/missionnaire';
@@ -34,6 +34,7 @@ export class MissionnaireComponent implements OnInit {
   operation: string;
   selectedMissionnaire : Missionnaire=new Missionnaire() ;
 
+  
   constructor(private alertService : AlertService , private fb : FormBuilder , private missionnaireService : MissionnaireService, private router : Router) { 
     this.createForm() ; 
   
@@ -214,6 +215,32 @@ createForm()
     () => {console.log('loading missionnaires was done ')}
   )
 
+  }
+
+
+  exportpdf(){
+ // alert(JSON.stringify(this.selectedMissionnaire)) ; 
+this.missionnaireService.getOneExport(this.selectedMissionnaire).subscribe(
+  data=>{  
+  /*  if((data==null) || (data==undefined) || (data==''))
+    {alert('خطا') ;}*/
+    //alert(JSON.stringify(data)) ; 
+    this.missionnaireService.exportPdf(data).subscribe(
+    data => { 
+      alert('لقد تم التحمبل  اذهب الى ملف التحمبل')
+  },
+    error => {console.log('an error occured');
+    alert('لقد تم تحمبل ملف تجميد الاعتمادات اذهب الى ملف التحمبل')
+
+ // alert(JSON.stringify(error)) ; 
+  
+ // alert('خطا') ; 
+ } , 
+    () => {console.log('loading missionnaires was done ')}
+  ) ;
+},
+error =>{console.log(error) ; }
+);  
   }
   error(message: string) {
     this.alertService.error(message);

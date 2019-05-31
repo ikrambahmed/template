@@ -99,7 +99,7 @@ m.cin=this.cin_user ;
     this.hasRoleController() ; 
     this.hasRoleUser() ; 
           resolve();
-        }, 1000);     
+        }, 2000);     
       })
     } 
 

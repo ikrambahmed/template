@@ -196,7 +196,7 @@ goToFrais(){
   this.router.navigateByUrl('/frais') ; 
 }
  doStuff() {
-    alert('do stuff');
+   // alert('do stuff');
 }
 affich2 : boolean ; 
 selectedMission:Mission; 

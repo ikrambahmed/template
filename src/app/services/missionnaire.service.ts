@@ -66,16 +66,7 @@ export class MissionnaireService {
 
   getCategories():Observable<any> 
   {    
-   /* var jsonObject : any = JSON.parse(this.getToken()) ; 
-  
-const httpOptions = {
-     headers: new HttpHeaders({
-     'Authorisation': 'Token '+jsonObject 
-    })
-};
-console.log('Token '+jsonObject) ; 
-    return this.http.get('http://localhost:8080/rest/listcategorie/allcat') ; 
-  */
+
  return this.http.get(this.baseUrl+'/api/all') ; 
 
   }
@@ -84,11 +75,7 @@ console.log('Token '+jsonObject) ;
   {
     return this.http.get(this.baseUrl+'/api/listgroupe') ; 
   }
-/* getOneGrade(lib : String):Observable<any>
- {
-  return this.http.get(this.rl+'/listegrade?name='+lib)
-}*/
-//getMissionnaireByCin
+
 getOneMiss(missCin : Missionnaire) : Observable<any>{
   return this.http.post(this.baseUrl+'/api/getOneMiss',missCin) ; 
  }
@@ -96,9 +83,16 @@ getOneMiss(missCin : Missionnaire) : Observable<any>{
  {
    return this.http.post(this.baseUrl+'/api/DeptOfUsername',cin) ; 
  }
+
  rechercheMissionnaire(miss : Missionnaire) : Observable<any>{
   return this.http.get(this.baseUrl+'/api/') ; 
+ }
 
+ exportPdf(ord:ordMiss):Observable<any>{ 
+   return this.http.post(this.baseUrl+'/api/export',ord) ; 
+ }
+ getOneExport(miss:Missionnaire):Observable<any>{
+   return this.http.post(this.baseUrl+'/api/getOne',miss) ; 
  }
 
 }

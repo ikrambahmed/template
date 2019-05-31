@@ -57,17 +57,17 @@
                 <div class="row">
                 <div class="form-group col-md-6 text-right">
                   <label>المشروع</label>
-                  <input type="textbox" class="form-control" formControlName="libprjA"  required [(ngModel)]="selectedProjet.libprjA"
+                  <input type="textbox" class="form-control text-right" formControlName="libprjA"  required [(ngModel)]="selectedProjet.libprjA"
                   [ngClass]="{'is-invalid':PojetForm.get('libprjA').touched && PojetForm.get('libprjA').invalid}" 
-                  >
-                </div>
+                  minlength="10" title="الرجاء التثبت في المعطيات" pattern="[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_]">
+                </div> 
 
                 
                 <div class="form-group col-md-6 text-right">
                   <label>Projet</label>
                   <input type="textbox" class="form-control" formControlName="libPrjL" required [(ngModel)]="selectedProjet.libPrjL"
                   [ngClass]="{'is-invalid':PojetForm.get('libPrjL').touched && PojetForm.get('libPrjL').invalid}" 
-
+                  minlength="10" title="الرجاء التثبت في المعطيات" pattern="[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_]"
                   >
                 </div>
               </div>

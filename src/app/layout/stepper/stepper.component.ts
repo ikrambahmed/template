@@ -194,6 +194,8 @@ this.show=true ;
   }
 valid : boolean ; 
   add(){
+    this.missionForm.value.code=this.cod ; 
+    this.missionForm.value.numMission=this.codeMission ; 
     const m = this.missionForm.value ;
     if(this.missionForm.value.objeta==='' ||this.missionForm.value.objetl===''){
       alert('الرجاء اضافة الموضوع') ; 

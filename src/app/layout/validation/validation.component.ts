@@ -107,21 +107,19 @@ o.code=this.cod ;
 num:String ; 
  loadMission()
  {
-   console.log('ikram') ; 
    console.log(this.selectedOrd) ;
    this.num=this.selectedOrd.numMission ; 
-    console.log(this.selectedOrd.numMission) ; 
-    console.log('num',this.num) ; 
-    console.log('cod',this.cod) ; 
+   // console.log(this.selectedOrd.numMission) ; 
+    //console.log('num',this.num) ; 
+    //console.log('cod',this.cod) ; 
     this.miss.numMission=this.num; 
     this.miss.code=this.cod; 
-    console.log(this.objet) ; 
-    console.log(this.miss ,'l mission') ; 
-    console.log(this.miss.code) ; 
-    console.log(this.miss.numMission) ; 
+    //console.log(this.objet) ; 
+    //console.log(this.miss.code) ; 
+    //console.log(this.miss.numMission) ; 
     this.missionService.getOneMission(this.miss).subscribe(
     data => { this.mission=data;
-    console.log(data);
+    //console.log(data);
     this.objet =data.objeta ; 
     console.log(this.mission);},
     error => {console.log(error)}, 

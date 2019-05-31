@@ -27,11 +27,13 @@
             <div class="container" >
                   <div class="card-body">
                     <div *ngIf="Avoirbudg==true || Avoirbudgproj==true">
-                    <form [formGroup]="missionForm" #f="ngForm">
+                    <form [formGroup]="missionForm">
                        <div class="row" dir="rtl">
                           <div class="form-group col-md-12 text-center">
                              <div ><h4>رقم المأمورية<span class = "label label-default">{{cod}}/{{codeMission}}</span></h4>
-                              <input type="text" class="form-control" formControlName="numMission" [(ngModel)]="codeMission" hidden>
+                          <!--                          <input type="textbox" id="champ12" class="class-form" formControlName="code" [(ngModel)]="cod" hidden />
+
+                            <input type="text" class="form-control" formControlName="numMission" [(ngModel)]="codeMission" hidden>-->    
                             </div> 
         
                             </div>  
@@ -40,14 +42,16 @@
                       <div class="row" dir="rtl">
                         <div class="form-group col-md-6 text-right">
                           <label> الكلمة المفتاح </label>
-                          <select class="form-control form-control-lg" id="select" formControlName="motcle" >
+                          <select class="form-control form-control-lg text-right" id="select" formControlName="motcle"
+                          [ngClass]="{'is-invalid':missionForm.get('motcle').touched && missionForm.get('motcle').invalid}"
+
+                          
+                          >
                             <option *ngFor="let motcle of motcles" [ngValue]="motcle">{{motcle.amotcle}}</option>
                           </select>
                         </div>
         
-                        <div>
-                          <input type="textbox" id="champ12" class="class-form" formControlName="code" [(ngModel)]="cod" hidden />
-                        </div>
+                     
         
                       </div>
         
@@ -75,6 +79,8 @@
                           <label>تاريخ الاياب </label>
         
                           <input type="date" id="date1" class="form-control" formControlName="datarrP"
+                          [ngClass]="{'is-invalid':missionForm.get('datarrP').touched && missionForm.get('datarrP').invalid}" 
+
                           min="2000-01-01" max="2050-12-31"
                           (change)="toggle()"   [(ngModel)]="selectedMission.datarrP"/>
         
@@ -82,6 +88,7 @@
                         <div class="form-group col-md-4 text-right">
                           <label>تاريخ الذهاب </label>
                           <input type="date" id="date2" class="form-control" min="2000-01-01" max="2050-12-31"
+                          [ngClass]="{'is-invalid':missionForm.get('datdepP').touched && missionForm.get('datdepP').invalid}" 
                           formControlName="datdepP" [(ngModel)]="selectedMission.datdepP" />
     
                         </div>

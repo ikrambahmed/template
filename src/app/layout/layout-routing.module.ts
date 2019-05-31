@@ -5,7 +5,6 @@ import { BudgetDeptComponent } from '../budget-dept/budget-dept.component';
 import { ProjetComponent } from '../projet/projet.component';
 import { BudgetProjComponent } from '../budget-proj/budget-proj.component';
 import { MissionnaireComponent } from './missionnaire/missionnaire.component';
-import { ListeMissionnaireComponent } from './liste-missionnaire/liste-missionnaire.component';
 import { MissionComponent } from '../mission/mission.component';
 import { ordMiss } from '../models/Ord_Miss';
 import { OrdMissionnaireComponent } from './ord-missionnaire/ord-missionnaire.component';
@@ -37,11 +36,9 @@ const routes: Routes = [
             { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
-            { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
             {path:'budgetDept',component:BudgetDeptComponent ,canActivate: [RoleGuard] } ,
             {path:'projet',component:ProjetComponent,canActivate: [RoleGuard]} , 
             {path:'missionnaire', component:MissionnaireComponent,canActivate: [RoleGuard]},
-            {path:'missionn', component:ListeMissionnaireComponent, canActivate: [RoleGuard]},
             {path:'mission', component:MissionComponent,canActivate: [RoleGuard]},
             {path:'listeOdreMission',component:ListeOrdreComponent,canActivate: [RoleGuard]} , 
             {path:'budgetProj',component:BudgetProjComponent,canActivate: [RoleGuard]} , 

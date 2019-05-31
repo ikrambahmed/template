@@ -64,10 +64,6 @@ typFrais :String;
   }
 createForm(){
   this.OrdMissForm = this.fb.group({
-    numMission: ['',Validators.required],
-    numord: ['',Validators.required],
-    cin  :['',Validators.required],
-    code:['',Validators.required] ,
     codPays:['',Validators.required],
    valeurP:['',Validators.required],
    valeurR:['',Validators.required],
@@ -91,6 +87,10 @@ GoToOrd(){
 valeurR:String ; 
   add(){   
      const m = this.OrdMissForm.value ;
+     this.OrdMissForm.value.numMission=this.numMission ; 
+     this.OrdMissForm.value.numord=this.num_ord ; 
+     this.OrdMissForm.value.cin=this.username;
+     this.OrdMissForm.value.code=this.cod ;
 
   //  this.FraisForm.value.valeurR=+this.valeurR;
  // alert(JSON.stringify(m));
@@ -131,7 +131,9 @@ if(this.d<=this.duree)
      this.OrdMissForm.value.code=this.cod ;
      const m = this.OrdMissForm.value ;
      this.OrdMissForm.value.typFrais="1" ; 
-    // alert(JSON.stringify(m));
+    // alert(JSON.stringify(m))
+    if(this.d>this.duree){alert('الرجاء التثبت في المدة')}
+    else{
      this.missionService.addFrais(m).subscribe(
        res => {   
         this.success('لقد تمت الاضافة بنجاح') ; 
@@ -141,7 +143,7 @@ if(this.d<=this.duree)
           this.getLatestBudgetDept() ; 
        },
        error=>{ console.log(error);}
-     )
+     ) ; }
    }  
 
    getLatestBudgetDept(){
@@ -386,7 +388,7 @@ selectedOrd:ordMiss=new ordMiss() ;
     let m : Missionnaire= new Missionnaire() ;
     m.cin=this.username ; 
     m.code=this.depart ; 
-    alert(JSON.stringify(m) ); 
+    //alert(JSON.stringify(m) ); 
     this.missionnaireService.getOneMiss(m).subscribe(
       data=>{console.log(data);
         this.missionnaire=data ;

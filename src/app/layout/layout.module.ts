@@ -21,8 +21,6 @@ import { BudgetDeptComponent } from '../budget-dept/budget-dept.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BudgetProjComponent } from '../budget-proj/budget-proj.component';
 import { MissionnaireComponent } from './missionnaire/missionnaire.component';
-import { ListeMissionnaireComponent } from './liste-missionnaire/liste-missionnaire.component';
-import { MissionaireComponent } from './missionaire/missionaire.component';
 import { OneMissionComponent } from './one-mission/one-mission.component';
 import { OrdMissionnaireComponent } from './ord-missionnaire/ord-missionnaire.component';
 import { FraisMissionComponent } from './frais-mission/frais-mission.component';
@@ -65,10 +63,7 @@ import { FicheBlocageComponent } from './fiche-blocage/fiche-blocage.component'
         StoreModule.forRoot({principal:principalReducer})
     ],
     declarations: [LayoutComponent,StepperComponent,ProjetComponent, SidebarComponent, HeaderComponent,BudgetDeptComponent,ProjetComponent, MissionComponent,MissionnaireComponent,
-    BudgetProjComponent,
-    ListeMissionnaireComponent,
-    MissionaireComponent,
-    OneMissionComponent,
+    BudgetProjComponent,    OneMissionComponent,
     OrdMissionnaireComponent,
     FraisMissionComponent,
     ValidationComponent,

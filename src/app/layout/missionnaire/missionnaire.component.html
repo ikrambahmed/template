@@ -36,7 +36,9 @@
                      <td>
                        <a href="listeMissionnaire#AjoutMissionnaire"> <button class="btn btn-outline-primary"
                          (click)="editOp() ;  selectedMissionnaire = missionnaire">تغيير</button></a>
-                       <button class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" (click)="selectedMissionnaire=missionnaire ; " >حذف</button>
+                       <button class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" (click)="selectedMissionnaire=missionnaire;">حذف</button>
+                       <button class="btn btn-outline-success" (click)="selectedMissionnaire=missionnaire ;exportpdf();"> تجميد الاعتمادات</button>
+
                      </td>
                    </tr>
                  </tbody>
@@ -101,19 +103,28 @@
               <div class="form-group col-md-4  text-right" >
                 <label> مكانها </label>
                 <input type="text" class="form-control" formControlName="place_cin" 
-                [(ngModel)]="selectedMissionnaire.place_cin" >
+                [(ngModel)]="selectedMissionnaire.place_cin" 
+                minlength="3" maxlength="25"  title="الرجاء التثبت في المعطيات" pattern="[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]"
+                [ngClass]="{'is-invalid':missionnaireForm.get('place_cin').touched && missionnaireForm.get('place_cin').invalid}"
+                >
               </div>
               <div class="form-group col-md-4 text-right" >
                 <label for="delivre"> المسلمة يوم </label>
                 <input type="date" class="form-control" formControlName="date_cin"      
-                [(ngModel)]="selectedMissionnaire.date_cin" >
+                [(ngModel)]="selectedMissionnaire.date_cin" 
+                [ngClass]="{'is-invalid':missionnaireForm.get('date_cin').touched && missionnaireForm.get('date_cin').invalid}"
+                min="1980-01-01"  max="2019-05-24">
               </div>
              
               <div class="form-group col-md-4 text-right">
                 <label for="cin"> الهوية الوطنية </label>
                 <input type="text" class="form-control" formControlName="cin" 
-                placeholder="Tapez dans ce champ 8 chiffres" autofocus pattern="[0-9]{8}" 
-                name="cin" [(ngModel)]="selectedMissionnaire.cin" maxlength="8" >
+                placeholder="Tapez dans ce champ 8 chiffres" autofocus
+                pattern="[0-9]+" minlength="8" maxlength="8" required
+                name="cin" [(ngModel)]="selectedMissionnaire.cin" maxlength="8" 
+                [ngClass]="{'is-invalid':missionnaireForm.get('cin').touched && missionnaireForm.get('cin').invalid}"
+
+                >
               </div>
             </div>
             <div class="row">
@@ -121,12 +132,19 @@
               <div class="form-group col-md-6 text-right">
                 <label>مكانها</label>
                 <input type="text" class="form-control" formControlName="place_naissance" 
-                [(ngModel)]="selectedMissionnaire.place_naissance" >
+                [(ngModel)]="selectedMissionnaire.place_naissance" minlength="3" maxlength="25"
+              title="الرجاء التثبت في المعطيات" pattern="[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]"
+                [ngClass]="{'is-invalid':missionnaireForm.get('place_naissance').touched && missionnaireForm.get('place_naissance').invalid}"
+                >
               </div>
                 <div class="form-group col-md-6 text-right">
                   <label> تاريخ الولادة </label>
                   <input type="date" class="form-control" formControlName="datenaissance" 
-                  [(ngModel)]="selectedMissionnaire.datenaissance" >
+                  [(ngModel)]="selectedMissionnaire.datenaissance" 
+                  min="1940-01-01"  max="1999-01-01"
+                  [ngClass]="{'is-invalid':missionnaireForm.get('datenaissance').touched && missionnaireForm.get('datenaissance').invalid}"
+
+                  >
                 </div>
             </div>
             <div class="row">
@@ -134,13 +152,22 @@
                 <div class="form-group col-md-6">
                   <label> RIB </label>
                   <input type="text" class="form-control" formControlName="rib" 
-                  [(ngModel)]="selectedMissionnaire.rib" >
+                  [(ngModel)]="selectedMissionnaire.rib" 
+                  pattern="[0-9]+" required  maxlength="25"
+                  minlength="3" title="الرجاء التثبت في المعطيات" 
+                  [ngClass]="{'is-invalid':missionnaireForm.get('rib').touched && missionnaireForm.get('rib').invalid}"
+                  
+                  >
                 </div>
         
                 <div class="form-group col-md-6 text-right">
                   <label> المعرف الوحيد </label>
                   <input type="text" class="form-control" formControlName="matricule" 
-                  [(ngModel)]="selectedMissionnaire.matricule" >
+                  [(ngModel)]="selectedMissionnaire.matricule"  maxlength="15"
+                  minlength="3" title="الرجاء التثبت في المعطيات" 
+                  [ngClass]="{'is-invalid':missionnaireForm.get('matricule').touched && missionnaireForm.get('matricule').invalid}"
+  
+                  >
                 </div>
             </div>
             <div class="row">
@@ -148,64 +175,89 @@
                 <div class="form-group col-md-6">
                   <label> Prenom </label>
                   <input type="text" class="form-control" formControlName="prenomL"
-                  [(ngModel)]="selectedMissionnaire.prenomL" >
+                  [(ngModel)]="selectedMissionnaire.prenomL"  maxlength="20" required
+                  minlength="3" title="الرجاء التثبت في المعطيات" pattern="[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]"
+                  [ngClass]="{'is-invalid':missionnaireForm.get('prenomL').touched && missionnaireForm.get('prenomL').invalid}"
+  
+                  >
                 </div>
         
                 <div class="form-group col-md-6 text-right">
                     <label>الاسم</label>
-                    <input type="text" class="form-control" formControlName="prenom" 
-                    [(ngModel)]="selectedMissionnaire.prenom" >
+                    <input type="text" class="form-control text-right" formControlName="prenom" 
+                    [(ngModel)]="selectedMissionnaire.prenom"  maxlength="20"
+                    minlength="3" title="الرجاء التثبت في المعطيات" pattern="[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]"
+                    [ngClass]="{'is-invalid':missionnaireForm.get('prenom').touched && missionnaireForm.get('prenom').invalid}"
+    
+                    >
                   </div>
             </div>
             <div class="row">
         
                 <div class="form-group col-md-6 ">
                   <label> Nom </label>
-                  <input type="text" class="form-control" formControlName="nomL" 
-                  [(ngModel)]="selectedMissionnaire.nomL" >
+                  <input type="text" class="form-control" formControlName="nomL" pattern="[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]"
+                  [(ngModel)]="selectedMissionnaire.nomL" maxlength="25"
+                  minlength="3" title="الرجاء التثبت في المعطيات" 
+                  [ngClass]="{'is-invalid':missionnaireForm.get('nomL').touched && missionnaireForm.get('nomL').invalid}"
+  
+                  >
                 </div>
         
                 <div class="form-group col-md-6 text-right">
                   <label>اللقب  </label>
-                  <input type="text" class="form-control" formControlName="nom" 
-                  [(ngModel)]="selectedMissionnaire.nom" >
+                  <input type="text" class="form-control text-right" formControlName="nom" 
+                  [(ngModel)]="selectedMissionnaire.nom"  maxlength="25"
+                  minlength="3" title="الرجاء التثبت في المعطيات" 
+                  [ngClass]="{'is-invalid':missionnaireForm.get('nom').touched && missionnaireForm.get('nom').invalid}"
+
+                  pattern="[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]"
+                  >
                 </div>
             </div>
             <div class="row">
         
                     <div class="form-group col-md-6">
                       <label>Nationalite </label>
-                      <input type="text" class="form-control" formControlName="nationaliteL"  
-                      [(ngModel)]="selectedMissionnaire.nationaliteL" > 
+                      <input type="text" class="form-control" formControlName="nationaliteL"  pattern="[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]"
+                      [(ngModel)]="selectedMissionnaire.nationaliteL" required  maxlength="25"
+                      minlength="3" title="الرجاء التثبت في المعطيات" 
+                      [ngClass]="{'is-invalid':missionnaireForm.get('nationaliteL').touched && missionnaireForm.get('nationaliteL').invalid}"
+                      > 
                     </div>
         
                     <div class="form-group col-md-6 text-right">
                         <label>الجنسية</label>
-                        <input type="text" class="form-control" formControlName="nationalite" [(ngModel)]="selectedMissionnaire.nationalite" >
+                        <input type="text" class="form-control text-right" formControlName="nationalite"
+                        minlength="3" title="الرجاء التثبت في المعطيات"  maxlength="25"
+                        [ngClass]="{'is-invalid':missionnaireForm.get('nationalite').touched && missionnaireForm.get('nationalite').invalid}"
+                        pattern="[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z ]+[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z-_ ]"
+
+                        [(ngModel)]="selectedMissionnaire.nationalite" >
                       </div>
             </div>
             <div class="row">
         
                       <div class="form-group col-md-6 text-right">
                        <label> الرتبة </label>
-                       <input list="browsers" name="browser"  class="form-control" formControlName="graade" [(ngModel)]="selectedMissionnaire.graade.libGrda" *ngIf="operation=='EDIT'">
+                       <input list="browsers" name="browser"  class="form-control text-right" formControlName="graade" [(ngModel)]="selectedMissionnaire.graade.libGrda" *ngIf="operation=='EDIT'">
                        <datalist id="browsers">
                           <option *ngFor="let grade of grades" [ngValue]="grade" >{{grade.libGrda}}</option>
                         
                        </datalist>
-                  <select class="form-control" formControlName="graade" [(ngModel)]="selectedMissionnaire.graade" *ngIf="operation=='ADD'">
+                  <select class="form-control text-right" formControlName="graade" [(ngModel)]="selectedMissionnaire.graade" *ngIf="operation=='ADD'">
                           <option *ngFor="let grade of grades" [ngValue]="grade">{{grade.libGrda}}</option>
                         </select>
                       </div>
         
                       <div class="form-group col-md-6 text-right">
-                        <label>الوظيفة</label>
-                        <input list="browsers1" name="browser1"  class="form-control" formControlName="fonnction" [(ngModel)]="selectedMissionnaire.fonnction.libFonca" *ngIf="operation=='EDIT'">
+                        <label>  الوظيفة</label>
+                        <input list="browsers1" name="browser1"  class="form-control text-right" formControlName="fonnction" [(ngModel)]="selectedMissionnaire.fonnction.libFonca" *ngIf="operation=='EDIT'">
                         <datalist id="browsers1">
                           <option *ngFor="let fonction of fonctions" [ngValue]="fonction">{{fonction.libFonca}}</option>
                          
                         </datalist>
-                        <select class="form-control" formControlName="fonnction" [(ngModel)]="selectedMissionnaire.fonnction" *ngIf="operation=='ADD'">
+                        <select class="form-control text-right" formControlName="fonnction" [(ngModel)]="selectedMissionnaire.fonnction" *ngIf="operation=='ADD'">
                           <option *ngFor="let fonction of fonctions" [ngValue]="fonction">{{fonction.libFonca}}</option>
                         </select>
                       </div>
@@ -214,24 +266,24 @@
         
                       <div class="form-group col-md-6 text-right">
                           <label>صنف</label>
-                          <input list="browsers2" name="browser2"  class="form-control" formControlName="codCat" [(ngModel)]="selectedMissionnaire.codCat.libCatAr" *ngIf="operation=='EDIT'">
+                          <input list="browsers2" name="browser2"  class="form-control text-right" formControlName="codCat" [(ngModel)]="selectedMissionnaire.codCat.libCatAr" *ngIf="operation=='EDIT'">
                           <datalist id="browsers2">
                             <option *ngFor="let categorie of categories" [ngValue]="categorie">{{categorie.libCatAr}}</option>
                            
                           </datalist>
-                          <select class="form-control" formControlName="codCat" [(ngModel)]="selectedMissionnaire.codCat" *ngIf="operation=='ADD'">
+                          <select class="form-control text-right" formControlName="codCat" [(ngModel)]="selectedMissionnaire.codCat" *ngIf="operation=='ADD'">
                             <option *ngFor="let categorie of categories" [ngValue]="categorie">{{categorie.libCatAr}}</option>
                           </select>
                         </div>
                         
                         <div class="form-group col-md-6 text-right">
                           <label>سلك</label>
-                          <input list="browsers3" name="browser3"  class="form-control" formControlName="classgrd" [(ngModel)]="selectedMissionnaire.classgrd" [ngModel]="classeM" *ngIf="operation=='EDIT'" >
+                          <input list="browsers3" name="browser3"  class="form-control text-right" formControlName="classgrd" [(ngModel)]="selectedMissionnaire.classgrd.libclassgrda" [ngModel]="classeM" *ngIf="operation=='EDIT'" >
                           <datalist id="browsers3" >
                             <option *ngFor="let classe of classes" [ngValue]="classe">{{classe.libclassgrda}}</option>
                            
                           </datalist>
-                          <select class="form-control" formControlName="classgrd" [(ngModel)]="selectedMissionnaire.classgrd" *ngIf="operation=='ADD'">
+                          <select class="form-control text-right" formControlName="classgrd" [(ngModel)]="selectedMissionnaire.classgrd" *ngIf="operation=='ADD'">
                             <option *ngFor="let classe of classes" [ngValue]="classe">{{classe.libclassgrda}}</option>
                           </select>
                       </div>
@@ -241,7 +293,10 @@
                        <div class="form-group col-md-6 text-right">
                           <label>المجموع</label>
                           <input type="text" class="form-control" formControlName="groupe"  
-                          [(ngModel)]="selectedMissionnaire.groupe">
+                          [(ngModel)]="selectedMissionnaire.groupe"
+                          pattern="[A-B-C]{1}"  title="الرجاء التثبت في المعطيات" 
+
+                          >
                         </div>
                         <div class="form-group col-md-6 text-right">
                           <label>مستوى التاجير</label>
@@ -252,7 +307,7 @@
                         </div>
             </div>
                       <div>
-                      <button class="btn btn-success"  
+                      <button class="btn btn-success"  [disabled]="!missionnaireForm.valid"
                       (click)="operation == 'ADD' ? add() : operation=='EDIT'? update() : operation=='REMOVE'? remove() : ''  ; operation=''">
                         {{ operation == 'ADD' ? 'اظافة' : operation == 'EDIT' ? 'تغيير':operation == 'REMOVE' ? 'حذف' : ''}}
                         </button>

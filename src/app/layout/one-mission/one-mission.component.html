@@ -55,7 +55,7 @@
                       <label>تاريخ الاياب </label>
     
                       <input type="date" id="date1" class="form-control" formControlName="datarrP"
-                       [ngModel] ="selectedMission.datarrP|date:'yyyy-MM-dd'"  min="2000-01-01" max="2050-12-31"
+                       [ngModel] ="selectedMission.datarrP|date:'yyyy-MM-dd'"  min="2000-01-01" max="2025-12-31"
 
                        
                        [(ngModel)]="selectedMission.datarrP" (change)="toggle()"/>
@@ -65,7 +65,7 @@
                       <label>تاريخ الذهاب </label>
     
                       <input type="date" id="date2" class="form-control" 
-                      formControlName="datdepP"      min="2000-01-01" max="2050-12-31"
+                      formControlName="datdepP"      min="2000-01-01" max="2025-12-31"
 
                       [ngModel] ="selectedMission.datdepP|date:'yyyy-MM-dd'" 
 
